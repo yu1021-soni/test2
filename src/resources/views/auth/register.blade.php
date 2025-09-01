@@ -9,6 +9,10 @@
 
   <form action="/register" class="form" method="post">
   @csrf
+    <div class="register-form__heading">
+      <h2>会員登録</h2>
+    </div>
+
     <div class="register__group">
       <div class="register__group-title">
         <span class="register__label--item">ユーザ名</span>
@@ -70,10 +74,12 @@
         </div>
       </div>
       <div class="register__button">
-        <button class="register__button-submit" type="submit">登録</button>
+        <button class="register__button-submit" type="submit">登録する</button>
       </div>
+
+      <a class="bottom__link" href="/login">ログインはこちら</a>
     </form>
 
-    <a class="header__link" href="/login">login</a>
-    
+
 </div>
+@endsection
