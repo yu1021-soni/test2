@@ -1,0 +1,23 @@
+html,body{
+    height: 100%;
+}
+
+.app{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.header{
+    background-color: black;
+}
+
+.header__heading{
+    max-width: 1230px;
+    height: 60px;
+    padding: 15px 30px;
+}
+.header__link{
+    height: 30px;
+    display: block;
+}
