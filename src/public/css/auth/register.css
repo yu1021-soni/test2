@@ -51,8 +51,7 @@
 }
 
 .register__error {
-    grid-column: 2;
-    font-size: 12px;
+    font-size: 10px;
     color: red;
     padding: 10px;
 }

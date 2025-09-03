@@ -66,11 +66,6 @@
           <div class="register__input--text">
             <input type="password" name="password_confirmation">
           </div>
-          <div class="register__error">
-            @error('password')
-              {{ $message }}
-            @enderror
-          </div>
         </div>
       </div>
       <div class="register__button">
