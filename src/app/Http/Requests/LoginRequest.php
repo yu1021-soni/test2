@@ -2,38 +2,34 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
+use Laravel\Fortify\Http\Requests\LoginRequest as FortifyBase;
 
-class LoginRequest extends FormRequest
+class LoginRequest extends FortifyBase
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return true;
-    }
+    public function authorize(): bool { return true; }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'email' => ['required','email'],
+            'email'    => ['required','email'],
             'password' => ['required'],
         ];
     }
 
-    public function messages() {
+    public function messages(): array
+    {
         return [
-            'email.required' => 'メールアドレスを入力してください',
-            'email.email' => 'メールアドレスはメール形式で入力してください',
+            'email.required'    => 'メールアドレスを入力してください',
+            'email.email'       => 'メールアドレスはメール形式で入力してください',
             'password.required' => 'パスワードを入力してください',
+        ];
+    }
+
+    public function attributes(): array
+    {
+        return [
+            'email'    => 'メールアドレス',
+            'password' => 'パスワード',
         ];
     }
 }
