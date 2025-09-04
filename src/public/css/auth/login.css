@@ -1,0 +1,198 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.login {
+    margin: 0 auto;
+    max-width: 1230px;
+    padding: 24px 16px;
+}
+
+.login-form__content {
+    min-height: 100vh;
+}
+
+.login-form__heading {
+    text-align: center;
+    margin-bottom: 32px;
+    font-size: 20px;
+}
+
+.form {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 560px;
+    padding: 24px;
+    background: #fff;
+    border-radius: 8px;
+}
+
+.login__group {
+    width: 100%;
+}
+
+.login__group-title {
+    text-align: left;
+    margin-bottom: 6px;
+}
+
+.login__label--item {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #374151;
+}
+
+.login__input--text input,
+.login__group input[type="password"] {
+    width: 100%;
+    height: 44px;
+    border: 1px solid #000;
+    border-radius: 6px;
+    padding: 10px 12px;
+    margin-bottom: 30px;
+    appearance: none;
+    outline: none;
+}
+
+.login__input--text input:focus,
+.login__group input[type="password"]:focus {
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, .25);
+}
+
+.login__error {
+    font-size: 12px;
+    color: red;
+    padding: 6px 0 0;
+}
+
+.login__button {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.login__button-submit {
+    padding: 10px;
+    width: 100%;
+    height: 48px;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    background-color: salmon;
+    font-size: 18px;
+}
+
+.bottom__link {
+    display: block;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    color: blue;
+    font-size: 16px;
+    margin-top: 30px;
+}
+
+/* ───────── 768–850px（タブレット） ───────── */
+@media (min-width: 768px) and (max-width: 850px) {
+    .login {
+        padding: 32px 20px;
+    }
+
+    .form {
+        max-width: 720px;
+        padding: 28px;
+    }
+
+    .login__group {
+        display: grid;
+        grid-template-columns: 220px 1fr;
+        column-gap: 16px;
+        align-items: center;
+        margin-bottom: 12px;
+    }
+
+    .login__group-title {
+        margin: 0;
+    }
+
+    .login__label--item {
+        font-size: 15px;
+        text-align: right;
+        margin: 0;
+        padding-right: 6px;
+    }
+
+    .login__error {
+        grid-column: 2 / 3;
+        padding: 4px 0 0;
+        font-size: 12px;
+    }
+
+    .login__button {
+        grid-column: 1 / -1;
+        text-align: left;
+        display: grid;
+        grid-template-columns: 220px 1fr;
+    }
+
+    .login__button-submit {
+        width: 260px;
+        justify-self: start;
+    }
+}
+
+/* ───────── 1400–1540px（PC） ───────── */
+@media (min-width: 1400px) and (max-width: 1540px) {
+    .login {
+        padding: 40px 24px;
+    }
+
+    .form {
+        max-width: 880px;
+        padding: 36px;
+    }
+
+    .login__group {
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        /* ラベル:入力＝260:可変 */
+        column-gap: 20px;
+        align-items: center;
+        margin-bottom: 14px;
+    }
+
+    .login__label--item {
+        font-size: 16px;
+        text-align: right;
+        padding-right: 8px;
+        margin: 0;
+    }
+
+    .login__input--text input,
+    .login__group input[type="password"] {
+        height: 48px;
+        font-size: 16px;
+    }
+
+    .login__button {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: 260px 1fr;
+        text-align: left;
+    }
+
+    .login__button-submit {
+        width: 300px;
+        height: 52px;
+        font-size: 18px;
+        justify-self: start;
+    }
+
+    .bottom__link {
+        font-size: 18px;
+    }
+}
