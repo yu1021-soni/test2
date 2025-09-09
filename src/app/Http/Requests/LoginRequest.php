@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Laravel\Fortify\Http\Requests\LoginRequest as FortifyBase;
 
+
 class LoginRequest extends FortifyBase
 {
     public function authorize(): bool { return true; }
