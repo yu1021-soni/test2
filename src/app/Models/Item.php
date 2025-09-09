@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Order;
 
 class Item extends Model
 {
@@ -13,6 +14,7 @@ class Item extends Model
         'user_id',
         'category_id',
         'item_img_url',
+        'name',
         'price',
         'description',
         'condition',
@@ -31,8 +33,8 @@ class Item extends Model
         return $this->hasMany(Favorite::class);
     }
 
-    public function orders() {
-        return $this->hasMany(Order::class);
+    public function order() {
+        return $this->hasOne(Order::class);
     }
 
     public function categories() {
