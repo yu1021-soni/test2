@@ -19,4 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('/',[ItemController::class,'index']);
-
+Route::get('/',[ItemController::class,'index'])->name('item.index');
