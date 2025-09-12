@@ -40,4 +40,14 @@ class Item extends Model
     public function categories() {
     return $this->belongsToMany(Category::class);
     }
+
+     // 検索用のスコープ
+    public function scopeSearch($query, $keyword) {
+        // キーワードが空の場合は全件取得
+        if (empty($keyword)) {
+            return $query;
+        }
+        // 名前で部分一致検索
+        return $query->where('name', 'like', "%{$keyword}%");
+    }
 }

@@ -47,4 +47,16 @@ class ItemController extends Controller
 
         return view('index', compact('items','tab'));
     }
+
+    public function search(Request $request) {
+        $keyword = $request->query('keyword');
+
+        $items = Item::query()
+        ->with('order')
+        ->search($keyword)
+        ->orderBy('id')
+        ->paginate(16);
+
+        return view('index',compact('items'));
+    }
 }

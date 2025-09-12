@@ -18,5 +18,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/',[ItemController::class,'index']);
-Route::get('/',[ItemController::class,'index'])->name('item.index');
+Route::get('/',[ItemController::class,'index'])->name('item.index'); // 一覧
+Route::get('/search', [ItemController::class, 'search'])->name('items.search'); // 検索

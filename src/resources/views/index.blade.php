@@ -6,7 +6,6 @@
 
 @section('link')
 <form class="search-form" action="/search" method="get">
-  @csrf
   <input class="search-form__keyword-input" type="text" name="keyword" placeholder="なにをお探しですか？" value="{{request('keyword')}}">
 </form>
 <form method="post" action="{{ route('logout') }}">
