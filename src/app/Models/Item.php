@@ -30,7 +30,7 @@ class Item extends Model
     }
 
     public function favorites() {
-        return $this->hasMany(Favorite::class);
+        return $this->belongsToMany(User::class, 'favorites', 'item_id', 'user_id')->withTimestamps();
     }
 
     public function order() {
