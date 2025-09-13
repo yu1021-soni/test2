@@ -1,0 +1,46 @@
+.content{
+    margin-top: 30px;
+}
+
+.select__page{
+    display: flex;
+    border-bottom: 1px solid black;
+}
+
+.select__page-main{
+    margin-left: 100px;
+}
+
+.select__page-my{
+    text-decoration: none;
+    color: red;
+    margin-left: 50px;
+}
+
+.item__list{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item__card{
+    width: 25%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.item__img img{
+    width: 100%;
+    display: block;
+}
+
+@media (min-width: 1400px) and (max-width: 1540px) {
+    .item__card {
+        width: 25%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 850px) {
+    .item__card {
+        width: 50%;
+    }
+}
