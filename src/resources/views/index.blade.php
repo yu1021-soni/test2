@@ -25,7 +25,8 @@
           <span class="badge-sold">Sold</span>
         @endif
 
-        <div class="item__name">{{ $item->name }}</div>
+        <div class="item__name">
+            {{ $item->name }}</div>
       </div>
     @empty
       <p>商品がありません。</p>
