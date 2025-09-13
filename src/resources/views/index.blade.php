@@ -4,16 +4,6 @@
 <link rel="stylesheet" href="{{ asset('css/index.css')}}">
 @endsection
 
-@section('link')
-<form class="search-form" action="/search" method="get">
-  <input class="search-form__keyword-input" type="text" name="keyword" placeholder="なにをお探しですか？" value="{{request('keyword')}}">
-</form>
-<form method="post" action="{{ route('logout') }}">
-  @csrf
-  <button type="submit">ログアウト</button>
-</form>
-@endsection
-
 @section('content')
 <div class="content">
   <div class="select__page">
