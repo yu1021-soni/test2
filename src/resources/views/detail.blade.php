@@ -1,0 +1,65 @@
+@extends('layouts.app')
+
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/detail.css')}}">
+@endsection
+
+@section('content')
+<div class="content">
+
+  {{-- 左：商品画像 --}}
+  <div class="item__img">
+    <img
+      src="{{ $item->item_img_url ? Storage::url($item->item_img_url) : asset('img/placeholder.png') }}"
+      alt="{{ $item->name }}">
+  </div>
+
+  {{-- 右：商品情報 --}}
+  <div class="detail__info">
+
+    {{-- 商品名・ブランド・価格 --}}
+    <h1 class="item__name">{{ $item->name }}</h1>
+    <div class="item__brand">{{ $item->brand }}</div>
+    <div class="item__price">¥{{ number_format($item->price) }} <span>（税込）</span></div>
+
+    {{-- 購入ボタン --}}
+    <a href="#" class="btn-purchase">購入手続きへ</a>
+
+    {{-- 商品説明 --}}
+    <h2 class="section-title">商品説明</h2>
+    <p class="item__description">{{ $item->description }}</p>
+
+    {{-- 商品の情報 --}}
+    <h2 class="section-title">商品の情報</h2>
+    <ul class="item__info">
+      <li>カテゴリ：{{ $item->category_id }}</li>
+      <li>商品の状態：{{ $item->condition }}</li>
+    </ul>
+
+    {{-- コメント --}}
+    <h2 class="section-title">コメント ({{ $item->comments->count() }})</h2>
+    <div class="comments">
+      @forelse($item->comments as $comment)
+        <div class="comment">
+          <strong>{{ $comment->user->name }}</strong>
+          <p>{{ $comment->content }}</p>
+        </div>
+      @empty
+        <p>コメントはまだありません。</p>
+      @endforelse
+    </div>
+
+    {{-- コメント投稿フォーム --}}
+    @auth
+      <form action="{{ route('comments.store', $item->id) }}" method="post">
+        @csrf
+        <textarea name="content" rows="3" placeholder="商品へのコメントを入力"></textarea>
+        <button type="submit" class="btn-comment">コメントを送信する</button>
+      </form>
+    @else
+      <p>コメントするには <a href="{{ route('login') }}">ログイン</a> してください。</p>
+    @endauth
+
+  </div>
+</div>
+@endsection

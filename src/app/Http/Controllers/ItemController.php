@@ -59,4 +59,10 @@ class ItemController extends Controller
 
         return view('index',compact('items'));
     }
+
+    public function detail($item_id) {
+
+        $item = Item::withCount('order')->findOrFail($item_id);
+        return view ('detail',compact('item'));
+    }
 }

@@ -8,6 +8,8 @@
 }
 
 .select__page-main{
+    text-decoration: none;
+    color: black;
     margin-left: 100px;
 }
 

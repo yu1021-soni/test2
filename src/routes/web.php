@@ -14,9 +14,7 @@ use App\Http\Controllers\ItemController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/',[ItemController::class,'index'])->name('item.index'); // 一覧
 Route::get('/search', [ItemController::class, 'search'])->name('items.search'); // 検索
+
+Route::get('/detail/{item_id}',[ItemController::class,'detail'])->name('items.detail'); // 商品詳細画面
