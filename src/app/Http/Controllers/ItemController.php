@@ -26,7 +26,7 @@ class ItemController extends Controller
         // ③ マイリスト
         if ($tab === 'mylist') {  //?tab=mylistの時だけ実行
             // ユーザIDがnullじゃなかったら
-            if ($userId !== null) {
+            if ($userId == null) {
                 $items = collect(); //collect() 空の配列
                 return view('index', compact('items', 'tab'));
             }
@@ -43,7 +43,7 @@ class ItemController extends Controller
         }
 
         //  orderBy('id', 'desc') 並び順を指定
-        $items = $query->orderBy('id', 'desc')->get();
+        $items = $query->with('categories') ->orderBy('id', 'desc')->get();
 
         return view('index', compact('items','tab'));
     }
@@ -52,17 +52,23 @@ class ItemController extends Controller
         $keyword = $request->query('keyword');
 
         $items = Item::query()
-        ->with('order')
-        ->search($keyword)
-        ->orderBy('id')
-        ->paginate(16);
+            ->with('order')
+            ->search($keyword)
+            ->orderBy('id')
+            ->paginate(16);
 
         return view('index',compact('items'));
     }
 
     public function detail($item_id) {
 
-        $item = Item::withCount('order')->findOrFail($item_id);
+        $item = Item::with([
+            'categories',
+            'comments.user', // コメント表示でユーザー名を出すので同時読込
+            ])
+        ->withCount(['order','comments','favorites'])
+        ->findOrFail($item_id);
+
         return view ('detail',compact('item'));
     }
 }

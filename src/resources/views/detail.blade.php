@@ -22,6 +22,17 @@
     <div class="item__brand">{{ $item->brand }}</div>
     <div class="item__price">¥{{ number_format($item->price) }} <span>（税込）</span></div>
 
+    <form action="" class="favorite">
+        @csrf
+        <button class="favorite__button">⭐️</button>
+        <p>{{ $item->favorites_count }}</p>
+    </form>
+    <div class="comment">
+        <p>💬</p>
+        <p>{{ $item->comments_count }}</p>
+    </div>
+
+
     {{-- 購入ボタン --}}
     <a href="#" class="btn-purchase">購入手続きへ</a>
 
@@ -32,7 +43,7 @@
     {{-- 商品の情報 --}}
     <h2 class="section-title">商品の情報</h2>
     <ul class="item__info">
-      <li>カテゴリ：{{ $item->category_id }}</li>
+      <li>カテゴリ：{{ $item->categories->pluck('name')->join(' / ') ?: '未分類' }}</li>
       <li>商品の状態：{{ $item->condition }}</li>
     </ul>
 

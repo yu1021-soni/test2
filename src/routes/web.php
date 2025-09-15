@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\FavoriteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,3 +19,6 @@ Route::get('/',[ItemController::class,'index'])->name('item.index'); // 一覧
 Route::get('/search', [ItemController::class, 'search'])->name('items.search'); // 検索
 
 Route::get('/detail/{item_id}',[ItemController::class,'detail'])->name('items.detail'); // 商品詳細画面
+
+//Route::post('/item/{item}/favorite',[FavoriteController::class,'store'])->name('favorites.store'); // いいね追加
+//Route::delete('item/{item}/favorite',[FavoriteController::class,'destroy'])->name('favorites.destroy'); // いいねから削除

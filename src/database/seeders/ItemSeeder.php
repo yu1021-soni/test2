@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Item;
 use App\Models\User;
-use App\Models\Category;               // ← 追加
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
