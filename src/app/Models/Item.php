@@ -50,4 +50,17 @@ class Item extends Model
         // 名前で部分一致検索
         return $query->where('name', 'like', "%{$keyword}%");
     }
+
+    // 数値コード → 日本語ラベルの対応
+    public const CONDITION_LABELS = [
+        1 => '良好',
+        2 => '目立った傷や汚れなし',
+        3 => 'やや傷や汚れあり',
+        4 => '状態が悪い',
+    ];
+
+    // Bladeで $item->condition_label で読める
+    public function getConditionLabelAttribute(): string {
+        return self::CONDITION_LABELS[$this->condition] ?? '未設定';
+    }
 }

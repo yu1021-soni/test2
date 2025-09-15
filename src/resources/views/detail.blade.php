@@ -44,7 +44,7 @@
     <h2 class="section-title">商品の情報</h2>
     <ul class="item__info">
       <li>カテゴリ：{{ $item->categories->pluck('name')->join(' / ') ?: '未分類' }}</li>
-      <li>商品の状態：{{ $item->condition }}</li>
+      <li>商品の状態：{{ $item->condition_label }}</li>
     </ul>
 
     {{-- コメント --}}
