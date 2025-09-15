@@ -22,9 +22,15 @@
     <div class="item__brand">{{ $item->brand }}</div>
     <div class="item__price">¥{{ number_format($item->price) }} <span>（税込）</span></div>
 
-    <form action="" class="favorite">
+    <form action="{{ route('favorites.favorite',$item) }}" class="favorite" method="post">
         @csrf
-        <button class="favorite__button">⭐️</button>
+        <button class="favorite__button" type="submit" >
+            @if(auth()->check() && auth()->user()->favorites->contains($item->id))
+                ⭐️
+            @else
+                ☆
+            @endif
+        </button>
         <p>{{ $item->favorites_count }}</p>
     </form>
     <div class="comment">
@@ -60,16 +66,18 @@
       @endforelse
     </div>
 
-    {{-- コメント投稿フォーム --}}
+
+    {{-- ▼ コメント投稿フォーム（丸ごとコメントアウト） --------------------------
     @auth
       <form action="{{ route('comments.store', $item->id) }}" method="post">
-        @csrf
+      @csrf
         <textarea name="content" rows="3" placeholder="商品へのコメントを入力"></textarea>
         <button type="submit" class="btn-comment">コメントを送信する</button>
       </form>
     @else
-      <p>コメントするには <a href="{{ route('login') }}">ログイン</a> してください。</p>
+    <p>コメントするには <a href="{{ route('login') }}">ログイン</a> してください。</p>
     @endauth
+--}}{{-- ▲ ここまで --------------------------------------------------------- --}}
 
   </div>
 </div>
