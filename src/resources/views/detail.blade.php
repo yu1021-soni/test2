@@ -40,7 +40,9 @@
 
 
     {{-- 購入ボタン --}}
-    <a href="#" class="btn-purchase">購入手続きへ</a>
+    <form action="{{ route('purchase.create',$item) }}" class="btn-purchase" method="get" >
+        <button type="submit">購入手続きへ</button>
+    </form>
 
     {{-- 商品説明 --}}
     <h2 class="section-title">商品説明</h2>

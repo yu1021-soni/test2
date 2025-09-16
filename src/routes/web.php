@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,3 +23,8 @@ Route::get('/detail/{item_id}',[ItemController::class,'detail'])->name('items.de
 
 Route::post('/item/{item}/favorite',[FavoriteController::class,'favorite'])->name('favorites.favorite'); // いいね
 //Route::delete('item/{item}/favorite',[FavoriteController::class,'destroy'])->name('favorites.destroy'); // いいねから削除
+
+Route::middleware('auth')->group(function () {
+    // 購入画面表示
+    Route::get('/purchase/{item_id}', [OrderController::class, 'purchase'])->name('purchase.create');
+});
