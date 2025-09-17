@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Item;
+use App\Http\Requests\CommentRequest;
 
 class ItemController extends Controller
 {
@@ -70,5 +71,18 @@ class ItemController extends Controller
         ->findOrFail($item_id);
 
         return view ('detail',compact('item'));
+    }
+
+    public function comment(CommentRequest $request,Item $item) {
+        
+        $validated = $request->validated(); // バリデーション済みデータを取得
+
+        $item->comments()  // 商品のコメント一覧を開く
+             ->create([ // コメント一覧に新しいコメントを追加
+                'user_id' => $request->user()->id, // コメントを書いた人
+                'comment' => $validated['comment'], // コメント本文
+            ]);
+        
+            return back()->with('message', 'コメントを投稿しました。');
     }
 }

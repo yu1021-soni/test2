@@ -61,7 +61,7 @@
       @forelse($item->comments as $comment)
         <div class="comment">
           <strong>{{ $comment->user->name }}</strong>
-          <p>{{ $comment->content }}</p>
+          <p>{{ $comment->comment }}</p>
         </div>
       @empty
         <p>コメントはまだありません。</p>
@@ -69,17 +69,21 @@
     </div>
 
 
-    {{-- ▼ コメント投稿フォーム（丸ごとコメントアウト） --------------------------
+    {{--  コメント投稿フォーム --}}
     @auth
-      <form action="{{ route('comments.store', $item->id) }}" method="post">
+      <form action="{{ route('comment.store', $item) }}" method="post">
       @csrf
-        <textarea name="content" rows="3" placeholder="商品へのコメントを入力"></textarea>
+        <textarea name="comment" rows="3" placeholder="商品へのコメントを入力"></textarea>
         <button type="submit" class="btn-comment">コメントを送信する</button>
       </form>
+      <div class="comment__error">
+        @error('comment')
+          {{ $message }}
+        @enderror
+      </div>
     @else
     <p>コメントするには <a href="{{ route('login') }}">ログイン</a> してください。</p>
     @endauth
---}}{{-- ▲ ここまで --------------------------------------------------------- --}}
 
   </div>
 </div>

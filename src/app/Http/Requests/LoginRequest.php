@@ -7,7 +7,9 @@ use Laravel\Fortify\Http\Requests\LoginRequest as FortifyBase;
 
 class LoginRequest extends FortifyBase
 {
-    public function authorize(): bool { return true; }
+    public function authorize(): bool {
+        return true;
+    }
 
     public function rules(): array
     {
