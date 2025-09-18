@@ -73,6 +73,18 @@ class ItemController extends Controller
         return view ('detail',compact('item'));
     }
 
+    public function favorite(Item $item) {
+        $user = auth()->user(); //$userの中にユーザー情報が入る
+
+        if($user->favorites()->where('item_id',$item->id)->exists()) {
+            $user->favorites()->detach($item->id); // すでにいいねしてたら削除
+        } else {
+            $user->favorites()->attach($item->id); // いいねしてなければ追加
+        }
+
+        return back(); 
+    }
+
     public function comment(CommentRequest $request,Item $item) {
         
         $validated = $request->validated(); // バリデーション済みデータを取得

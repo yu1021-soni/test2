@@ -21,8 +21,8 @@ Route::get('/search', [ItemController::class, 'search'])->name('items.search'); 
 
 Route::get('/detail/{item_id}',[ItemController::class,'detail'])->name('items.detail'); // 商品詳細画面
 
-Route::post('/item/{item}/favorite',[FavoriteController::class,'favorite'])->name('favorites.favorite'); // いいね
-//Route::delete('item/{item}/favorite',[FavoriteController::class,'destroy'])->name('favorites.destroy'); // いいねから削除
+Route::post('/item/{item}/favorite',[ItemController::class,'favorite'])->name('favorites.favorite'); // いいね
+//Route::delete('item/{item}/favorite',[ItemController::class,'destroy'])->name('favorites.destroy'); // いいねから削除
 
 Route::middleware('auth')->group(function () {
     Route::get('/purchase/{item_id}', [OrderController::class, 'purchase'])->name('purchase.create'); // 購入画面表示
