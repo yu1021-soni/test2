@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\AccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,5 @@ Route::middleware('auth')->group(function () {
     ->middleware('auth')
     ->name('purchase.create'); // 購入画面表示
 });
+
+Route::get('/mypage',[AccountController::class,'mypage']);
