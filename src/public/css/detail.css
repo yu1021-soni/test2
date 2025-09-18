@@ -266,3 +266,61 @@ img {
     margin-top: 8px;
     font-size: 13px;
 }
+
+@media (min-width: 1400px) and (max-width: 1540px) {
+    .content {
+        padding-inline: 24px;
+        gap: 32px;
+    }
+
+    .item__img,
+    .detail__info {
+        width: 50%;
+    }
+
+    .item__name {
+        font-size: 36px;
+    }
+
+    .item__price {
+        font-size: 24px;
+    }
+
+    .section-title {
+        font-size: 20px;
+    }
+
+    .favorite__button,
+    .comment__icon i {
+        font-size: 22px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 850px) {
+    .content {
+        padding-inline: 16px;
+        gap: 24px;
+    }
+
+    .item__img,
+    .detail__info {
+        min-width: 0;
+    }
+
+    .item__name {
+        font-size: 28px;
+    }
+
+    .item__price {
+        font-size: 20px;
+    }
+
+    .section-title {
+        font-size: 18px;
+    }
+
+    .favorite__button,
+    .comment__icon i {
+        font-size: 20px;
+    }
+}
