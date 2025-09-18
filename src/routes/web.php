@@ -25,9 +25,11 @@ Route::post('/item/{item}/favorite',[ItemController::class,'favorite'])->name('f
 //Route::delete('item/{item}/favorite',[ItemController::class,'destroy'])->name('favorites.destroy'); // いいねから削除
 
 Route::middleware('auth')->group(function () {
-    Route::get('/purchase/{item_id}', [OrderController::class, 'purchase'])->name('purchase.create'); // 購入画面表示
+    Route::post('/item/comment/{item}', [ItemController::class, 'comment'])->name('comment.store'); // コメント機能
 });
 
 Route::middleware('auth')->group(function () {
-    Route::post('/item/comment/{item}', [ItemController::class, 'comment'])->name('comment.store'); // コメント機能
+    Route::get('/purchase/{item_id}', [OrderController::class, 'purchase'])
+    ->middleware('auth')
+    ->name('purchase.create'); // 購入画面表示
 });
