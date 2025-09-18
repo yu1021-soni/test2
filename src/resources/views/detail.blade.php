@@ -2,6 +2,7 @@
 
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/detail.css')}}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 @endsection
 
 @section('content')
@@ -17,73 +18,108 @@
   {{-- 右：商品情報 --}}
   <div class="detail__info">
 
-    {{-- 商品名・ブランド・価格 --}}
-    <h1 class="item__name">{{ $item->name }}</h1>
-    <div class="item__brand">{{ $item->brand }}</div>
-    <div class="item__price">¥{{ number_format($item->price) }} <span>（税込）</span></div>
+    <div class="product__area">
 
-    <form action="{{ route('favorites.favorite',$item) }}" class="favorite" method="post">
-        @csrf
-        <button class="favorite__button" type="submit" >
-            @if(auth()->check() && auth()->user()->favorites->contains($item->id))
-                ⭐️
-            @else
-                ☆
-            @endif
-        </button>
-        <p>{{ $item->favorites_count }}</p>
-    </form>
-    <div class="comment">
-        <p>💬</p>
-        <p>{{ $item->comments_count }}</p>
-    </div>
-
-
-    {{-- 購入ボタン --}}
-    <form action="{{ route('purchase.create',$item) }}" class="btn-purchase" method="get" >
-        <button type="submit">購入手続きへ</button>
-    </form>
-
-    {{-- 商品説明 --}}
-    <h2 class="section-title">商品説明</h2>
-    <p class="item__description">{{ $item->description }}</p>
-
-    {{-- 商品の情報 --}}
-    <h2 class="section-title">商品の情報</h2>
-    <ul class="item__info">
-      <li>カテゴリ：{{ $item->categories->pluck('name')->join(' / ') ?: '未分類' }}</li>
-      <li>商品の状態：{{ $item->condition_label }}</li>
-    </ul>
-
-    {{-- コメント --}}
-    <h2 class="section-title">コメント ({{ $item->comments->count() }})</h2>
-    <div class="comments">
-      @forelse($item->comments as $comment)
-        <div class="comment">
-          <strong>{{ $comment->user->name }}</strong>
-          <p>{{ $comment->comment }}</p>
+        {{-- 商品名・ブランド・価格 --}}
+        <h1 class="item__name">{{ $item->name }}</h1>
+        <div class="item__brand">{{ $item->brand }}</div>
+        <div class="item__price">¥{{ number_format($item->price) }} <span>（税込）</span>
         </div>
-      @empty
-        <p>コメントはまだありません。</p>
-      @endforelse
+
+        <form action="{{ route('favorites.favorite',$item) }}" class="favorite" method="post">
+            @csrf
+            <button class="favorite__button" type="submit" >
+                @if(auth()->check() && auth()->user()->favorites->contains($item->id))
+                    <i class="fa-solid fa-star"></i>
+                @else
+                    <i class="fa-regular fa-star"></i>
+                @endif
+            </button>
+            <p>{{ $item->favorites_count }}</p>
+        </form>
+        <div class="comment__icon">
+            <i class="fa-regular fa-comment"></i>
+            <p>{{ $item->comments_count }}</p>
+        </div>
+
     </div>
 
+    <div class="product-description">
 
-    {{--  コメント投稿フォーム --}}
-    @auth
-      <form action="{{ route('comment.store', $item) }}" method="post">
-      @csrf
-        <textarea name="comment" rows="3" placeholder="商品へのコメントを入力"></textarea>
-        <button type="submit" class="btn-comment">コメントを送信する</button>
-      </form>
-      <div class="comment__error">
-        @error('comment')
-          {{ $message }}
-        @enderror
-      </div>
-    @else
-    <p>コメントするには <a href="{{ route('login') }}">ログイン</a> してください。</p>
-    @endauth
+        {{-- 購入ボタン --}}
+        <form action="{{ route('purchase.create',$item) }}" class="btn-purchase" method="get" >
+        <button type="submit">購入手続きへ</button>
+        </form>
+
+        {{-- 商品説明 --}}
+        <h2 class="section-title">商品説明</h2>
+        <p class="item__description">{{ $item->description }}</p>
+
+    </div>
+
+    <div class="product__info">
+
+        {{-- 商品の情報 --}}
+        <h2 class="section-title">商品の情報</h2>
+        <ul class="item__spec">
+            <li class="row">
+                <span class="label">カテゴリー</span>
+                <span class="value">
+                    @if ($item->categories->isNotEmpty())
+                        @foreach ($item->categories as $cat)
+                        <span class="chip">{{ $cat->name }}</span>
+                        @endforeach
+                    @else
+                        <span class="muted">未分類</span>
+                    @endif
+                </span>
+            </li>
+            <li class="row">
+                <span class="label">商品の状態</span>
+                <span class="value">{{ $item->condition_label }}</span>
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="product__comments">
+
+        {{-- コメント --}}
+        <h2 class="section-title">
+            コメント ({{ $item->comments->count() }})
+        </h2>
+        <div class="comments">
+            @forelse ($item->comments as $comment)
+            <div class="comment">
+                <div class="comment__head">
+                    <span class="avatar">
+                        <img src="{{ $comment->user->profile_image_url ?? asset('img/avatar-default.png') }}" alt="" />
+                    </span>
+                    <strong class="name">{{ $comment->user->name }}</strong>
+                </div>
+                <p class="comment__body">{{ $comment->comment }}</p>
+            </div>
+            @empty
+                <p>コメントはまだありません。</p>
+            @endforelse
+        </div>
+
+        {{--  コメント投稿フォーム --}}
+        @auth
+        <form action="{{ route('comment.store', $item) }}" method="post" class="comment-form">
+        @csrf
+            <h3 class="form-title">商品のコメント</h3>
+            <textarea name="comment" rows="5" ></textarea>
+            <button type="submit" class="btn-comment">コメントを送信する</button>
+        </form>
+        <div class="comment__error">
+            @error('comment')
+                {{ $message }}
+            @enderror
+        </div>
+        @endauth
+
+    </div>
 
   </div>
 </div>
