@@ -17,12 +17,14 @@ use App\Http\Controllers\AccountController;
 |
 */
 
-Route::get('/',[ItemController::class,'index'])->name('item.index'); // 一覧
-Route::get('/search', [ItemController::class, 'search'])->name('items.search'); // 検索
+Route::get('/',[ItemController::class,'index'])->name('item.index'); // 一覧 ok
+Route::get('/search', [ItemController::class, 'search'])->name('items.search'); // 検索 ??
 
-Route::get('/detail/{item_id}',[ItemController::class,'detail'])->name('items.detail'); // 商品詳細画面
+Route::get('/detail/{item_id}',[ItemController::class,'detail'])->name('items.detail'); // 商品詳細画面 ok
 
-Route::post('/item/{item}/favorite',[ItemController::class,'favorite'])->name('favorites.favorite'); // いいね
+Route::post('/item/favorite', [ItemController::class, 'favorite'])
+    ->middleware('auth')
+    ->name('favorites.favorite'); // いいね機能
 //Route::delete('item/{item}/favorite',[ItemController::class,'destroy'])->name('favorites.destroy'); // いいねから削除
 
 Route::middleware('auth')->group(function () {

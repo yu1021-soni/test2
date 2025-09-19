@@ -26,17 +26,19 @@
         <div class="item__price">¥{{ number_format($item->price) }} <span>（税込）</span>
         </div>
 
-        <form action="{{ route('favorites.favorite',$item) }}" class="favorite" method="post">
-            @csrf
-            <button class="favorite__button" type="submit" >
-                @if(auth()->check() && auth()->user()->favorites->contains($item->id))
-                    <i class="fa-solid fa-star"></i>
+        <form action="{{ route('favorites.favorite') }}" method="post" class="favorite">
+        @csrf
+            <input type="hidden" name="item_id" value="{{ $item->id }}">
+            <button class="favorite__button" type="submit">
+                @if($item->is_favorited)
+                <i class="fa-solid fa-star"></i>
                 @else
-                    <i class="fa-regular fa-star"></i>
+                <i class="fa-regular fa-star"></i>
                 @endif
             </button>
             <p>{{ $item->favorites_count }}</p>
         </form>
+
         <div class="comment__icon">
             <i class="fa-regular fa-comment"></i>
             <p>{{ $item->comments_count }}</p>
