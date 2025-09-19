@@ -49,9 +49,8 @@ class ItemController extends Controller
                     ->orderBy('id', 'desc')
                     ->get();
 
-    // いいね済みidを配列で取得
     $favoritedIds = $userId
-        ? $user->favorites()->pluck('items.id')->all()
+        ? \App\Models\Favorite::where('user_id', $userId)->pluck('item_id')->all()
         : [];
 
     // 各アイテムに is_favorited を true/false で
@@ -96,15 +95,11 @@ class ItemController extends Controller
     }
 
     public function favorite(Request $request) {
-        $validated = $request->validate([
+        $request->validate([
         'item_id' => ['required', 'integer', 'exists:items,id'],
         ]);
 
-        $user   = $request->user();
-        $itemId = (int) $validated['item_id'];
-
-        // attach/detach をまとめてトグル
-        $user->favorites()->toggle($itemId);
+        $request->user()->favorites()->toggle((int) $request->item_id);
 
         return back();
     }

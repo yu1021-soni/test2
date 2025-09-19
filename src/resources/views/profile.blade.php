@@ -9,7 +9,14 @@
 
     {{-- 上：ユーザー情報 --}}
     <div class="user">
-        <img src="{{ $comment->user->profile_image_url ?? asset('img/avatar-default.png') }}" alt="{{ $user->name }}" />
+        <div class="user__img">
+            <img src="{{ $comment->user->profile_image_url ?? asset('img/avatar-default.png') }}" alt="{{ $user->name }}" />
+        </div>
+        <form action="">
+            <button type="submit" class="edit">
+                プロフィールを編集
+            </button>
+        </form>
     </div>
 
     {{-- 下：アイテム一覧 --}}
@@ -19,7 +26,7 @@
             <a href="/mypage?page=buy" class="select__page-my">購入した商品</a>
         </div>
         <div class="item__img">
-            
+
         </div>
     </div>
 
