@@ -24,9 +24,10 @@ class OrderController extends Controller
         return back()->with('message', 'コメントを投稿しました');
     }
 
-    public function purchase ($item_id,Request $request) {
+    public function purchase (Request $request) {
 
-        $item = Item::findOrFail($item_id); // 商品をIDで取得
+        $itemId = $request->input('item_id');
+        $item   = Item::findOrFail($itemId);
 
         $user = $request->user(); // ログイン中のユーザーを取得
         $profile = $user->profile; // ユーザーに紐づくプロフィール取得

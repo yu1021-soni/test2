@@ -25,4 +25,11 @@ class AccountController extends Controller
 
         return view ('profile',compact('user','items','orders'));
     }
+
+    public function edit(Request $request){
+
+        $user = $request->user(); //ログイン中のユーザ取得
+
+        return view('edit',compact('user'));
+    }
 }

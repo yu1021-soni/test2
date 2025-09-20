@@ -12,8 +12,9 @@
         <div class="user__img">
             <img src="{{ $comment->user->profile_image_url ?? asset('img/avatar-default.png') }}" alt="{{ $user->name }}" />
         </div>
-        <form action="">
-            <button type="submit" class="edit">
+        <form action="{{ route('profile.edit') }}" class="edit" method="post">
+            @csrf
+            <button type="submit" class="button__edit">
                 プロフィールを編集
             </button>
         </form>

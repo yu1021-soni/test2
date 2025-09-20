@@ -49,8 +49,10 @@
     <div class="product-description">
 
         {{-- 購入ボタン --}}
-        <form action="{{ route('purchase.create',$item) }}" class="btn-purchase" method="get" >
-        <button type="submit">購入手続きへ</button>
+        <form method="post" action="{{ route('purchase.store') }}">
+            @csrf
+            <input type="hidden" name="item_id" value="{{ $item->id }}">
+            <button type="submit" class="btn-buy">購入手続きへ</button>
         </form>
 
         {{-- 商品説明 --}}

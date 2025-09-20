@@ -29,24 +29,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/comment', [OrderController::class, 'comment'])->name('comment.store'); // ok
 
 
-    Route::post('/mypage', [AccountController::class, 'mypage'])->name('mypage');
+    Route::post('/mypage', [AccountController::class, 'mypage'])->name('mypage'); // ok
 
-    Route::get('/purchase/{item}', [OrderController::class, 'purchase'])->name('purchase.create');
+    Route::post('/purchase',[OrderController::class,'purchase'])->name('purchase.store'); // ok
 
-    Route::post('/purchase/{item}', [OrderController::class, 'store'])->name('purchase.store');
+    Route::post('/mypage/profile',[AccountController::class,'edit'])->name('profile.edit');
 });
-
-//Route::post('/item/favorite', [ItemController::class, 'favorite'])
-    //->middleware('auth')
-//->name('favorites.favorite'); // いいね機能 ok
-//Route::delete('item/{item}/favorite',[ItemController::class,'destroy'])->name('favorites.destroy'); // いいねから削除
-
-//Route::middleware('auth')->group(function () {
-    //Route::post('/item/comment/{item}', [ItemController::class, 'comment'])->name('comment.store'); // コメント機能 確認中
-//});
-
-//Route::middleware('auth')->group(function () {
-    //Route::get('/purchase/{item_id}', [OrderController::class, 'purchase'])
-    //->middleware('auth')
-    //->name('purchase.create'); // 購入画面表示
-//});
