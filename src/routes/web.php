@@ -26,10 +26,10 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/item/favorite', [ItemController::class, 'favorite'])->name('favorites.favorite'); //ok
 
-    Route::post('/comment', [OrderController::class, 'comment'])->name('comment.store');
+    Route::post('/comment', [OrderController::class, 'comment'])->name('comment.store'); // ok
 
 
-    Route::get('/mypage', [AccountController::class, 'mypage'])->name('mypage');
+    Route::post('/mypage', [AccountController::class, 'mypage'])->name('mypage');
 
     Route::get('/purchase/{item}', [OrderController::class, 'purchase'])->name('purchase.create');
 

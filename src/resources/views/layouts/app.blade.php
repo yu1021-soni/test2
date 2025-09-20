@@ -27,8 +27,19 @@
                                 <button type="submit" class="logout">ログアウト</button>
                             </form>
                         </li>
-                        <li><a href="/mypage" class="mypage">マイページ</a></li>
-                        <li><a href="/sell" class="sell">出品</a></li>
+                        <li>
+                            <form method="post" action="{{ route('mypage') }}">
+                                @csrf
+                                <button type="submit" class="mypage">マイページ</button>
+                            </form>
+                        </li>
+                        <li>{{-- コメントアウト
+                            <form method="post" action="{{ route('') }}">
+                                @csrf
+                                <button type="submit" class="sell">出品</button>
+                            </form>
+                            --}}
+                        </li>
                     </ul>
                 </nav>
             </div>
