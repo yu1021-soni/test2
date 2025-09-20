@@ -90,6 +90,7 @@
         <h2 class="section-title">
             コメント ({{ $item->comments->count() }})
         </h2>
+
         <div class="comments">
             @forelse ($item->comments as $comment)
             <div class="comment">
@@ -102,26 +103,30 @@
                 <p class="comment__body">{{ $comment->comment }}</p>
             </div>
             @empty
-                <p>コメントはまだありません。</p>
+            <p>コメントはまだありません。</p>
             @endforelse
         </div>
 
-        {{--  コメント投稿フォーム --}}
+        {{-- コメント投稿フォーム --}}
         @auth
-        <form action="{{ route('comment.store', $item) }}" method="post" class="comment-form">
+        <form action="{{ route('comment.store') }}" method="post" class="comment-form">
         @csrf
+            <input type="hidden" name="item_id" value="{{ $item->id }}">
+
             <h3 class="form-title">商品のコメント</h3>
-            <textarea name="comment" rows="5" ></textarea>
+            <textarea name="comment" rows="5"></textarea>
             <button type="submit" class="btn-comment">コメントを送信する</button>
         </form>
+
         <div class="comment__error">
             @error('comment')
                 {{ $message }}
             @enderror
+            @error('item_id')
+                {{ $message }}
+            @enderror
         </div>
         @endauth
-
-    </div>
 
   </div>
 </div>

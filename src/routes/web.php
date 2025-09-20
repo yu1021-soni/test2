@@ -26,7 +26,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/item/favorite', [ItemController::class, 'favorite'])->name('favorites.favorite'); //ok
 
-    Route::post('/item/comment/{item}', [ItemController::class, 'comment'])->name('comment.store');
+    Route::post('/comment', [OrderController::class, 'comment'])->name('comment.store');
+
 
     Route::get('/mypage', [AccountController::class, 'mypage'])->name('mypage');
 
