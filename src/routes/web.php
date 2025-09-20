@@ -33,5 +33,5 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/purchase',[OrderController::class,'purchase'])->name('purchase.store'); // ok
 
-    Route::post('/mypage/profile',[AccountController::class,'edit'])->name('profile.edit');
+    Route::post('/mypage/profile',[AccountController::class,'edit'])->name('profile.edit'); // ok
 });
