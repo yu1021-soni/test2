@@ -33,12 +33,11 @@
                                 <button type="submit" class="mypage">マイページ</button>
                             </form>
                         </li>
-                        <li>{{-- コメントアウト
-                            <form method="post" action="{{ route('') }}">
+                        <li>
+                            <form method="post" action="{{ route('item.listing') }}">
                                 @csrf
                                 <button type="submit" class="sell">出品</button>
                             </form>
-                            --}}
                         </li>
                     </ul>
                 </nav>

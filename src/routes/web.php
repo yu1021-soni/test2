@@ -39,4 +39,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/mypage/profile', [AccountController::class, 'edit'])->name('profile.view');
 
     Route::post('/update',[AccountController::class,'update'])->name('profile.update');
+
+    Route::post('/listing',[ItemController::class,'listing'])->name('item.listing');
 });

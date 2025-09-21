@@ -102,4 +102,11 @@ class ItemController extends Controller
 
         return back();
     }
+
+    public function listing(Request $request) {
+        
+        $user = $request -> user();
+
+        return view('create',compact('user'));
+    }
 }
