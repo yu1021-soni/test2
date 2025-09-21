@@ -36,5 +36,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/mypage/profile',[AccountController::class,'edit'])->name('profile.edit'); // ok
 
+    Route::get('/mypage/profile', [AccountController::class, 'edit'])->name('profile.view');
+
     Route::post('/update',[AccountController::class,'update'])->name('profile.update');
 });

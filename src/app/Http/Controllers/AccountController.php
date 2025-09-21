@@ -21,17 +21,7 @@ class AccountController extends Controller
 
         $items  = Item::where('user_id', $user->id)->latest('id')->get();
         $orders = Order::with('item')->where('user_id', $user->id)->latest('id')->get();
-
-        // 出品した商品（user_idが自分のものを取得）
-        //$items = Item::where('user_id', $user->id)->get();
-
-        // 購入した商品（user_idが自分のものをordersテーブルから取得)
-        //$orders = Order::with('item')
-                //->where('user_id',$user->id)->get();
-
-        // これは購入履歴しか取れない 商品情報にアクセスできない
-        // $orders = Order::where('user_id', $user->id)->get();
-
+        
         return view ('profile',compact('user','items','orders','tab'));
     }
 
