@@ -10,7 +10,7 @@
     {{-- 上：ユーザー情報 --}}
     <div class="user">
         <div class="user__img">
-            <img src="{{ $user->profile_image_url ? Storage::url($user->profile_image_url) : asset('img/avatar-default.png') }}" alt="{{ $user->name }}"/>
+            <img src="{{ $user->user_image_url ? Storage::url($user->user_image_url) : asset('img/avatar-default.png') }}" alt="{{ $user->name }}"/>
         </div>
         <form action="{{ route('profile.edit') }}" class="edit" method="post">
             @csrf
