@@ -98,7 +98,7 @@
             <div class="comment">
                 <div class="comment__head">
                     <span class="avatar">
-                        <img src="{{ $comment->user->profile_image_url ?? asset('img/avatar-default.png') }}" alt="" />
+                        <img src="{{ $user->profile_image_url ? Storage::url($user->profile_image_url) : asset('img/avatar-default.png') }}" alt="{{ $user->name }}"/>
                     </span>
                     <strong class="name">{{ $comment->user->name }}</strong>
                 </div>

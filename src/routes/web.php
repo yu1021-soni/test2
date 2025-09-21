@@ -28,10 +28,12 @@ Route::middleware(['auth'])->group(function () {
 
     Route::post('/comment', [OrderController::class, 'comment'])->name('comment.store'); // ok
 
+    Route::match(['get','post'], '/mypage', [AccountController::class, 'mypage'])->name('mypage');
 
-    Route::post('/mypage', [AccountController::class, 'mypage'])->name('mypage'); // ok
+    //Route::post('/mypage', [AccountController::class, 'mypage'])->name('mypage'); // ok
 
     Route::post('/purchase',[OrderController::class,'purchase'])->name('purchase.store'); // ok
 
     Route::post('/mypage/profile',[AccountController::class,'edit'])->name('profile.edit'); // ok
+
 });
