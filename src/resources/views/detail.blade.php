@@ -8,14 +8,13 @@
 @section('content')
 <div class="content">
 
-  {{-- 左：商品画像 --}}
-  <div class="item__img">
-    <img
-      src="{{ $item->item_img_url ? Storage::url($item->item_img_url) : asset('img/placeholder.png') }}"
-      alt="{{ $item->name }}">
-  </div>
+    {{-- 左：商品画像 --}}
+    <div class="item__img">
+        <img
+        src="{{ $item->item_img_url ? Storage::url($item->item_img_url) : asset('img/placeholder.png') }}" alt="{{ $item->name }}">
+    </div>
 
-  {{-- 右：商品情報 --}}
+    {{-- 右：商品情報 --}}
   <div class="detail__info">
 
     <div class="product__area">
@@ -49,11 +48,16 @@
     <div class="product-description">
 
         {{-- 購入ボタン --}}
+        {{-- 購入済みは Sold --}}
+        @if ($item->order)
+            <p class="badge-sold">Sold</p>
+        @else
         <form method="post" action="{{ route('purchase.store') }}">
             @csrf
             <input type="hidden" name="item_id" value="{{ $item->id }}">
             <button type="submit" class="btn-buy">購入手続きへ</button>
         </form>
+        @endif
 
         {{-- 商品説明 --}}
         <h2 class="section-title">商品説明</h2>

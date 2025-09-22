@@ -23,15 +23,15 @@
             alt="{{ $item->name }}">
         </div>
 
-        {{-- 購入済みは Sold --}}
-        @if ($item->order)
-          <span class="badge-sold">Sold</span>
-        @endif
-
         <div class="item__name">
             {{ $item->name }}
         </div>
         </a>
+
+        {{-- 購入済みは Sold --}}
+        @if ($item->order)
+          <p class="badge-sold">Sold</p>
+        @endif
 
       </div>
     @empty
