@@ -41,4 +41,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/update',[AccountController::class,'update'])->name('profile.update');
 
     Route::post('/listing',[ItemController::class,'listing'])->name('item.listing');
+
+    Route::post('/pay',[OrderController::class,'pay'])->name('item.pay');
 });

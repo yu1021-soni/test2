@@ -55,8 +55,9 @@
                 <p></p>
             </div>
         </div>
-        <form action="" method="post">
+        <form action="{{ route('item.pay') }}" method="post">
             @csrf
+            <input type="hidden" name="item_id" value="{{ $item->id }}">
             <button type="submit" class="button_buy">購入する</button>
         </form>
     </div>

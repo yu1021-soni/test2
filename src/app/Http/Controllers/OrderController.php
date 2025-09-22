@@ -34,4 +34,23 @@ class OrderController extends Controller
 
         return view ('purchase',compact('item','profile'));
     }
+
+    public function pay (Request $request) {
+        // ① 購入する商品IDを受け取る
+        $itemId = $request->input('item_id');
+        $item   = Item::findOrFail($itemId);
+
+        // ② ログインユーザーを取得
+        $user = $request->user();
+
+        // ③ 注文データをDBに登録
+        $order = Order::create([
+            'user_id' => $user->id,
+            'item_id' => $item->id,
+        ]);
+
+        // ④ 完了画面やマイページにリダイレクト
+        return redirect()->route('mypage')
+                        ->with('message', '購入が完了しました！');
+    }
 }
