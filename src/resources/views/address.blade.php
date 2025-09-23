@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('css/purchase.css')}}">
+<link rel="stylesheet" href="{{ asset('css/address.css')}}">
 @endsection
 
 @section('content')
@@ -13,13 +13,13 @@
             <input type="hidden" name="item_id" value="{{ session('checkout.item_id') }}">
 
             <label>郵便番号</label>
-            <input type="text" name="postcode" value="{{ old('postcode', $draft['postcode'] ?? $user->postcode) }}">
+            <input type="text" name="postcode" value="{{ old('postcode') }}">
 
             <label>住所</label>
-            <input type="text" name="address" value="{{ old('address', $draft['address'] ?? $user->address) }}">
+            <input type="text" name="address" value="{{ old('address') }}">
 
             <label>建物名</label>
-            <input type="text" name="building" value="{{ old('building', $draft['building'] ?? ($user->building ?? '')) }}">
+            <input type="text" name="building" value="{{ old('building') }}">
 
             <button type="submit">更新する</button>
         </form>
