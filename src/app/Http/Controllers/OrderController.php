@@ -24,15 +24,23 @@ class OrderController extends Controller
         return back()->with('message', 'コメントを投稿しました');
     }
 
-    public function purchase (Request $request) {
+    public function purchase(Request $request) {
 
-        $itemId = $request->input('item_id');
-        $item   = Item::findOrFail($itemId);
+        // ① $request->input('item_id') フォームから送られてきた item_id を探す
+        //   $request->session()->get('checkout.item_id') なければ セッションに保存してある item_id 使用
+        $itemId = $request->input('item_id') ?? $request->session()->get('checkout.item_id');
 
-        $user = $request->user(); // ログイン中のユーザーを取得
-        $profile = $user->profile; // ユーザーに紐づくプロフィール取得
+        // ② セッションに保持
+        $request->session()->put('checkout.item_id', $itemId);
 
-        return view ('purchase',compact('item','user','profile'));
+        $item    = Item::findOrFail($itemId);
+        $user    = $request->user();
+        $profile = $user?->profile;
+
+        // ③ 住所下書きは 商品ごと に保持
+        $draft = $request->session()->get("checkout.address.$itemId");
+
+        return view('purchase', compact('item', 'user', 'profile', 'draft'));
     }
 
     public function pay (Request $request) {

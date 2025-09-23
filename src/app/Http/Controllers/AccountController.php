@@ -77,23 +77,21 @@ class AccountController extends Controller
 
     // 住所変更処理（セッションに保存、DBは更新しない）
     public function change(Request $request) {
-    // 住所のバリデーションだけ通す（DB保存はしない）
-    $request->validate([
-        'postcode' => ['required','regex:/^\d{3}-\d{4}$/'],
-        'address'  => ['required','string'],
-    ]);
+        $validated = $request->validate([
+            'item_id'  => ['required','integer','exists:items,id'],
+            'postcode' => ['required','regex:/^\d{3}-\d{4}$/'],
+            'address'  => ['required','string'],
+        ]);
 
-    // 今回入力した住所をビューに渡す（セッションでもOK）
-    $user    = $request->user();
-    $profile = $user->profile;
+        $itemId = $validated['item_id'];
 
-    // もし入力をそのまま表示したいなら
-    $draft = [
-        'postcode' => $request->input('postcode'),
-        'address'  => $request->input('address'),
-    ];
+        // 商品ごとに下書きを保存 checkout.address.{itemId}に配列を保存
+        $request->session()->put("checkout.address.$itemId", [
+            'postcode' => $validated['postcode'],
+            'address'  => $validated['address'],
+        ]);
 
-    // purchase.blade.php を直接返す
-    return view('purchase', compact('user', 'profile', 'draft'));
+        // purchase へ戻る（item_id はセッションに入っている）
+        return redirect()->route('purchase.store');
     }
 }

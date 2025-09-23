@@ -36,6 +36,7 @@
         <div class="shipping_address">
             <h3>配送先</h3>
             <a href="{{ route('address.edit', ['user_id' => auth()->id()]) }}">変更する</a>
+
             <div class="address">
                 {{ $draft['postcode'] ?? ($profile?->postcode ?? $user->postcode ?? '未設定') }}<br>
                 {{ $draft['address']  ?? ($profile?->address  ?? $user->address  ?? '未設定') }}

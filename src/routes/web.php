@@ -30,11 +30,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::match(['get','post'], '/mypage', [AccountController::class, 'mypage'])->name('mypage');
 
-    //Route::post('/mypage', [AccountController::class, 'mypage'])->name('mypage'); // ok
-
-    Route::post('/purchase',[OrderController::class,'purchase'])->name('purchase.store'); // ok
-    //Route::match(['get','post'], '/purchase', [OrderController::class, 'purchase'])
-    ->name('purchase.store');
+    Route::match(['get','post'], '/purchase', [OrderController::class, 'purchase'])->name('purchase.store');
 
     Route::post('/mypage/profile',[AccountController::class,'edit'])->name('profile.edit'); // ok
 
