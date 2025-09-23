@@ -10,7 +10,10 @@
     {{-- 上：ユーザー情報 --}}
     <div class="user">
         <div class="user__img">
-            <img src="{{ $user->user_img_url ? Storage::url($user->user_img_url) : asset('img/avatar-default.png') }}" alt="{{ $user->name }}"/>
+            <img src="{{ $user->user_img_url ? Storage::url($user->user_img_url) : asset('img/avatar-default.png') }}" >
+        </div>
+        <div class="user__name">
+            {{ $user->name }}
         </div>
         <form action="{{ route('profile.edit') }}" class="edit" method="post">
             @csrf
@@ -21,7 +24,7 @@
     </div>
 
     {{-- 下：アイテム一覧 --}}
-    <div class="item__list">
+    <div class="item__table">
         {{-- タブリンク --}}
         <div class="select__page">
             <a href="?page=sell" class="{{ request('page','sell')==='sell' ? 'is-active' : '' }}">
@@ -34,37 +37,38 @@
 
         {{-- コンテンツ --}}
         @if ($tab === 'sell')
-        <div class="cards-grid">
+        <div class="item__list">
             @foreach ($items as $item)
-            <div class="card">
-                <div class="thumb">
+            <div class="item__card">
+                <div class="item__img">
                     <img src="{{ $item->item_img_url ? Storage::url($item->item_img_url) : asset('img/placeholder.png') }}" alt="{{ $item->name }}">
-
                     @if (($item->order_count ?? 0) > 0)
-                        <p class="badge-sold">sold</p>
+                    <div class="badge-sold">
+                        sold
+                    </div>
                     @endif
                 </div>
-                <div class="name">
+                <div class="item__name">
                     {{ $item->name }}
                 </div>
             </div>
-            @endforeach
-            </div>
-            {{ $items->links() }}
+        @endforeach
+        </div>
+        {{ $items->links() }}
         @else
-            <div class="orders-grid">
-            @foreach ($orders as $order)
-                <div class="order">
-                    <div class="thumb">
-                        <img src="{{ optional($order->item)->item_img_url ? Storage::url($order->item->item_img_url) : asset('img/placeholder.png') }}" alt="{{ $order->item->name ?? '購入商品' }}">
-                    </div>
-                    <div class="name">
-                        {{ $order->item->name ?? '' }}
-                    </div>
+        <div class="item__list">
+        @foreach ($orders as $order)
+            <div class="item__card">
+                <div class="item__img">
+                    <img src="{{ optional($order->item)->item_img_url ? Storage::url($order->item->item_img_url) : asset('img/placeholder.png') }}" alt="{{ $order->item->name ?? '購入商品' }}">
                 </div>
-            @endforeach
+                <div class="item__name">
+                    {{ $order->item->name ?? '' }}
+                </div>
             </div>
-            {{ $orders->links() }}
+            @endforeach
+        </div>
+        {{ $orders->links() }}
         @endif
     </div>
 
