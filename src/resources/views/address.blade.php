@@ -18,6 +18,9 @@
             <label>住所</label>
             <input type="text" name="address" value="{{ old('address', $draft['address'] ?? $user->address) }}">
 
+            <label>建物名</label>
+            <input type="text" name="building" value="{{ old('building', $draft['building'] ?? ($user->building ?? '')) }}">
+
             <button type="submit">更新する</button>
         </form>
     </div>

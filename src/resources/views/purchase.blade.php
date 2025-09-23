@@ -39,7 +39,8 @@
 
             <div class="address">
                 {{ $draft['postcode'] ?? ($profile?->postcode ?? $user->postcode ?? '未設定') }}<br>
-                {{ $draft['address']  ?? ($profile?->address  ?? $user->address  ?? '未設定') }}
+                {{ $draft['address']  ?? ($profile?->address  ?? $user->address  ?? '未設定') }}<br>
+                {{ ($draft['building'] ?? null) ?: ($profile?->building ?: ($user->building ?? null)) }}
             </div>
         </div>
 

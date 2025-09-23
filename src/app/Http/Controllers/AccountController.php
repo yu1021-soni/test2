@@ -81,6 +81,7 @@ class AccountController extends Controller
             'item_id'  => ['required','integer','exists:items,id'],
             'postcode' => ['required','regex:/^\d{3}-\d{4}$/'],
             'address'  => ['required','string'],
+            'building' => ['nullable','string'],
         ]);
 
         $itemId = $validated['item_id'];
@@ -89,6 +90,7 @@ class AccountController extends Controller
         $request->session()->put("checkout.address.$itemId", [
             'postcode' => $validated['postcode'],
             'address'  => $validated['address'],
+            'building' => $validated['building'] ?? null,
         ]);
 
         // purchase へ戻る（item_id はセッションに入っている）
