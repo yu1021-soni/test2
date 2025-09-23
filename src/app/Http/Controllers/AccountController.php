@@ -13,16 +13,26 @@ class AccountController extends Controller
 {
     public function mypage(Request $request) {
 
-        $user = $request->user();  //ログイン中のユーザ取得
+        $user = $request->user();
 
-        // GET/POST 両対応で受け取る
-        $tab = $request->input('page', 'sell');
-        if (!in_array($tab, ['sell','buy'], true)) $tab = 'sell';
+        // ?page=sell | buy（それ以外は sell）
+        $tab = $request->query('page');
+        $tab = $tab === 'buy' ? 'buy' : 'sell';
 
-        $items  = Item::where('user_id', $user->id)->latest('id')->get();
-        $orders = Order::with('item')->where('user_id', $user->id)->latest('id')->get();
-        
-        return view ('profile',compact('user','items','orders','tab'));
+        if ($tab === 'sell') {
+            // 自分が出品した商品。order の件数で SOLD 判定
+            $items = Item::withCount('order')
+                ->where('user_id', $user->id)->paginate(12);
+            $orders = null;
+        } else {
+             // 自分が購入した商品（orders）＋商品データ
+            $orders = Order::with('item')
+                ->where('user_id', $user->id)
+                ->paginate(12);
+            $items = null;
+        }
+
+    return view('profile', compact('user', 'tab', 'items', 'orders'));
     }
 
     public function edit(Request $request){
