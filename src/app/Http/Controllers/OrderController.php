@@ -32,7 +32,7 @@ class OrderController extends Controller
         $user = $request->user(); // ログイン中のユーザーを取得
         $profile = $user->profile; // ユーザーに紐づくプロフィール取得
 
-        return view ('purchase',compact('item','profile'));
+        return view ('purchase',compact('item','user','profile'));
     }
 
     public function pay (Request $request) {

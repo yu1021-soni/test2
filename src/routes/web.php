@@ -33,6 +33,8 @@ Route::middleware(['auth'])->group(function () {
     //Route::post('/mypage', [AccountController::class, 'mypage'])->name('mypage'); // ok
 
     Route::post('/purchase',[OrderController::class,'purchase'])->name('purchase.store'); // ok
+    //Route::match(['get','post'], '/purchase', [OrderController::class, 'purchase'])
+    ->name('purchase.store');
 
     Route::post('/mypage/profile',[AccountController::class,'edit'])->name('profile.edit'); // ok
 
@@ -43,4 +45,10 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/listing',[ItemController::class,'listing'])->name('item.listing');
 
     Route::post('/pay',[OrderController::class,'pay'])->name('item.pay');
+
+     // 住所変更ページ (GET)
+    Route::get('/address/{user_id}', [AccountController::class, 'address'])->name('address.edit');
+
+    // 住所変更処理 (POST)
+    Route::post('/change', [AccountController::class, 'change'])->name('address.change');
 });

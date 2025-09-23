@@ -62,4 +62,38 @@ class AccountController extends Controller
 
         return redirect('mypage');
     }
+
+    public function address($user_id,Request $request) {
+
+        $user = $request->user(); // ← ログイン中のユーザー取得
+
+        $draft = $request->session()->get('checkout.address');
+
+        return view('address', [
+            'user' => $user,
+            'draft' => $draft,
+        ]);
+    }
+
+    // 住所変更処理（セッションに保存、DBは更新しない）
+    public function change(Request $request) {
+    // 住所のバリデーションだけ通す（DB保存はしない）
+    $request->validate([
+        'postcode' => ['required','regex:/^\d{3}-\d{4}$/'],
+        'address'  => ['required','string'],
+    ]);
+
+    // 今回入力した住所をビューに渡す（セッションでもOK）
+    $user    = $request->user();
+    $profile = $user->profile;
+
+    // もし入力をそのまま表示したいなら
+    $draft = [
+        'postcode' => $request->input('postcode'),
+        'address'  => $request->input('address'),
+    ];
+
+    // purchase.blade.php を直接返す
+    return view('purchase', compact('user', 'profile', 'draft'));
+    }
 }
