@@ -1,0 +1,158 @@
+.purchase__content {
+    width: 100%;
+    margin-top: 50px;
+    display: flex;
+}
+
+/* 左 */
+.left__content {
+    width: 70%;
+    padding-left: 80px;
+}
+
+.item__info {
+    display: flex;
+    align-items: flex-start;
+    margin-right: 100px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #000;
+}
+
+.item__img {
+    width: 30%;
+}
+
+.item__img img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.detail__info {
+    width: 70%;
+    padding-left: 30px;
+}
+
+.item__name {
+    margin: 0;
+    line-height: 1;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.item__price {
+    padding-top: 25px;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+.pay__method {
+    margin-right: 100px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #000;
+}
+
+.pay__method h3 {
+    margin-left: 20px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.pay__method select {
+    margin-left: 60px;
+    width: 20%;
+    height: 30px;
+}
+
+.shipping__address {
+    margin-top: 30px;
+    margin-right: 100px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #000;
+}
+
+.shipping__title {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding-right: 20px;
+}
+
+.shipping__title h3 {
+    padding-left: 20px;
+    margin: 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.shipping__title a {
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    color: #0073CC;
+}
+
+.shipping__address .address {
+    margin-left: 60px;
+    margin-top: 20px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.6;
+}
+
+/* 右 */
+.right__content {
+    width: 440px;
+    margin-right: 80px;
+}
+
+.confirm {
+    width: 440px;
+    background: #fff;
+    box-sizing:border-box;
+    border: 1px solid #000;
+}
+
+.confirm__price {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    height: 115px;
+}
+
+.confirm__pay {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    height: 115px;
+    border-top: 1px solid #000;
+}
+
+
+.confirm__title {
+    width: 220px;
+    font-size: 20px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.confirm__content {
+    font-size: 24px;
+    font-weight: 400;
+    margin: 0;
+    text-align: center;
+    width: 220px;
+}
+
+.button_buy {
+    width: 440px;
+    height: 60px;
+    margin-top: 50px;
+    border-radius: 2px;
+    background: #ff5555;
+    color: #fff;
+    font-size: 26px;
+    font-weight: 700;
+    cursor: pointer;
+    border: none;
+}

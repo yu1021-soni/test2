@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div class="content">
+<div class="purchase__content">
 
     {{-- 左：商品画像など --}}
     <div class="left__content">
@@ -15,7 +15,7 @@
                 <img src="{{ $item->item_img_url ? Storage::url($item->item_img_url) : asset('img/placeholder.png') }}" alt="{{ $item->name }}">
             </div>
             <div class="detail__info">
-                <h1 class="item__name">{{ $item->name }}</h1>
+                <p class="item__name">{{ $item->name }}</p>
                 <div class="item__price">
                     ¥{{ number_format($item->price) }}
                 </div>
@@ -27,15 +27,16 @@
             <form action="" method="get">
                 <select name="select" id="">
                     <option value="" selected disabled>選択してください</option>
-                    <option value="" ></option>
-                    <option value="" ></option>
+                    <option value="" >コンビニ払い</option>
+                    <option value="" >カード払い</option>
                 </select>
             </form>
         </div>
 
-        <div class="shipping_address">
-            <h3>配送先</h3>
-            <a href="{{ route('address.edit', ['user_id' => auth()->id()]) }}">変更する</a>
+        <div class="shipping__address">
+            <div class="shipping__title">       <h3>配送先</h3>
+                <a href="{{ route('address.edit', ['user_id' => auth()->id()]) }}">変更する</a>
+            </div>
 
             <div class="address">
                 {{ $draft['postcode'] ?? ($profile?->postcode ?? $user->postcode ?? '未設定') }}<br>
@@ -50,12 +51,12 @@
     <div class="right__content">
         <div class="confirm">
             <div class="confirm__price">
-                <p class="title">商品代金</p>
-                <p></p>
+                <p class="confirm__title">商品代金</p>
+                <p class="confirm__content">¥{{ number_format($item->price) }}</p>
             </div>
             <div class="confirm__pay">
-                <p class="title">支払い方法</p>
-                <p></p>
+                <p class="confirm__title">支払い方法</p>
+                <p class="confirm__content"></p>
             </div>
         </div>
         <form action="{{ route('item.pay') }}" method="post">
