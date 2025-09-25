@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Favorite;
 use App\Models\Category;
+use App\Http\Requests\ExhibitionRequest;
 
 class ItemController extends Controller
 {
@@ -104,12 +105,28 @@ class ItemController extends Controller
         return back();
     }
 
-    public function listing(ExhibitionRequest $request) {
-        
+    public function listing(Request $request) {
         $user = $request -> user();
         $categories = Category::all();
 
-
         return view('create',compact('user','categories'));
+    }
+
+    public function sell(ExhibitionRequest $request) {
+
+         // バリデーション済みデータを取得
+        $validated = $request->validated();
+        $user = $request -> user();
+        $path = Storage::disk('public')->putFile('items', $validated['item_img_url']);
+
+        $item = Item::create([
+            'user_id' => $user->id,
+            'name' => $validated['name'],
+            'category_id' => $validated['category'],
+            'condition' => $validated['condition'],
+            'price' => $validated['price'],
+        ]);
+
+        return redirect()->route('item.index')->with('success', '商品を出品しました！');
     }
 }

@@ -14,8 +14,12 @@
         </div>
 
         <div class="item__img">
-            <p>商品画像</p>
-            <p>画像を選択する</p>
+            <h3 class="img__title">商品画像</h3>
+
+            <div class="uploader">
+                <input id="item-img" class="uploader__input" type="file" name="item_img_url" accept=".jpg,.jpeg,.png,image/jpeg,image/png" required>
+                <label for="item-img" class="uploader__button">画像を選択する</label>
+            </div>
         </div>
 
         <div class="item__detail">
