@@ -19,14 +19,12 @@ class ItemSeeder extends Seeder
             'name' => 'Seeder Seller', 'email' => 'seller@example.com',
         ])->id;
 
-        // ★ 未分類カテゴリを用意して $categoryId を取得（fillable未設定でも動くように手動save）
-        $cat = Category::where('name', '未分類')->first();
+        $cat = Category::where('name')->first();
         if (!$cat) {
             $cat = new Category();
-            $cat->name = '未分類';
             $cat->save();
         }
-        $categoryId = $cat->id; // ← これを後続で使う
+        $categoryId = $cat->id; 
 
         // 状態ラベル → コード
         $map = ['良好'=>1,'目立った傷や汚れなし'=>2,'やや傷や汚れあり'=>3,'状態が悪い'=>4];

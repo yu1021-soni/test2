@@ -38,7 +38,7 @@ class Item extends Model
     }
 
     public function categories() {
-    return $this->belongsToMany(Category::class);
+    return $this->belongsToMany(Category::class,'category_item');
     }
 
      // 検索用のスコープ

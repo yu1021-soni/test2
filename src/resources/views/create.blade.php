@@ -8,7 +8,7 @@
 <div class="content">
     <form action="">
         @csrf
-        
+
         <div class="title">
             <h2>商品の出品</h2>
         </div>
@@ -26,6 +26,10 @@
                 <div class="category__title">
                     <h3>カテゴリー</h3>
                 </div>
+                @foreach ($categories as $cat)
+                <input type="checkbox" id="cat{{ $cat->id }}" name="categories[]" value="{{ $cat->id }}" >
+                <label for="cat{{ $cat->id }}" class="chip">{{ $cat->name }}</label>
+                @endforeach
 
             </div>
             <div class="condition">

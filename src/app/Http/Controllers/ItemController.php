@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Favorite;
+use App\Models\Category;
 
 class ItemController extends Controller
 {
@@ -106,7 +107,8 @@ class ItemController extends Controller
     public function listing(Request $request) {
         
         $user = $request -> user();
+        $categories = Category::all();
 
-        return view('create',compact('user'));
+        return view('create',compact('user','categories'));
     }
 }
