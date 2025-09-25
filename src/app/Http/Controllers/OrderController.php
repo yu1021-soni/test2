@@ -7,6 +7,7 @@ use App\Models\Order;
 use App\Models\Item;
 use App\Models\Profile;
 use App\Http\Requests\CommentRequest;
+use App\Http\Requests\PurchaseRequest;
 
 class OrderController extends Controller
 {
@@ -43,7 +44,10 @@ class OrderController extends Controller
         return view('purchase', compact('item', 'user', 'profile', 'draft'));
     }
 
-    public function pay (Request $request) {
+    public function pay (PurchaseRequest $request) {
+
+        $validated = $request->validated();
+
         // ① 購入する商品IDを受け取る
         $itemId = $request->input('item_id');
         $item   = Item::findOrFail($itemId);
@@ -55,6 +59,8 @@ class OrderController extends Controller
         $order = Order::create([
             'user_id' => $user->id,
             'item_id' => $item->id,
+            'payment' => $validated['payment'],
+            'shipping' => $validated['shipping'],
         ]);
 
         // ④ 完了画面やマイページにリダイレクト
