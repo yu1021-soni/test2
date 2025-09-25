@@ -19,12 +19,7 @@ class ItemSeeder extends Seeder
             'name' => 'Seeder Seller', 'email' => 'seller@example.com',
         ])->id;
 
-        $cat = Category::where('name')->first();
-        if (!$cat) {
-            $cat = new Category();
-            $cat->save();
-        }
-        $categoryId = $cat->id; 
+        $categoryId = Category::query()->value('id');
 
         // 状態ラベル → コード
         $map = ['良好'=>1,'目立った傷や汚れなし'=>2,'やや傷や汚れあり'=>3,'状態が悪い'=>4];
