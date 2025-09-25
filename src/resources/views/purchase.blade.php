@@ -24,17 +24,16 @@
 
         <div class="pay__method">
             <h3>支払い方法</h3>
-            <form action="" method="get">
-                <select name="select" id="">
-                    <option value="" selected disabled>選択してください</option>
-                    <option value="" >コンビニ払い</option>
-                    <option value="" >カード払い</option>
-                </select>
-            </form>
+            <select name="payment" form="purchase-form" required>
+                <option value="" selected disabled>選択してください</option>
+                <option value="1" >コンビニ払い</option>
+                <option value="2" >カード払い</option>
+            </select>
         </div>
 
         <div class="shipping__address">
-            <div class="shipping__title">       <h3>配送先</h3>
+            <div class="shipping__title">
+                <h3>配送先</h3>
                 <a href="{{ route('address.edit', ['user_id' => auth()->id()]) }}">変更する</a>
             </div>
 
@@ -43,6 +42,15 @@
                 {{ $draft['address']  ?? ($profile?->address  ?? $user->address  ?? '未設定') }}<br>
                 {{ ($draft['building'] ?? null) ?: ($profile?->building ?: ($user->building ?? null)) }}
             </div>
+            @php
+                // 結合
+                $shipping = collect([
+                    $draft['postcode'] ?? ($profile?->postcode ?? $user->postcode ?? null),
+                    $draft['address']  ?? ($profile?->address  ?? $user->address  ?? null),
+                    ($draft['building'] ?? null) ?: ($profile?->building ?: ($user->building ?? null)),
+                ])->filter(fn($v) => filled($v))->implode(' ');
+            @endphp
+
         </div>
 
     </div>
@@ -59,9 +67,10 @@
                 <p class="confirm__content"></p>
             </div>
         </div>
-        <form action="{{ route('item.pay') }}" method="post">
+        <form action="{{ route('item.pay') }}" method="post" id="purchase-form">
             @csrf
             <input type="hidden" name="item_id" value="{{ $item->id }}">
+            <input type="hidden" name="shipping" value="{{ $shipping }}">
             <button type="submit" class="button_buy">購入する</button>
         </form>
     </div>
