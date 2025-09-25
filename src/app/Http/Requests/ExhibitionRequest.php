@@ -24,7 +24,12 @@ class ExhibitionRequest extends FormRequest
     public function rules()
     {
         return [
-            
+            'name' => ['required'],
+            'description' => ['required','max:255'],
+            'item_img_url' => ['required','file','mimes:jpeg,png','mimetypes:image/jpeg,image/png',],
+            'category' => ['required'],
+            'condition' => ['required'],
+            'price' => ['required','numeric','min:0'],
         ];
     }
 }

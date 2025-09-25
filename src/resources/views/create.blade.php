@@ -36,7 +36,7 @@
                 <div class="condition__title">
                     <h3>商品の状態</h3>
                 </div>
-                <select name="" form="" required>
+                <select name="condition" form="" required>
                     <option value="" selected disabled>選択してください</option>
                     <option value="1">良好</option>
                     <option value="2">目立った傷や汚れなし</option>

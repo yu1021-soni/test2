@@ -104,10 +104,11 @@ class ItemController extends Controller
         return back();
     }
 
-    public function listing(Request $request) {
+    public function listing(ExhibitionRequest $request) {
         
         $user = $request -> user();
         $categories = Category::all();
+
 
         return view('create',compact('user','categories'));
     }
