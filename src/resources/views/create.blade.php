@@ -6,7 +6,9 @@
 
 @section('content')
 <div class="content">
-    <form action="">
+
+    {{-- enctype="multipart/form-data 画像を送る --}}
+    <form action="{{ route('item.sell') }}" method="post" enctype="multipart/form-data">
         @csrf
 
         <div class="title">
@@ -40,7 +42,7 @@
                 <div class="condition__title">
                     <h3>商品の状態</h3>
                 </div>
-                <select name="condition" form="" required>
+                <select name="condition" required>
                     <option value="" selected disabled>選択してください</option>
                     <option value="1">良好</option>
                     <option value="2">目立った傷や汚れなし</option>

@@ -34,7 +34,7 @@
                             </form>
                         </li>
                         <li>
-                            <form method="post" action="{{ route('item.listing') }}">
+                            <form method="get" action="{{ route('item.listing') }}">
                                 @csrf
                                 <button type="submit" class="sell">出品</button>
                             </form>

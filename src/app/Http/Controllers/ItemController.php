@@ -7,6 +7,7 @@ use App\Models\Item;
 use App\Models\Favorite;
 use App\Models\Category;
 use App\Http\Requests\ExhibitionRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ItemController extends Controller
 {
@@ -117,7 +118,7 @@ class ItemController extends Controller
          // バリデーション済みデータを取得
         $validated = $request->validated();
         $user = $request -> user();
-        $path = Storage::disk('public')->putFile('items', $validated['item_img_url']);
+        $img = Storage::disk('public')->putFile('items', $validated['item_img_url']);
 
         $item = Item::create([
             'user_id' => $user->id,
@@ -125,6 +126,7 @@ class ItemController extends Controller
             'category_id' => $validated['category'],
             'condition' => $validated['condition'],
             'price' => $validated['price'],
+            'item_img_url' => $img,
         ]);
 
         return redirect()->route('item.index')->with('success', '商品を出品しました！');
