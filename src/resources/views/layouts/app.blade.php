@@ -34,10 +34,11 @@
                             </form>
                         </li>
                         <li>
-                            <form method="get" action="{{ route('item.listing') }}">
+                            {{-- <form method="get" action="{{ route('item.listing') }}">
                                 @csrf
                                 <button type="submit" class="sell">出品</button>
-                            </form>
+                            </form> --}}
+                            <a href="{{ route('item.listing') }}">出品</a>
                         </li>
                     </ul>
                 </nav>

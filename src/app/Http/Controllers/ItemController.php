@@ -120,15 +120,24 @@ class ItemController extends Controller
         $user = $request -> user();
         $img = Storage::disk('public')->putFile('items', $validated['item_img_url']);
 
+        // 代表カテゴリ＝先頭
+        $mainCategoryId = (int) $validated['categories'][0];
+
+
+        // items へ保存（DBにあるカラムだけ入れる）
         $item = Item::create([
-            'user_id' => $user->id,
-            'name' => $validated['name'],
-            'category_id' => $validated['category'],
-            'condition' => $validated['condition'],
-            'price' => $validated['price'],
+            'user_id'      => $user->id,
+            'name'         => $validated['name'],
+            'description'  => $validated['description'],
+            'price'        => $validated['price'],
+            'condition'    => $validated['condition'],
+            'category_id'  => $mainCategoryId,
             'item_img_url' => $img,
         ]);
 
-        return redirect()->route('item.index')->with('success', '商品を出品しました！');
+    // 多対多（category_item）へ全カテゴリを保存
+    $item->categories()->sync($validated['categories']);
+
+    return redirect()->route('item.index');
     }
 }
