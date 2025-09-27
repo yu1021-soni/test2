@@ -29,6 +29,7 @@ class ExhibitionRequest extends FormRequest
             'item_img_url' => ['required','file','mimes:jpeg,png','mimetypes:image/jpeg,image/png',],
             'categories'   => ['required','array','min:1'],
             'categories.*' => ['integer','exists:categories,id'],
+            // *各要素のに対してのルール決め
             'condition' => ['required'],
             'price' => ['required','numeric','min:0'],
         ];

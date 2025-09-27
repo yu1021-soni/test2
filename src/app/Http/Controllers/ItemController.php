@@ -117,7 +117,12 @@ class ItemController extends Controller
 
          // バリデーション済みデータを取得
         $validated = $request->validated();
+
         $user = $request -> user();
+
+        //Storage::disk('public') ファイル保存先指定
+        //'items' 第一引数は保存先フォルダ
+        //$validated['item_img_url'] 第二引数はアップロードされたファイル
         $img = Storage::disk('public')->putFile('items', $validated['item_img_url']);
 
         // 代表カテゴリ＝先頭
@@ -136,6 +141,7 @@ class ItemController extends Controller
         ]);
 
     // 多対多（category_item）へ全カテゴリを保存
+    //sync ピボットテーブルを渡した配列と同じ状態にする
     $item->categories()->sync($validated['categories']);
 
     return redirect()->route('item.index');
