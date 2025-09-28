@@ -12,7 +12,7 @@
         @csrf
 
         <div class="title">
-            <h2>商品の出品</h2>
+            <h2 class ="h2__title">商品の出品</h2>
         </div>
 
         <div class="item__img">

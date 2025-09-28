@@ -1,3 +1,98 @@
 .uploader__input {
     display: none ;
 }
+
+.content {
+    width: 100%;
+    display: flex;
+}
+
+.title {
+    width: 100%;  
+
+    margin-top: 50px;
+}
+
+.h2__title {
+    width: 180px;
+    height: 44px;
+    font-weight: bold;
+    font-size: 36px;
+    color: black;
+}
+
+h2 {
+    height: 36px;
+    font-weight: bold;
+    color: #5f5f5f;
+    font-size: 30px;
+}
+
+h3 {
+    height: 36px;
+    font-weight: bold;
+    font-size: 24px;
+}
+
+input {
+    width: 680px;
+    height: 45px;
+    border-radius: 4px;
+    border: 1px solid #5f5f5f;
+}
+
+/* 並べて折り返すだけ */
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px 16px;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+/* ピル型のボタン */
+.chip {
+    display: inline-block;
+    margin: 6px 10px;
+    padding: 6px 14px;
+    border: 2px solid #ff4d4d;
+    /* 赤いフチ */
+    border-radius: 9999px;
+    /* まん丸 */
+    background: #fff;
+    color: #ff4d4d;
+    /* 文字は赤 */
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* 選択中の色 */
+input[type="checkbox"]:checked+.chip {
+    background: #ff4d4d;
+    color: #fff;
+}
+
+select {
+    width: 680px;
+    height: 45px;
+    border-radius: 4px;
+    border: 1px solid #5f5f5f;
+}
+
+textarea {
+    width: 680px;
+    height: 125px;
+    border-radius: 4px;
+    border: 1px solid #5f5f5f;
+}
+
+button {
+    width: 680px;
+    height: 60px;
+    border-radius: 5px;
+    border: red;
+    background-color: #ff5555;
+    color: white;
+}
