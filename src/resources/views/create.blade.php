@@ -5,7 +5,7 @@
 @endsection
 
 @section('content')
-<div class="content">
+<div class="content__listing">
 
     {{-- enctype="multipart/form-data 画像を送る --}}
     <form action="{{ route('item.sell') }}" method="post" enctype="multipart/form-data">
@@ -26,7 +26,7 @@
 
         <div class="item__detail">
             <div class="detail___title">
-                <h2>商品の詳細</h2>
+                <h2 class="sub__title">商品の詳細</h2>
             </div>
             <div class="category">
                 <div class="category__title">
@@ -54,19 +54,19 @@
 
         <div class="item__description">
             <div class="description__title">
-                <h2>商品名と説明</h2>
+                <h2 class="sub__title">商品名と説明</h2>
             </div>
             <div class="name">
                 <div class="name__title">
                     <h3>商品名</h3>
                 </div>
-                <input type="text" name="name">
+                <input type="text" name="name" class="box">
             </div>
             <div class="brand">
                 <div class="brand__title">
                     <h3>ブランド名</h3>
                 </div>
-                <input type="text" name="brand">
+                <input type="text" name="brand" class="box">
             </div>
             <div class="item__text">
                 <div class="text__title">
@@ -78,10 +78,10 @@
                 <div class="price__title">
                     <h3>販売価格</h3>
                 </div>
-                <input type="text" name="price">
+                <input type="text" name="price" class="price__box">
             </div>
         </div>
-        <button type="submit">出品する</button>
+        <button type="submit" class="sell">出品する</button>
 
     </form>
 

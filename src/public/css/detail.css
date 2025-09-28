@@ -187,7 +187,7 @@ img {
     padding: 18px;
 }
 
-/* 各コメントの縦間隔 */
+/* コメントの縦間隔 */
 .product__comments .comment+.comment {
     margin-top: 16px;
 }
@@ -228,14 +228,11 @@ img {
     line-height: 1.8;
     color: #333;
     white-space: pre-wrap;
-    /* 改行を保持 */
     word-break: break-word;
-    /* 長い単語で折り返し */
 }
 
 /*  コメント投稿フォーム */
 .product__comments .comment-form {
-    /* フォーム全体 */
     margin-top: 20px;
 }
 
@@ -243,7 +240,6 @@ img {
     font-size: 18px;
     font-weight: 700;
     margin: 16px 0 10px;
-    /* 見本っぽい余白 */
     color: black;
 }
 

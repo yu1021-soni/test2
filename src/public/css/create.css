@@ -1,98 +1,178 @@
-.uploader__input {
-    display: none ;
+.content__listing {
+    width: 680px;
+    margin: 50px auto;
+    padding: 0;
+    display: block;
+    box-sizing: border-box;
 }
 
-.content {
-    width: 100%;
-    display: flex;
+.content__listing * {
+    box-sizing: border-box;
 }
 
 .title {
-    width: 100%;  
-
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 .h2__title {
-    width: 180px;
-    height: 44px;
     font-weight: bold;
     font-size: 36px;
-    color: black;
+    color: #000;
+    margin-bottom: 16px;
+    text-align: center;
 }
 
-h2 {
-    height: 36px;
+.sub__title {
     font-weight: bold;
     color: #5f5f5f;
     font-size: 30px;
+    border-bottom: 1px solid #5f5f5f;
+    padding-bottom: 10px;
+    margin-top: 70px;
 }
 
 h3 {
-    height: 36px;
     font-weight: bold;
     font-size: 24px;
+    margin-top: 40px;
 }
 
-input {
-    width: 680px;
-    height: 45px;
-    border-radius: 4px;
+.uploader__input {
+    display: none;
+}
+
+.uploader__button {
+    display: inline-block;
+    width: 165px;
+    height: 44px;
+    line-height: 22px;
+    color: #ff5655;
+    border: 2px solid #ff5555;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+}
+
+
+.box,
+select,
+textarea,
+.sell {
+    width: 100%;
     border: 1px solid #5f5f5f;
+    border-radius: 4px;
+    height: 45px;
 }
 
-/* 並べて折り返すだけ */
-.chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px 16px;
+textarea {
+    height: 125px;
 }
 
+.sell {
+    height: 60px;
+    border: none;
+    border-radius: 5px;
+    background: #ff5555;
+    color: #fff;
+    margin-top: 100px;
+}
+
+/* カテゴリ（gap無しでも整うように marginで間隔） */
 input[type="checkbox"] {
     display: none;
 }
 
-/* ピル型のボタン */
-.chip {
-    display: inline-block;
-    margin: 6px 10px;
-    padding: 6px 14px;
-    border: 2px solid #ff4d4d;
-    /* 赤いフチ */
-    border-radius: 9999px;
-    /* まん丸 */
-    background: #fff;
-    color: #ff4d4d;
-    /* 文字は赤 */
-    font-size: 14px;
-    cursor: pointer;
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 4px;
+    margin-left: 10px;
 }
 
-/* 選択中の色 */
+.chip {
+    display: inline-block;
+    margin: 15px 0 0 15px;
+    padding: 6px 14px;
+    border: 2px solid #ff4d4d;
+    border-radius: 9999px;
+    background: #fff;
+    color: #ff4d4d;
+    font-size: 14px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
 input[type="checkbox"]:checked+.chip {
     background: #ff4d4d;
     color: #fff;
 }
 
-select {
-    width: 680px;
+.price__box {
+    width: 100%;
+    border: 1px solid #5f5f5f;
+    border-radius: 4px;
     height: 45px;
-    border-radius: 4px;
-    border: 1px solid #5f5f5f;
+
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ctext x='0' y='18' font-size='18' font-weight='700' font-family='Inter,Segoe UI,Roboto,Helvetica,Arial,sans-serif'%3E%C2%A5%3C/text%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 12px center;
+    /* 横幅12px */
+    background-size: 24px auto;
+    padding-left: 40px;
 }
 
-textarea {
-    width: 680px;
-    height: 125px;
-    border-radius: 4px;
-    border: 1px solid #5f5f5f;
+@media (min-width: 1400px) and (max-width: 1540px) {
+
+    .h2__title {
+        font-size: 38px;
+    }
+
+    .sub__title {
+        font-size: 30px;
+    }
+
+    h3 {
+        margin-top: 32px;
+    }
+
+    .sell {
+        margin-top: 80px;
+        height: 60px;
+    }
 }
 
-button {
-    width: 680px;
-    height: 60px;
-    border-radius: 5px;
-    border: red;
-    background-color: #ff5555;
-    color: white;
+@media (min-width: 768px) and (max-width: 850px) {
+    
+    .content__listing {
+        width: 550px;
+        margin: 35px auto;
+        padding: 0;
+    }
+
+    .h2__title {
+        font-size: 30px;
+        margin-bottom: 15px;
+    }
+
+    .sub__title {
+        font-size: 25px;
+        margin-top: 45px;
+        padding-bottom: 10px;
+    }
+
+    h3 {
+        font-size: 20px;
+        margin-top: 25px;
+    }
+
+    .sell {
+        height: 55px;
+        margin-top: 65px;
+    }
+
+    .chip {
+        margin: 10px 10px 0 0;
+        padding: 6px 12px;
+        font-size: 13px;
+    }
 }
