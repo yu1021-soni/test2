@@ -96,7 +96,6 @@
     margin-top: 30px;
 }
 
-/* ───────── 768–850px（タブレット） ───────── */
 @media (min-width: 768px) and (max-width: 850px) {
     .login {
         padding: 32px 20px;
@@ -145,7 +144,6 @@
     }
 }
 
-/* ───────── 1400–1540px（PC） ───────── */
 @media (min-width: 1400px) and (max-width: 1540px) {
     .login {
         padding: 40px 24px;
@@ -159,7 +157,6 @@
     .login__group {
         display: grid;
         grid-template-columns: 260px 1fr;
-        /* ラベル:入力＝260:可変 */
         column-gap: 20px;
         align-items: center;
         margin-bottom: 14px;

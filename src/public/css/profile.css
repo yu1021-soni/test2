@@ -16,7 +16,6 @@
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    /* まん丸アイコン */
     object-fit: cover;
     border: 1px solid #ddd;
     margin-right: 30px;
