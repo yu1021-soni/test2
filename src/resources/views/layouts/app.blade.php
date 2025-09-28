@@ -22,10 +22,16 @@
                 <nav class="header__nav">
                     <ul class="header__menu">
                         <li>
+                            @if(Auth::check())
                             <form method="post" action="{{ route('logout') }}">
                                 @csrf
                                 <button type="submit" class="logout">ログアウト</button>
                             </form>
+                            @else
+                            <form action="{{ route('login') }}" method="get">
+                                <button type="submit" class="login">ログイン</button>
+                            </form>
+                            @endif
                         </li>
                         <li>
                             <form method="post" action="{{ route('mypage') }}">
@@ -34,11 +40,7 @@
                             </form>
                         </li>
                         <li>
-                            {{-- <form method="get" action="{{ route('item.listing') }}">
-                                @csrf
-                                <button type="submit" class="sell">出品</button>
-                            </form> --}}
-                            <a href="{{ route('item.listing') }}">出品</a>
+                            <a href="{{ route('item.listing') }}" class="sell">出品</a>
                         </li>
                     </ul>
                 </nav>
