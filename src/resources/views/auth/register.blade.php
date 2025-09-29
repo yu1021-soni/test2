@@ -60,7 +60,7 @@
       </div>
       <div class="register__group">
         <div class="register__group-title">
-          <span class="register__label--item">もう一度入力</span>
+          <span class="register__label--item">確認用パスワード</span>
         </div>
         <div class="register__group-content">
           <div class="register__input--text">
