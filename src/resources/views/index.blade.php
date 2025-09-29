@@ -7,8 +7,16 @@
 @section('content')
 <div class="content">
   <div class="select__page">
-    <a href="/" class="select__page-main">おすすめ</a>
-    <a href="/?tab=mylist" class="select__page-my">マイリスト</a>
+    <a
+    href="{{ route('item.index') }}"
+    class="select__page-link {{ request('tab') !== 'mylist' ? 'is-active' : '' }}"
+  >おすすめ</a>
+
+  {{-- マイリスト（?tab=mylist の時に active） --}}
+  <a
+    href="{{ route('item.index', ['tab' => 'mylist']) }}"
+    class="select__page-link {{ request('tab') === 'mylist' ? 'is-active' : '' }}"
+  >マイリスト</a>
   </div>
 
   <div class="item__list">
@@ -35,7 +43,7 @@
 
       </div>
     @empty
-      <p>商品がありません。</p>
+      <p class="nothing">商品がありません</p>
     @endforelse
   </div>
 </div>
