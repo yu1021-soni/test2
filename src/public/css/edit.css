@@ -1,0 +1,141 @@
+.content {
+    width: 680px;
+    margin: 50px auto;
+    padding: 0;
+    display: block;
+    box-sizing: border-box;
+}
+
+.content__title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 700;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 24px;
+    margin-top: 40px;
+}
+
+.text {
+    box-sizing: border-box;
+    width: 100%;
+    border: 1px solid #5f5f5f;
+    border-radius: 4px;
+    height: 55px;
+}
+
+.button__update {
+    width: 100%;
+    height: 60px;
+    border: none;
+    border-radius: 5px;
+    background: #ff5555;
+    color: #fff;
+    font-size: 26px;
+    margin-top: 50px;
+}
+
+.user__img {
+    display: flex;
+}
+
+.user__item {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: gainsboro;
+    object-fit: cover;
+}
+
+.uploader__button {
+    width: 179px;
+    height: 49px;
+    color: #ff5555;
+    border: 2px solid #ff5555;
+    border-radius: 10px;
+    background-color: #fff;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+    margin-left: 50px;
+    margin-top: 45px;
+}
+
+@media (min-width: 1400px) and (max-width: 1540px) {
+    .content {
+        width: 900px;
+        margin: 80px auto;
+    }
+
+    .content__title {
+        font-size: 40px;
+    }
+
+    .title {
+        font-size: 26px;
+        margin-top: 50px;
+    }
+
+    .text {
+        height: 60px;
+    }
+
+    .button__update {
+        height: 65px;
+        font-size: 28px;
+    }
+
+    .user__item {
+        width: 170px;
+        height: 170px;
+    }
+
+    .uploader__button {
+        width: 200px;
+        height: 55px;
+        font-size: 22px;
+        margin-left: 60px;
+        margin-top: 50px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 850px) {
+    .content {
+        width: 80%;
+        margin: 30px auto;
+    }
+
+    .content__title {
+        font-size: 28px;
+    }
+
+    .title {
+        font-size: 20px;
+        margin-top: 30px;
+    }
+
+    .text {
+        height: 45px;
+    }
+
+    .button__update {
+        height: 50px;
+        font-size: 20px;
+        margin-top: 40px;
+    }
+
+    .user__item {
+        width: 120px;
+        height: 120px;
+    }
+
+    .uploader__button {
+        width: 150px;
+        height: 45px;
+        font-size: 16px;
+        margin-left: 30px;
+        margin-top: 35px;
+    }
+}
