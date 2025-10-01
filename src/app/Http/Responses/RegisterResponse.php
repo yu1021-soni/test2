@@ -8,7 +8,8 @@ class RegisterResponse implements RegisterResponseContract
 {
     public function toResponse($request)
     {
-        // 登録直後にプロフィール編集画面へリダイレクト
-        return redirect()->intended(route('profile.view'));
+        $request->session()->put('onboarding', true);
+
+        return redirect()->route('profile.edit');
     }
 }

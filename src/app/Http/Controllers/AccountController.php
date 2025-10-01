@@ -65,14 +65,17 @@ class AccountController extends Controller
 
         $saved = $user->save();
 
-        $user->save(); // 保存
 
         // 保存成功かつ画像が変更されたときだけ旧ファイル削除
         if ($saved && $imgChanged && $oldPath && Storage::disk('public')->exists($oldPath)) {
         Storage::disk('public')->delete($oldPath);
         }
 
-        return redirect('mypage');
+        $isOnboarding = $request->session()->pull('onboarding', false);
+
+        return $isOnboarding
+            ? redirect()->route('item.index')
+            : redirect('mypage');
     }
 
     public function address($user_id,Request $request) {
