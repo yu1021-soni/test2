@@ -81,7 +81,7 @@
                 <input type="text" name="price" class="price__box">
             </div>
         </div>
-        <button type="submit" class="sell">出品する</button>
+        <button type="submit" class="sell__button">出品する</button>
 
     </form>
 

@@ -14,10 +14,10 @@ class AddProfileFieldsToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('postcode', 10)->nullable()->after('password');
-            $table->string('address')->nullable()->after('postcode');
-            $table->string('building')->nullable()->after('address');
-            $table->string('img_url')->nullable()->after('building');
+            $table->string('postcode', 10)->nullable();
+            $table->string('address')->nullable();
+            $table->string('building')->nullable();
+            $table->string('user_img_url')->nullable();
         });
     }
 
@@ -29,7 +29,7 @@ class AddProfileFieldsToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['postcode','address','building','img_url']);
+            $table->dropColumn(['postcode','address','building','user_img_url']);
         });
     }
 }

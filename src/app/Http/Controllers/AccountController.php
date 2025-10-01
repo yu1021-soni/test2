@@ -52,13 +52,25 @@ class AccountController extends Controller
         $user->address = $request->input('address');
         $user->building = $request->input('building');
 
-        // 任意（ファイルがあるときだけ処理）
+        $oldPath = $user->user_img_url;
+
+        // ファイルが送られているかチェック
         if ($request->hasFile('user_img_url')) {
             $path = $request->file('user_img_url')->store('avatars', 'public');
             $user->user_img_url = $path;
         }
 
+        // 画像が変わったか保存前に判定
+        $imgChanged = $user->isDirty('user_img_url');
+
+        $saved = $user->save();
+
         $user->save(); // 保存
+
+        // 保存成功かつ画像が変更されたときだけ旧ファイル削除
+        if ($saved && $imgChanged && $oldPath && Storage::disk('public')->exists($oldPath)) {
+        Storage::disk('public')->delete($oldPath);
+        }
 
         return redirect('mypage');
     }

@@ -7,12 +7,14 @@
 @section('content')
     <div class="content">
         <h2 class="content__title">プロフィール設定</h2>
-        <div class="user__img">
-            <img src="{{ $user->user_img_url ? Storage::url($user->user_image_url) : asset('img/avatar-default.png') }}" class="user__item"/>
-            <button  class="uploader__button">画像を選択する</button>
-        </div>
-        <form action="{{ route('profile.update') }}" method="post" class="update">
+        <form action="{{ route('profile.update') }}" method="post" class="update" enctype="multipart/form-data">
             @csrf
+        <div class="user__img">
+            <img src="{{ $user->user_img_url ? Storage::url($user->user_img_url) : asset('img/avatar-default.png') }}" class="user__item"/>
+            <input id="user-img" class="uploader__input" type="file" name="user_img_url" accept=".jpg,.jpeg,.png,image/jpeg,image/png">
+            <label for="user-img" class="uploader__button">画像を選択する</label>
+        </div>
+        
             <div class="profile">
                 <div class="profile__name">
                     <p class="title">ユーザ名</p>

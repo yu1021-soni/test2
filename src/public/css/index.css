@@ -1,0 +1,83 @@
+.content {
+    margin-top: 60px;
+}
+
+.select__page {
+    display: flex;
+    border-bottom: 1px solid black;
+    padding-bottom: 2px;
+    font-weight: bold;
+    font-size: 24px;
+    padding-left: 100px;
+}
+
+.select__page-link {
+    margin-left: 100px;
+    color: #000;
+    text-decoration: none;
+}
+
+.select__page .select__page-link.is-active,
+.select__page .select__page-link.is-active:visited {
+    color: red;
+    font-weight: bold;
+}
+
+.badge-sold {
+    display: inline-block;
+    padding: 2px 4px;
+    border: 2px solid red;
+    color: red;
+    border-radius: 4px;
+    background-color: #fff;
+    margin-bottom: 1px;
+}
+
+.item__list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item__card {
+    width: 25%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.item__img img {
+    width: 100%;
+    display: block;
+}
+
+.nothing {
+    margin-top: 30px;
+    margin-left: 30px;
+    font-size: 20px;
+}
+
+@media (min-width: 1400px) and (max-width: 1540px) {
+    .item__card {
+        width: 25%;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 850px) {
+    .select__page {
+        padding-left: 40px;
+        font-size: 20px;
+    }
+
+    .select__page-link {
+        margin-left: 40px;
+    }
+
+    .item__card {
+        width: 50%;
+    }
+
+    .nothing {
+        margin-top: 20px;
+        margin-left: 20px;
+        font-size: 15px;
+    }
+}

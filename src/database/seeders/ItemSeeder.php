@@ -55,12 +55,12 @@ class ItemSeeder extends Seeder
 
             Item::create([
                 'user_id'       => $sellerId,
-                'category_id'   => $categoryId,     // ★ 必須FKを投入
+                'category_id'   => $categoryId,
                 'name'          => $name,
                 'price'         => (int)str_replace(',', '', $price),
                 'brand'         => ($brand === '' || $brand === 'なし') ? null : $brand,
                 'description'   => $desc,
-                'item_img_url'  => $stored ?: $url,  // storage相対 or 外部URL
+                'item_img_url'  => $stored ?: $url,
                 'condition'     => $toCode($condLabel),
             ]);
         }

@@ -37,6 +37,10 @@
     margin-top: 50px;
 }
 
+.uploader__input {
+    display: none;
+}
+
 .user__img {
     display: flex;
 }
@@ -58,9 +62,10 @@
     background-color: #fff;
     font-size: 20px;
     font-weight: 700;
-    text-align: center;
     margin-left: 50px;
     margin-top: 45px;
+    line-height: 49px;
+    text-align: center;
 }
 
 @media (min-width: 1400px) and (max-width: 1540px) {
