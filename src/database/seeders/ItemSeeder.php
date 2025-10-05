@@ -15,9 +15,7 @@ class ItemSeeder extends Seeder
     public function run(): void
     {
         // 出品者
-        $sellerId = User::query()->value('id') ?? User::factory()->create([
-            'name' => 'Seeder Seller', 'email' => 'seller@example.com',
-        ])->id;
+        $userIds = User::pluck('id');
 
         //$categoryId = Category::query()->value('id');
         $categories = Category::all();
@@ -73,6 +71,8 @@ class ItemSeeder extends Seeder
 
         foreach ($rows as [$name, $price, $brand, $desc, $url, $condLabel,$categoryNames]) {
             $stored = $saveFromUrl($url);
+
+            $sellerId = $userIds->random();
 
              // 1) 複数カテゴリ → ID配列に
             $categoryIds = $resolveCategoryIds($categoryNames);
