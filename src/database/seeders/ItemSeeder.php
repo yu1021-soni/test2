@@ -19,7 +19,8 @@ class ItemSeeder extends Seeder
             'name' => 'Seeder Seller', 'email' => 'seller@example.com',
         ])->id;
 
-        $categoryId = Category::query()->value('id');
+        //$categoryId = Category::query()->value('id');
+        $categories = Category::all();
 
         // 状態ラベル → コード
         $map = ['良好'=>1,'目立った傷や汚れなし'=>2,'やや傷や汚れあり'=>3,'状態が悪い'=>4];
@@ -38,24 +39,52 @@ class ItemSeeder extends Seeder
         };
 
         $rows = [
-            ['腕時計','15,000','Rolax','スタイリッシュなデザインのメンズ腕時計','https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Armani+Mens+Clock.jpg','良好'],
-            ['HDD','5,000','西芝','高速で信頼性の高いハードディスク','https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/HDD+Hard+Disk.jpg','目立った傷や汚れなし'],
-            ['玉ねぎ3束','300','なし','新鮮な玉ねぎ3束のセット','https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/iLoveIMG+d.jpg','やや傷や汚れあり'],
-            ['革靴','4,000','', 'クラシックなデザインの革靴','https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Leather+Shoes+Product+Photo.jpg','状態が悪い'],
-            ['ノートPC','45,000','', '高性能なノートパソコン','https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Living+Room+Laptop.jpg','良好'],
-            ['マイク','8,000','なし','高音質のレコーディング用マイク','https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Music+Mic+4632231.jpg','目立った傷や汚れなし'],
-            ['ショルダーバッグ','3,500','', 'おしゃれなショルダーバッグ','https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Purse+fashion+pocket.jpg','やや傷や汚れあり'],
-            ['タンブラー','500','なし','使いやすいタンブラー','https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Tumbler+souvenir.jpg','状態が悪い'],
-            ['コーヒーミル','4,000','Starbacks','手動のコーヒーミル','https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Waitress+with+Coffee+Grinder.jpg','良好'],
-            ['メイクセット','2,500','', '便利なメイクアップセット','https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/%E5%A4%96%E5%87%BA%E3%83%A1%E3%82%A4%E3%82%AF%E3%82%A2%E3%83%83%E3%83%95%E3%82%9A%E3%82%BB%E3%83%83%E3%83%88.jpg','目立った傷や汚れなし'],
+            ['腕時計','15,000','Rolax','スタイリッシュなデザインのメンズ腕時計','https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Armani+Mens+Clock.jpg','良好',['メンズ','ファッション']],
+            ['HDD','5,000','西芝','高速で信頼性の高いハードディスク','https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/HDD+Hard+Disk.jpg','目立った傷や汚れなし','家電'],
+            ['玉ねぎ3束','300','なし','新鮮な玉ねぎ3束のセット','https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/iLoveIMG+d.jpg','やや傷や汚れあり','キッチン'],
+            ['革靴','4,000','', 'クラシックなデザインの革靴','https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Leather+Shoes+Product+Photo.jpg','状態が悪い','メンズ'],
+            ['ノートPC','45,000','', '高性能なノートパソコン','https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Living+Room+Laptop.jpg','良好','家電'],
+            ['マイク','8,000','なし','高音質のレコーディング用マイク','https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Music+Mic+4632231.jpg','目立った傷や汚れなし','家電'],
+            ['ショルダーバッグ','3,500','', 'おしゃれなショルダーバッグ','https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Purse+fashion+pocket.jpg','やや傷や汚れあり',['レディース','ファッション']],
+            ['タンブラー','500','なし','使いやすいタンブラー','https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Tumbler+souvenir.jpg','状態が悪い','キッチン'],
+            ['コーヒーミル','4,000','Starbacks','手動のコーヒーミル','https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/Waitress+with+Coffee+Grinder.jpg','良好','キッチン'],
+            ['メイクセット','2,500','', '便利なメイクアップセット','https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/%E5%A4%96%E5%87%BA%E3%83%A1%E3%82%A4%E3%82%AF%E3%82%A2%E3%83%83%E3%83%95%E3%82%9A%E3%82%BB%E3%83%83%E3%83%88.jpg','目立った傷や汚れなし','コスメ'],
         ];
 
-        foreach ($rows as [$name, $price, $brand, $desc, $url, $condLabel]) {
+            // 既存カテゴリをまとめて取得（何度もDBに行かないように）
+            $allCategories = Category::all();
+
+            // カテゴリ名（文字列 or 配列）→ 既存のID配列
+            $resolveCategoryIds = function ($categoryNames) use ($allCategories) {
+                if (!is_array($categoryNames)) {
+                $categoryNames = [$categoryNames];
+            }
+
+                $ids = [];
+                foreach ($categoryNames as $name) {
+                    $category = $allCategories->firstWhere('name', $name);
+                    if ($category) {
+                        $ids[] = $category->id; // 見つかったらIDを追加
+                }
+            }
+            // 重複除去して返す
+            return array_values(array_unique($ids));
+        };
+
+        foreach ($rows as [$name, $price, $brand, $desc, $url, $condLabel,$categoryNames]) {
             $stored = $saveFromUrl($url);
 
-            Item::create([
+             // 1) 複数カテゴリ → ID配列に
+            $categoryIds = $resolveCategoryIds($categoryNames);
+
+
+            // 3) 代表カテゴリ（NOT NULL対策）＝先頭IDを items.category_id に入れる
+            $representativeId = $categoryIds[0];
+
+
+            $item = Item::create([
                 'user_id'       => $sellerId,
-                'category_id'   => $categoryId,
+                'category_id'   => $representativeId,
                 'name'          => $name,
                 'price'         => (int)str_replace(',', '', $price),
                 'brand'         => ($brand === '' || $brand === 'なし') ? null : $brand,
@@ -63,6 +92,9 @@ class ItemSeeder extends Seeder
                 'item_img_url'  => $stored ?: $url,
                 'condition'     => $toCode($condLabel),
             ]);
+
+            
+            $item->categories()->sync($categoryIds);
         }
     }
 }
