@@ -4,17 +4,24 @@
 <link rel="stylesheet" href="{{ asset('css/index.css')}}">
 @endsection
 
+@php
+  // 検索条件を保持
+  $searchParams = request()->except('tab', 'page');
+@endphp
+
+
 @section('content')
 <div class="content">
   <div class="select__page">
     <a
-    href="{{ route('item.index') }}"
+    href="{{ route('item.index', $searchParams) }}"
     class="select__page-link {{ request('tab') !== 'mylist' ? 'is-active' : '' }}"
   >おすすめ</a>
 
   {{-- マイリスト（?tab=mylist の時に active） --}}
+  {{-- array_merge は 配列どうしを合体する関数 --}}
   <a
-    href="{{ route('item.index', ['tab' => 'mylist']) }}"
+    href="{{ route('item.index', array_merge($searchParams, ['tab' => 'mylist'])) }}"
     class="select__page-link {{ request('tab') === 'mylist' ? 'is-active' : '' }}"
   >マイリスト</a>
   </div>
