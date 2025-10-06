@@ -42,7 +42,6 @@
     border: 1px solid rgba(95,95,95,1);
     border-radius: 4px;
     padding: 10px 12px;
-    margin-bottom: 30px;
     appearance: none;
     outline: none;
 }
@@ -54,7 +53,8 @@
 }
 
 .login__error {
-    font-size: 12px;
+    margin-bottom: 30px;
+    font-size: 15px;
     color: red;
     padding: 6px 0 0;
 }
