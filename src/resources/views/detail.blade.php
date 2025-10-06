@@ -11,7 +11,7 @@
     {{-- 左：商品画像 --}}
     <div class="item__img">
         <img
-        src="{{ $item->item_img_url ? Storage::url($item->item_img_url) : asset('img/placeholder.png') }}" alt="{{ $item->name }}">
+        src="{{ $item->item_img_url ? Storage::url($item->item_img_url) : asset('img/placeholder.png') }}" alt="{{ $item->name }}" class="img__url">
     </div>
 
     {{-- 右：商品情報 --}}
@@ -109,7 +109,7 @@
                 <p class="comment__body">{{ $comment->comment }}</p>
             </div>
             @empty
-            <p>コメントはまだありません。</p>
+            <p class="no__comment">こちらにコメントが入ります。</p>
             @endforelse
         </div>
 
@@ -119,7 +119,7 @@
         @csrf
             <input type="hidden" name="item_id" value="{{ $item->id }}">
 
-            <h3 class="form-title">商品のコメント</h3>
+            <h3 class="form-title">商品へのコメント</h3>
             <textarea name="comment" rows="5"></textarea>
             <button type="submit" class="btn-comment">コメントを送信する</button>
         </form>

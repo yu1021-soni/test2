@@ -25,7 +25,13 @@ img {
 
 .item__img {
     width: 50%;
-    padding: 12px;
+    margin-top: 50px;
+    box-sizing: border-box;
+}
+
+.img__url {
+    width: 600px;
+    height: 600px;
     box-sizing: border-box;
 }
 
@@ -41,6 +47,7 @@ img {
 
 .detail__info {
     width: 50%;
+    padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -51,23 +58,25 @@ img {
 }
 
 .item__name {
-    font-size: 35px;
+    font-size: 45px;
+    font-weight: 700;
     margin: 0 0 6px;
 }
 
 .item__brand {
-    font-size: 14px;
-    color: #666;
+    font-size: 20px;
+    font-weight: 400;
     margin-bottom: 10px;
 }
 
 .item__price {
-    font-size: 22px;
+    font-size: 30px;
+    font-weight: 400;
     margin-bottom: 12px;
 }
 
 .item__price span {
-    font-size: 12px;
+    font-size: 18px;
     font-weight: 400;
     color: #666;
 }
@@ -78,7 +87,8 @@ img {
     flex-direction: column;
     align-items: center;
     gap: 6px;
-    margin-right: 12px;
+    margin-right: 30px;
+    margin-top: 10px;
     vertical-align: top;
 }
 
@@ -86,14 +96,14 @@ img {
     border: none;
     background: none;
     padding: 0;
-    font-size: 18px;
+    font-size: 40px;
     color: #333;
     line-height: 1;
     cursor: pointer;
 }
 
 .comment__icon i {
-    font-size: 18px;
+    font-size: 40px;
     color: #333;
     line-height: 1;
     display: block;
@@ -111,31 +121,31 @@ img {
     padding: 18px;
 }
 
-.btn-purchase button {
-    width: 100%;
-    padding: 12px 16px;
+.btn-buy {
+    width: 570px;
+    height: 56px;
+    border-radius: 4px;
     border: 0;
-    border-radius: 3px;
-    background: #ff6b6b;
+    background: #ff5555;
     color: #fff;
+    font-size: 30px;
     font-weight: 700;
     cursor: pointer;
     margin: 4px 0 16px;
 }
 
-.btn-purchase button {
-    width: 100%;
-}
-
 /* 商品説明タイトル */
 .section-title {
-    font-size: 25px;
+    font-size: 36px;
+    font-weight: 700;
     margin: 14px 0 10px;
     padding-bottom: 6px;
 }
 
 /* 商品説明文 */
 .item__description {
+    font-size: 24px;
+    font-weight: 400;
     line-height: 1.8;
     white-space: pre-wrap;
 }
@@ -158,11 +168,14 @@ img {
 }
 
 .item__spec .label {
-    width: 120px;
-    font-weight: bold;
+    font-size: 24px;
+    font-weight: 700;
+    margin-right: 50px;
 }
 
 .item__spec .value {
+    font-size: 20px;
+    font-weight: 400;
     flex: 1;
     display: flex;
     flex-wrap: wrap;
@@ -171,13 +184,13 @@ img {
 
 /* カテゴリの丸 */
 .chip {
-    display: inline-block;
-    padding: 4px 10px;
-    border: 1px solid #e5e7eb;
-    background: #f3f4f6;
-    border-radius: 9999px;
+    display: flex;
+    padding: 0 18px ;
+    height: 30px;
+    border: 1px solid #d9d9d9;
+    background: #d9d9d9;
+    border-radius: 15px;
     /* まるいピル */
-    font-size: 12px;
     margin-right: 8px;
     margin-bottom: 6px;
     /* 折返し時の間隔 */
@@ -199,12 +212,12 @@ img {
 }
 
 .product__comments .comment__head .avatar {
-    width: 40px;
-    height: 40px;
+    width: 70px;
+    height: 70px;
     flex: 0 0 40px;
     border-radius: 50%;
     overflow: hidden;
-    background: #ddd;
+    background: #d9d9d9;
     /* 画像が無いときの背景 */
     margin-right: 12px;
 }
@@ -215,9 +228,9 @@ img {
     height: 100%;
 }
 
-.product__comments .comment__head .name {
-    font-size: 16px;
-    font-weight: bold;
+.name {
+    font-size: 30px;
+    font-weight: 700;
 }
 
 .product__comments .comment__body {
@@ -231,13 +244,22 @@ img {
     word-break: break-word;
 }
 
+.no__comment {
+    width: 570px;
+    background-color: #e5e5e5;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: 300;
+    padding: 20px;
+}
+
 /*  コメント投稿フォーム */
 .product__comments .comment-form {
     margin-top: 20px;
 }
 
-.product__comments .comment-form .form-title {
-    font-size: 18px;
+.comment-form .form-title {
+    font-size: 28px;
     font-weight: 700;
     margin: 16px 0 10px;
     color: black;
@@ -245,8 +267,8 @@ img {
 
 .product__comments .comment-form textarea {
     display: block;
-    width: 100%;
-    min-height: 160px;
+    width: 570px;
+    height: 246px;
     padding: 12px 14px;
     font: inherit;
     border: 1px solid #ddd;
@@ -254,16 +276,19 @@ img {
     box-sizing: border-box;
 }
 
-.product__comments .btn-comment {
-    width: 100%;
+.btn-comment {
+    width: 570px;
+    height: 56px;
+    font-size: 25px;
+    font-weight: 700;
     padding: 12px 16px;
     border: 0;
-    border-radius: 3px;
-    background: #ff6b6b;
+    border-radius: 4px;
+    background: #ff5555;
     color: #fff;
     font-weight: 700;
     cursor: pointer;
-    margin: 25px 0 16px;
+    margin-top: 50px;
 }
 
 /* エラー */
@@ -273,60 +298,86 @@ img {
     font-size: 13px;
 }
 
-@media (min-width: 1400px) and (max-width: 1540px) {
-    .content {
-        padding-inline: 24px;
-        gap: 32px;
-    }
-
-    .item__img,
-    .detail__info {
-        width: 50%;
-    }
-
-    .item__name {
-        font-size: 36px;
-    }
-
-    .item__price {
-        font-size: 24px;
-    }
-
-    .section-title {
-        font-size: 20px;
-    }
-
-    .favorite__button,
-    .comment__icon i {
-        font-size: 22px;
-    }
-}
 
 @media (min-width: 768px) and (max-width: 850px) {
+
     .content {
-        padding-inline: 16px;
+        display: flex;
+        flex-direction: column;
+        /* 縦に */
+        align-items: center;
+        /* 中央寄せ */
         gap: 24px;
+        padding-inline: 6%;
     }
 
     .item__img,
     .detail__info {
-        min-width: 0;
+        width: 100%;
+        max-width: 720px;
+        margin: 0;
+        padding: 0;
+    }
+
+    .img__url {
+        width: 100%;
+        height: auto;
+        max-width: 640px;
+        margin: 0 auto;
+        display: block;
     }
 
     .item__name {
-        font-size: 28px;
+        font-size: 32px;
     }
 
-    .item__price {
-        font-size: 20px;
-    }
-
-    .section-title {
+    .item__brand {
         font-size: 18px;
     }
 
+    .item__price {
+        font-size: 26px;
+    }
+
+    .item__price span {
+        font-size: 15px;
+    }
+
+    .section-title {
+        font-size: 28px;
+    }
+
+    .item__description {
+        font-size: 18px;
+        line-height: 1.9;
+    }
+
+    .item__spec .label {
+        font-size: 18px;
+        margin-right: 24px;
+        min-width: 120px;
+    }
+
+    .item__spec .value {
+        font-size: 16px;
+        gap: 6px 8px;
+    }
+
+    .btn-buy,
+    .product__comments .comment-form textarea,
+    .btn-comment,
+    .no__comment {
+        width: 100%;
+        max-width: 720px;
+    }
+
     .favorite__button,
     .comment__icon i {
-        font-size: 20px;
+        font-size: 32px;
+    }
+
+    .favorite p,
+    .comment__icon p {
+        font-size: 12px;
     }
 }
