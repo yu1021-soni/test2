@@ -17,14 +17,13 @@ class ItemSeeder extends Seeder
         // 出品者
         $userIds = User::pluck('id');
 
-        //$categoryId = Category::query()->value('id');
         $categories = Category::all();
 
         // 状態ラベル → コード
         $map = ['良好'=>1,'目立った傷や汚れなし'=>2,'やや傷や汚れあり'=>3,'状態が悪い'=>4];
         $toCode = fn($label) => $map[$label] ?? 0;
 
-        // 画像URL→storage保存
+        // 画像URL storage保存
         $saveFromUrl = function (string $url): ?string {
             try {
                 $res = Http::timeout(20)->get($url);
@@ -49,7 +48,7 @@ class ItemSeeder extends Seeder
             ['メイクセット','2,500','', '便利なメイクアップセット','https://coachtech-matter.s3.ap-northeast-1.amazonaws.com/image/%E5%A4%96%E5%87%BA%E3%83%A1%E3%82%A4%E3%82%AF%E3%82%A2%E3%83%83%E3%83%95%E3%82%9A%E3%82%BB%E3%83%83%E3%83%88.jpg','目立った傷や汚れなし','コスメ'],
         ];
 
-            // 既存カテゴリをまとめて取得（何度もDBに行かないように）
+            // カテゴリをまとめて取得
             $allCategories = Category::all();
 
             // カテゴリ名（文字列 or 配列）→ 既存のID配列
@@ -62,7 +61,7 @@ class ItemSeeder extends Seeder
                 foreach ($categoryNames as $name) {
                     $category = $allCategories->firstWhere('name', $name);
                     if ($category) {
-                        $ids[] = $category->id; // 見つかったらIDを追加
+                        $ids[] = $category->id; // 見つかったらidを追加
                 }
             }
             // 重複除去して返す
@@ -74,11 +73,11 @@ class ItemSeeder extends Seeder
 
             $sellerId = $userIds->random();
 
-             // 1) 複数カテゴリ → ID配列に
+             //複数カテゴリ → ID配列に
             $categoryIds = $resolveCategoryIds($categoryNames);
 
 
-            // 3) 代表カテゴリ（NOT NULL対策）＝先頭IDを items.category_id に入れる
+            // 代表カテゴリ 先頭IDを items.category_id に入れる
             $representativeId = $categoryIds[0];
 
 
@@ -93,7 +92,6 @@ class ItemSeeder extends Seeder
                 'condition'     => $toCode($condLabel),
             ]);
 
-            
             $item->categories()->sync($categoryIds);
         }
     }
