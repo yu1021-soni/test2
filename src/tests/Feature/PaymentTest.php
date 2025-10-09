@@ -1,0 +1,46 @@
+<?php
+
+namespace Tests\Feature;
+
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\WithFaker;
+use Tests\TestCase;
+use App\Models\Item;
+use App\Models\User;
+use Database\Seeders\CategorySeeder;
+
+class PaymentTest extends TestCase
+{
+    /**
+     * A basic feature test example.
+     *
+     * @return void
+     */
+
+    use RefreshDatabase;
+
+    //小計画面で変更が反映される
+    public function test_payment() {
+        $this->seed(CategorySeeder::class);
+
+        $seller = User::factory()->create();
+        $buyer  = User::factory()->create();
+
+        // 商品を出品
+        $item = Item::factory()->create(['user_id' => $seller->id]);
+
+        $this->actingAs($buyer);
+
+        $response = $this->post(route('purchase.store'), [
+            'item_id'  => $item->id,
+            'payment'  => 2,
+            'shipping' => 'テスト住所',
+        ]);
+
+
+        $response = $this->get(route('purchase.store', ['item_id' => $item->id]));
+
+        $response->assertOk()
+                ->assertSee('カード払い');
+    }
+}
