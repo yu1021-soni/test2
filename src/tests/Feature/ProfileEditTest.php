@@ -17,6 +17,7 @@ class ProfileEditTest extends TestCase
 
     use RefreshDatabase;
 
+    //変更項目が初期値として過去設定されていること
     public function test_profile_edit() {
 
         $user = User::factory()->create([
@@ -26,13 +27,14 @@ class ProfileEditTest extends TestCase
             'address'     => 'テスト住所',
         ]);
 
-
+        //1. ユーザーにログインする
         $this->actingAs($user);
 
-        // プロフィール編集ページを開く
+        //2. プロフィールページを開く
         $response = $this->get(route('profile.view'));
         $response->assertOk();
 
+        //各項目の初期値が正しく表示されている
         $response->assertSee('avatars/test.png');
         $response->assertSee('111-1111');
         $response->assertSee('テスト住所');

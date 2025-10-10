@@ -22,7 +22,7 @@ class SearchTest extends TestCase
 
     use RefreshDatabase;
 
-    //部分検索機能
+    //「商品名」で部分一致検索ができる
     public function test_search_partial() {
 
         $this->seed(CategorySeeder::class);
@@ -32,15 +32,18 @@ class SearchTest extends TestCase
         $matchItem = Item::factory()->create(['name' => 'コーヒーミル']);
         $notMatchItem = Item::factory()->create(['name' => '紅茶カップ']);
 
-        //部分検索
-        $response = $this->get('/search?keyword=コーヒー');
+        //1. 検索欄にキーワードを入力
+        //2. 検索ボタンを押す
+        $response = $this->get(route('items.search', ['keyword' => 'コーヒー']));
 
         $response->assertOk();
+
+        //部分一致する商品が表示される
         $response->assertSeeText('コーヒーミル');
         $response->assertDontSeeText('紅茶カップ');
     }
 
-    //検索状態がmylistでも保持
+    //検索状態がマイリストでも保持されている
     public function test_search_keep_mylist() {
 
         $this->seed(CategorySeeder::class);
@@ -49,13 +52,21 @@ class SearchTest extends TestCase
 
         $Item = Item::factory()->create(['name' => 'コーヒーミル']);
 
-        // ログイン状態で「コーヒー」で検索
+        // ログイン状態
         $this->actingAs($user);
 
-        // マイリストタブに遷移
-        $response = $this->get('/?tab=mylist&keyword=コーヒー');
+        //1. ホームページで商品を検索
+        $response = $this->get(route('items.search', ['keyword' => 'コーヒー']));
+
+        //2. 検索結果が表示される
+        $response->assertSeeText('コーヒーミル');
+        $response->assertSee('value="コーヒー"',false);
+
+        //3. マイリストページに遷移
+        $response = $this->get(route('item.index', ['tab' => 'mylist', 'keyword' => 'コーヒー']));
         
+        //検索キーワードが保持されている
         $response->assertOk();
-        $response->assertSee('コーヒー');
+        $response->assertSee('value="コーヒー"', false);
     }
 }

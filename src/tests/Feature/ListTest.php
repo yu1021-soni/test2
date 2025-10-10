@@ -20,7 +20,7 @@ class ListTest extends TestCase
 
     use RefreshDatabase;
 
-    //商品一覧取得
+    //全商品を取得できる
     public function test_item_list() {
 
         //固定データはFactory不要
@@ -28,16 +28,17 @@ class ListTest extends TestCase
 
         $items = Item::factory()->create();
 
+        //1. 商品ページを開く
         $response = $this->get(route('item.index'));
 
         //ページが存在するか確認
         $response->assertOk();
 
-        //商品の名前が画面に出ているか確認
+        //すべての商品が表示される
         $response->assertSee($items->name);
     }
 
-    //購入済み商品sold表示
+    //購入済み商品は「Sold」と表示される
     public function test_item_sold() {
 
         $this->seed(CategorySeeder::class);
@@ -51,13 +52,16 @@ class ListTest extends TestCase
             'item_id' => $item->id,
         ]);
 
+        //1. 商品ページを開く
         $response = $this->get(route('item.index'));
 
         //ページが存在するか確認
         $response->assertOk();
-        //商品の名前が画面に出ているか確認
+
+        //2. 購入済み商品を表示する
         $response->assertSee($item->name);
-        //sold表示
+
+        //購入済み商品に「Sold」のラベルが表示される
         $response->assertSee('Sold');
     }
 
@@ -72,11 +76,13 @@ class ListTest extends TestCase
             'name'    => 'my_listing',
         ]);
 
-        //ログイン状態
+        //1. ユーザーにログインをする
         $this->actingAs($user);
 
+        //2. 商品ページを開く
         $response = $this->get(route('item.index'));
 
+        //自分が出品した商品が一覧に表示されない
         $response->assertDontSee($myItem->name);
     }
 }

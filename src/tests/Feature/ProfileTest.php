@@ -20,6 +20,7 @@ class ProfileTest extends TestCase
 
     use RefreshDatabase;
 
+    //必要な情報が取得できる
     public function test_profile_get() {
 
         $this->seed(CategorySeeder::class);
@@ -29,6 +30,7 @@ class ProfileTest extends TestCase
             'user_img_url'=> 'avatars/test.png',
         ]);
 
+        //1. ユーザーにログインする
         $this->actingAs($user);
 
         // 出品商品
@@ -47,6 +49,12 @@ class ProfileTest extends TestCase
             'shipping' => 'テスト住所',
         ]);
 
+        //2.プロフィールページを開く
+        $this->get(route('mypage'))
+            ->assertOk()
+            ->assertSee('テスト名前')
+            ->assertSee('avatars/test.png');
+
         // 出品一覧タブ
         $this->get(route('mypage', ['page' => 'sell']))
             ->assertOk()
@@ -56,10 +64,5 @@ class ProfileTest extends TestCase
         $this->get(route('mypage', ['page' => 'buy']))
             ->assertOk()
             ->assertSee('テスト購入商品');
-
-    // 共通要素（ユーザー名・プロフィール画像）
-    $this->get(route('mypage'))
-        ->assertSee('テスト名前')
-        ->assertSee('avatars/test.png');
     }
 }

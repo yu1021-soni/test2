@@ -21,7 +21,8 @@ class ListingTest extends TestCase
 
     use RefreshDatabase;
 
-    public function test_example() {
+    //商品出品画面にて必要な情報が保存できること
+    public function test_listing() {
 
         $this->seed(CategorySeeder::class);
 
@@ -41,8 +42,10 @@ class ListingTest extends TestCase
         // Symfonyの UploadedFile を生成
         $file = new UploadedFile($tmp, 'item.png', 'image/png', null, true);
 
+        //ユーザーにログイン
         $this->actingAs($user);
 
+        //各項目に適切な情報を入力して保存する" 各項目が正しく保存されている
         $response = $this->post(route('item.sell'), [
             'item_img_url' => $file,          // ダミー画像
             'categories'   => [$category->id],
@@ -52,8 +55,9 @@ class ListingTest extends TestCase
             'price'        => 1000,
         ]);
 
-        $response->assertSessionHasNoErrors();
+        $response->assertSessionHasNoErrors()->assertStatus(302);
 
+        //各項目が正しく保存されている確認
         $this->assertDatabaseHas('items', [
             'user_id'     => $user->id,
             'name'        => 'テスト商品',

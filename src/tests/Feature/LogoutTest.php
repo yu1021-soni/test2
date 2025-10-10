@@ -15,15 +15,16 @@ class LogoutTest extends TestCase
      * @return void
      */
     
+    //ログアウトができる
     public function test_logout_successful() {
 
         //テスト用のユーザーを自動生成
         $user = User::factory()->create();
 
-        //ログイン
+        //1. ユーザーにログインをする
         $this->actingAs($user);
 
-        //ログアウトリクエスト
+        //2. ログアウトボタンを押す
         $response = $this->post('/logout');
 
         //未ログインアサーション

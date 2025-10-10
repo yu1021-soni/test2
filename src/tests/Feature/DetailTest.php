@@ -24,6 +24,7 @@ class DetailTest extends TestCase
 
     use RefreshDatabase;
 
+    //必要な情報が表示される
     public function test_detail_display() {
 
         //カテゴリ一覧をDBに
@@ -64,12 +65,12 @@ class DetailTest extends TestCase
         $response->assertOk();
 
         // 画像
-        $response->assertSee('<img', false);
+        $response->assertSee('alt="'.$item->name.'"', false);
 
         // 基本情報
         $response->assertSeeText($item->name);
         $response->assertSeeText($item->brand);
-        $response->assertSee('¥' . number_format($item->price));
+        $response->assertSee('¥' . number_format($item->price), false);
         $response->assertSeeText($item->description);
 
         $response->assertSeeText('カテゴリー');
@@ -86,6 +87,7 @@ class DetailTest extends TestCase
         $response->assertSeeText('テストコメント');
     }
 
+    //複数選択されたカテゴリが表示されているか
     public function test_detail_categories() {
 
         $this->seed(CategorySeeder::class);

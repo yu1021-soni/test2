@@ -29,9 +29,10 @@ class ShippingTest extends TestCase
 
         $item = Item::factory()->create(['user_id' => $seller->id]);
 
+        //1. ユーザーにログインする
         $this->actingAs($buyer);
 
-        //送付先住所変更 sessionに入れる
+        //2. 送付先住所変更画面で住所を登録する
         $this->withSession([
             "checkout.address.{$item->id}" => [
                 'postcode' => 'テストpostcode',
@@ -40,9 +41,10 @@ class ShippingTest extends TestCase
             ],
         ]);
 
-        //商品購入画面に住所が反映されているか確認
+        //3. 商品購入画面を再度開く
         $this->get(route('purchase.store', ['item_id' => $item->id]))
             ->assertOk()
+            //登録した住所が商品購入画面に正しく反映される
             ->assertSee('テストpostcode')
             ->assertSee('テスト住所')
             ->assertSee('テストビル');
@@ -57,24 +59,24 @@ class ShippingTest extends TestCase
         $buyer  = User::factory()->create();
         $item   = Item::factory()->create(['user_id' => $seller->id]);
 
+        //1. ユーザーにログインする
         $this->actingAs($buyer);
 
-        //送付先住所を登録
+        //2. 送付先住所変更画面で住所を登録する
         $this->post(route('address.change'), [
             'postcode' => 'テストpostcode',
             'address'  => 'テスト住所',
             'building' => 'テストビル',
         ]);
 
-        //
-        //商品を購入
+        //3. 商品を購入する
         $this->post(route('item.pay'), [
             'item_id'  => $item->id,
             'payment'  => 2,
             'shipping' => 'テストpostcode テスト住所 テストビル',
         ]);
 
-        //注文に送付先住所が正しく保存されていること
+        //正しく送付先住所が紐づいている
         $this->assertDatabaseHas('orders', [
             'user_id'  => $buyer->id,
             'item_id'  => $item->id,

@@ -21,6 +21,7 @@ class MyListTest extends TestCase
 
     use RefreshDatabase;
 
+    //いいねした商品だけが表示される
     public function test_mylist () {
 
         //Categoryデータが入ってないとItem::factory()->create()が動かない
@@ -40,14 +41,19 @@ class MyListTest extends TestCase
             'updated_at' => now(),
         ]);
 
-        //ログイン アクセス
+        //1. ユーザにログインする
         $this->actingAs($user);
+
+        //2.マイリストページを開く
         $response = $this->get('/?tab=mylist');
 
         $response->assertOk();
+
+        //いいねをした商品が表示される
         $response->assertSeeText('テスト用商品');
     }
 
+    //購入済み商品は「Sold」と表示される
     public function test_mylist_user_buy_sold() {
 
         $this->seed(CategorySeeder::class);
@@ -69,24 +75,33 @@ class MyListTest extends TestCase
             'item_id' => $item->id,
         ]);
 
-        //ログイン アクセス
+        //1. ユーザーにログインをする
         $this->actingAs($user);
+
+        //2. マイリストページを開く
         $response = $this->get('/?tab=mylist');
 
         $response->assertOk();
+
+        //3. 購入済み商品を確認する
         $response->assertSeeText('購入済み商品');
+
+        //購入済み商品に「Sold」のラベルが表示される
         $response->assertSeeText('Sold');
     }
 
-    //未承認の場合はmylist表示しない
+    //未認証の場合は何も表示されない
     public function test_mylist_not_login() {
 
         $this->seed(CategorySeeder::class);
 
         Item::factory()->create(['name' => 'myitem']);
 
+        //1. マイリストページを開く
         $response = $this->get('/?tab=mylist');
         $response->assertOk();
+
+        //何も表示されない
         $response->assertDontSeeText('myitem');
     }
 }
