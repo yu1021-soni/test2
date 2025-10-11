@@ -102,7 +102,7 @@
             <div class="comment">
                 <div class="comment__head">
                     <span class="avatar">
-                        <img src="{{ $comment->user_image_url ? Storage::url($comment->user_image_url) : asset('img/avatar-default.png') }}" alt="{{ $comment->name }}"/>
+                        <img src="{{ $comment->user?->user_img_url ? Storage::url($comment->user->user_img_url) : asset('img/avatar-default.png') }}" alt="{{ $comment->user?->name ?? 'user' }}"/>
                     </span>
                     <strong class="name">{{ $comment->user->name }}</strong>
                 </div>
