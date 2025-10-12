@@ -1,0 +1,106 @@
+/* 画面全体（ヘッダーの下を白いキャンバスに） */
+.mailhog__content {
+    width: 100%;
+    min-height: calc(100vh - 80px);
+    /* ヘッダー高さ80pxに合わせる */
+    background: #fff;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 60px 16px 100px;
+    box-sizing: border-box;
+}
+
+
+/* 本文ブロック（中央寄せ） */
+.mailhog__body {
+    padding: 120px 24px;
+    /* 上下に余白たっぷり */
+    text-align: center;
+}
+
+/* 説明テキスト（Figmaの中央テキストっぽく） */
+.mailhog__text {
+    font-size: 18px;
+    line-height: 1.9;
+    color: #111;
+    font-weight: 600;
+    /* ほんの少し太め */
+    margin: 0 0 28px;
+}
+
+/* 再送完了のフラッシュ */
+.mailhog__flash {
+    display: inline-block;
+    margin: 0 0 22px;
+    padding: 10px 14px;
+    background: #eef8ff;
+    color: #0b557a;
+    border: 1px solid #bfe6ff;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+/* ボタン＆リンクの並び */
+.mailhog__button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+/* 「認証はこちらから」＝グレーの大ボタン */
+.mailhog__button__form {
+    display: inline-block;
+    min-width: 260px;
+    padding: 12px 18px;
+    background: #e5e5e5;
+    /* 薄いグレー */
+    color: #111;
+    border: 1px solid #bdbdbd;
+    /* 枠 */
+    border-radius: 6px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2) inset;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.mailhog__button__form:hover {
+    background: #dcdcdc;
+}
+
+/* 青いテキストリンク（再送） */
+.resend__button {
+    margin: 0;
+}
+
+.resend__link {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    color: #2a66ff;
+    /* 青 */
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.resend__link:hover {
+    opacity: .85;
+}
+
+@media (max-width: 768px) {
+    .verify-body {
+        padding: 80px 16px;
+    }
+
+    .verify-text {
+        font-size: 16px;
+    }
+
+    .btn-cta {
+        min-width: 220px;
+    }
+}

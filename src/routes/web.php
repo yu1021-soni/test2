@@ -22,7 +22,7 @@ Route::get('/search', [ItemController::class, 'search'])->name('items.search'); 
 
 Route::get('/detail/{item_id}',[ItemController::class,'detail'])->name('items.detail'); // 商品詳細画面 ok
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth','verified'])->group(function () {
 
     Route::post('/item/favorite', [ItemController::class, 'favorite'])->name('favorites.favorite'); //ok
 
