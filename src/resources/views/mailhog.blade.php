@@ -12,13 +12,6 @@
         メール認証を完了してください。
         </p>
 
-        {{-- 再送完了メッセージ --}}
-        @if (session('status') === 'verification-link-sent')
-        <div class="mailhog__flash" role="status">
-            確認メールを再送しました。
-        </div>
-        @endif
-
         <div class="mailhog__button">
             {{-- Figmaの「認証はこちらから」＝ 開発中はMailhogへ --}}
             <a href="http://localhost:8025" target="_blank" rel="noopener" class="mailhog__button__form">
