@@ -14,8 +14,8 @@ class AddProfileFieldsToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('postcode', 10)->nullable();
-            $table->string('address')->nullable();
+            $table->string('postcode', 10);
+            $table->string('address');
             $table->string('building')->nullable();
             $table->string('user_img_url')->nullable();
         });

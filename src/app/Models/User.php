@@ -52,4 +52,12 @@ class User extends Authenticatable implements MustVerifyEmail
     public function comments(): HasMany {
         return $this->hasMany(Comment::class);
     }
+
+    public function orders() {
+        return $this->hasMany(Order::class);
+    }
+
+    public function profile() {
+        return $this->hasOne(Profile::class);
+    }
 }

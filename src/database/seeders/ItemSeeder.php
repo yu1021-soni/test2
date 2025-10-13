@@ -83,7 +83,6 @@ class ItemSeeder extends Seeder
 
             $item = Item::create([
                 'user_id'       => $sellerId,
-                'category_id'   => $representativeId,
                 'name'          => $name,
                 'price'         => (int)str_replace(',', '', $price),
                 'brand'         => ($brand === '' || $brand === 'なし') ? null : $brand,
@@ -92,6 +91,8 @@ class ItemSeeder extends Seeder
                 'condition'     => $toCode($condLabel),
             ]);
 
+            $categoryIds = $resolveCategoryIds($categoryNames);
+            
             $item->categories()->sync($categoryIds);
         }
     }

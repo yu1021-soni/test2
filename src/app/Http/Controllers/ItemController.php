@@ -136,7 +136,7 @@ class ItemController extends Controller
             'description'  => $validated['description'],
             'price'        => $validated['price'],
             'condition'    => $validated['condition'],
-            'category_id'  => $mainCategoryId,
+            //'category_id'  => $mainCategoryId,
             'item_img_url' => $img,
         ]);
 

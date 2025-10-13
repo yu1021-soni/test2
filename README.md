@@ -21,3 +21,27 @@
    `php artisan key:generate`
 5. マイグレーションの実行
    `php artisan migrate`
+
+## 初期データ投入
+php artisan db:seed --class=CategorySeeder
+php artisan db:seed --class=ItemSeeder
+
+## 画像保存設定
+php artisan storage:link
+
+## メール認証テスト
+
+Mailhogを利用
+ブラウザで以下にアクセス
+http://localhost:8025
+
+php artisan queue:work
+
+## テスト実行
+php artisan test
+
+
+## URL
+
+・アプリケーション: http://localhost:8080
+・Mailhog: http://localhost:8025
