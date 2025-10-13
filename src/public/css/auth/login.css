@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+body {
+    font-family: "Inter", sans-serif;
+}
+
 .login-form__content {
     width: 680px;
     margin: 80px auto;
