@@ -295,12 +295,12 @@ img {
 }
 
 /* エラー */
-.product__comments .comment__error {
-    color: #d03030;
-    margin-top: 8px;
-    font-size: 13px;
+.comment__error {
+    font-size: 18px;
+    margin-top: 30px;
+    color: red;
+    padding: 6px 0 0;
 }
-
 
 @media (min-width: 768px) and (max-width: 850px) {
 

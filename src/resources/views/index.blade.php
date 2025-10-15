@@ -52,9 +52,7 @@
         @endif
 
       </div>
-      @empty
-        <p class="nothing">商品がありません</p>
-      @endforelse
+    @endforeach
   </div>
 </div>
 @endsection
