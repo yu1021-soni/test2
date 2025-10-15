@@ -17,7 +17,8 @@ use App\Http\Controllers\AccountController;
 |
 */
 
-Route::get('/',[ItemController::class,'index'])->name('item.index'); // 一覧 ok
+Route::get('/',[ItemController::class,'index'])
+ ->middleware('force.verified')->name('item.index'); // 一覧 ok
 Route::get('/search', [ItemController::class, 'search'])->name('items.search'); // 検索 ?? post ??
 
 Route::get('/detail/{item_id}',[ItemController::class,'detail'])->name('items.detail'); // 商品詳細画面 ok
