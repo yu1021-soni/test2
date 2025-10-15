@@ -14,7 +14,7 @@ class AccountController extends Controller
 {
     public function mypage(Request $request) {
 
-        $user = $request->user();
+        $user = $request->user()->load('profile');
 
         // ?page=sell | buy（それ以外は sell）
         $tab = $request->query('page');
@@ -38,7 +38,7 @@ class AccountController extends Controller
 
     public function edit(Request $request){
 
-        $user = $request->user(); //ログイン中のユーザ取得
+        $user = $request->user()->load('profile'); //ログイン中のユーザ取得
         $profile = $user->profile; 
 
         return view('edit',compact('user','profile'));

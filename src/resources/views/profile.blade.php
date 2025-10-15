@@ -13,7 +13,9 @@
     {{-- 上：ユーザー情報 --}}
     <div class="user">
         <div class="user__img">
-            <img src="{{ $user->user_img_url ? Storage::url($user->user_img_url) : asset('img/avatar-default.png') }}" >
+            <img src="{{ data_get($user, 'profile.user_img_url')
+            ? Storage::url(data_get($user, 'profile.user_img_url'))
+            : asset('img/avatar-default.png') }}" >
         </div>
         <div class="user__name">
             {{ $user->name }}

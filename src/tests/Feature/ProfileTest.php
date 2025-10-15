@@ -8,6 +8,7 @@ use Tests\TestCase;
 use App\Models\Item;
 use App\Models\User;
 use App\Models\Order;
+use App\Models\Profile;
 use Database\Seeders\CategorySeeder;
 
 class ProfileTest extends TestCase
@@ -27,7 +28,12 @@ class ProfileTest extends TestCase
 
         $user = User::factory()->create([
             'name'        => 'テスト名前',
-            'user_img_url'=> 'avatars/test.png',
+            'email' => 'taro@example.com'
+        ]);
+
+        Profile::factory()->create([
+            'user_id'      => $user->id,
+            'user_img_url' => 'avatars/test.png',
         ]);
 
         //1. ユーザーにログインする
@@ -53,7 +59,7 @@ class ProfileTest extends TestCase
         $this->get(route('mypage'))
             ->assertOk()
             ->assertSee('テスト名前')
-            ->assertSee('avatars/test.png');
+            ->assertSee('/storage/avatars/test.png');
 
         // 出品一覧タブ
         $this->get(route('mypage', ['page' => 'sell']))

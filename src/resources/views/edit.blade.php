@@ -13,7 +13,9 @@
         <form action="{{ route('profile.update') }}" method="post" class="update" enctype="multipart/form-data">
             @csrf
         <div class="user__img">
-            <img src="{{ $user->user_img_url ? Storage::url($user->user_img_url) : asset('img/avatar-default.png') }}" class="user__item"/>
+            <img src="{{ data_get($user, 'profile.user_img_url')
+            ? Storage::url(data_get($user, 'profile.user_img_url'))
+            : asset('img/avatar-default.png') }}" class="user__item"/>
             <input id="user-img" class="uploader__input" type="file" name="user_img_url" accept=".jpg,.jpeg,.png,image/jpeg,image/png">
             <label for="user-img" class="uploader__button">画像を選択する</label>
         </div>
