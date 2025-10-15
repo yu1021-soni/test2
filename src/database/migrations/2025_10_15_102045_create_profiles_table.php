@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddProfileFieldsToUsersTable extends Migration
+class CreateProfilesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class AddProfileFieldsToUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('users', function (Blueprint $table) {
+        Schema::create('profiles', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->unique()->constrained()->cascadeOnDelete();
             $table->string('postcode', 10);
             $table->string('address');
             $table->string('building')->nullable();
             $table->string('user_img_url')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -28,8 +31,6 @@ class AddProfileFieldsToUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['postcode','address','building','user_img_url']);
-        });
+        Schema::dropIfExists('profiles');
     }
 }

@@ -22,9 +22,12 @@
             <h3 class="img__title">商品画像</h3>
 
             <div class="uploader">
-                <input id="item-img" class="uploader__input" type="file" name="item_img_url" accept=".jpg,.jpeg,.png,image/jpeg,image/png" required>
+                <input id="item-img" class="uploader__input" type="file" name="item_img_url" accept=".jpg,.jpeg,.png,image/jpeg,image/png">
                 <label for="item-img" class="uploader__button">画像を選択する</label>
             </div>
+            @error('item_img_url')
+                <p class="error">{{ $message }}</p>
+            @enderror
         </div>
 
         <div class="item__detail">
@@ -40,18 +43,25 @@
                 <label for="cat{{ $cat->id }}" class="chip">{{ $cat->name }}</label>
                 @endforeach
 
+                @error('categories')
+                    <p class="error">{{ $message }}</p>
+                @enderror
+
             </div>
             <div class="condition">
                 <div class="condition__title">
                     <h3>商品の状態</h3>
                 </div>
-                <select name="condition" required>
+                <select name="condition">
                     <option value="" selected disabled>選択してください</option>
                     <option value="1">良好</option>
                     <option value="2">目立った傷や汚れなし</option>
                     <option value="3">やや傷や汚れあり</option>
                     <option value="4">状態が悪い</option>
                 </select>
+                @error('condition')
+                    <p class="error">{{ $message }}</p>
+                @enderror
             </div>
         </div>
 
@@ -64,6 +74,9 @@
                     <h3>商品名</h3>
                 </div>
                 <input type="text" name="name" class="box">
+                @error('name')
+                    <p class="error">{{ $message }}</p>
+                @enderror
             </div>
             <div class="brand">
                 <div class="brand__title">
@@ -76,24 +89,22 @@
                     <h3>商品の説明</h3>
                 </div>
                 <textarea name="description"></textarea>
+                @error('description')
+                    <p class="error">{{ $message }}</p>
+                @enderror
             </div>
             <div class="item__price">
                 <div class="price__title">
                     <h3>販売価格</h3>
                 </div>
                 <input type="text" name="price" class="price__box">
+                @error('price')
+                    <p class="error">{{ $message }}</p>
+                @enderror
             </div>
         </div>
         <button type="submit" class="sell__button">出品する</button>
 
     </form>
-
-    @if ($errors->any())
-  <ul class="errors">
-    @foreach ($errors->all() as $e)
-      <li>{{ $e }}</li>
-    @endforeach
-  </ul>
-@endif
 </div>
 @endsection

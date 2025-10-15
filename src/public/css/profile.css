@@ -79,6 +79,12 @@ body {
     display: block;
 }
 
+.item__name {
+    font-weight: 400;
+    font-size: 25px;
+    font-style: Regular;
+}
+
 @media (min-width: 1400px) and (max-width: 1540px) {
     .item__card {
         width: 25%;
@@ -118,6 +124,8 @@ body {
     }
 
     .item__name {
-        font-size: 15px;
+        font-weight: 400;
+        font-size: 18px;
+        font-style: Regular;
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Item;
+use App\Models\Profile;
 use App\Http\Requests\ProfileRequest;
 use Illuminate\Support\Facades\Storage;
 
@@ -38,39 +39,48 @@ class AccountController extends Controller
     public function edit(Request $request){
 
         $user = $request->user(); //ログイン中のユーザ取得
+        $profile = $user->profile; 
 
-        return view('edit',compact('user'));
+        return view('edit',compact('user','profile'));
     }
 
     public function update(ProfileRequest $request) {
 
-        $user = $request->user(); // ← ログイン中のユーザー取得
+        $user = $request->user();
+        $profile = $user->profile; 
+
+        // usersテーブル側（名前のみ更新）
+        $user->name = $request->input('name');
+        $user->save();
+
+        // profilesテーブル側
+        $profile = $user->profile ?: new \App\Models\Profile(['user_id' => $user->id]);
+
+        // 保存前の画像パス
+        $oldPath = $profile->user_img_url;
 
         // フォームからきた値を代入
-        $user->name = $request->input('name');
-        $user->postcode = $request->input('postcode');
-        $user->address = $request->input('address');
-        $user->building = $request->input('building');
-
-        $oldPath = $user->user_img_url;
+        $profile->postcode = $request->input('postcode');
+        $profile->address  = $request->input('address');
+        $profile->building = $request->input('building');
 
         // ファイルが送られているかチェック
         if ($request->hasFile('user_img_url')) {
             $path = $request->file('user_img_url')->store('avatars', 'public');
-            $user->user_img_url = $path;
+            $profile->user_img_url = $path;
         }
 
         // 画像が変わったか保存前に判定
-        $imgChanged = $user->isDirty('user_img_url');
+        $imgChanged = $profile->isDirty('user_img_url');
 
-        $saved = $user->save();
-
+        $saved = $profile->save();
 
         // 保存成功かつ画像が変更されたときだけ旧ファイル削除
         if ($saved && $imgChanged && $oldPath && Storage::disk('public')->exists($oldPath)) {
-        Storage::disk('public')->delete($oldPath);
+            Storage::disk('public')->delete($oldPath);
         }
 
+        // 初回導線かどうかでリダイレクト先を変更
         $isOnboarding = $request->session()->pull('onboarding', false);
 
         return $isOnboarding

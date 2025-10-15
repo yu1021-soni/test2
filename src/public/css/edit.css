@@ -72,6 +72,13 @@ body {
     text-align: center;
 }
 
+.form-error {
+    font-size: 15px;
+    margin-bottom: 30px;
+    color: red;
+    padding: 6px 0 0;
+}
+
 @media (min-width: 1400px) and (max-width: 1540px) {
     .content {
         width: 900px;

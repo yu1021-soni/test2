@@ -17,23 +17,35 @@
             <input id="user-img" class="uploader__input" type="file" name="user_img_url" accept=".jpg,.jpeg,.png,image/jpeg,image/png">
             <label for="user-img" class="uploader__button">画像を選択する</label>
         </div>
-        
+    
             <div class="profile">
                 <div class="profile__name">
                     <p class="title">ユーザ名</p>
                     <input type="text" name="name" value="{{ $user->name }}" class="text">
+                    @error('name')
+                        <div class="form-error">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="profile__postcode">
                     <p class="title">郵便番号</p>
-                    <input type="text" name="postcode" value="{{ $user->postcode }}" class="text">
+                    <input type="text" name="postcode" value="{{ optional($profile)->postcode }}" class="text">
+                    @error('postcode')
+                        <div class="form-error">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="profile__address">
                     <p class="title">住所</p>
-                    <input type="text" name="address" value="{{ $user->address }}" class="text">
+                    <input type="text" name="address" value="{{ optional($profile)->address }}" class="text">
+                    @error('address')
+                        <div class="form-error">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="profile__building">
                     <p class="title">建物名</p>
-                    <input type="text" name="building" value="{{ $user->building }}" class="text">
+                    <input type="text" name="building" value="{{ optional($profile)->building }}" class="text">
+                    @error('building')
+                        <div class="form-error">{{ $message }}</div>
+                    @enderror
                 </div>
             </div>
             <div class="submit">

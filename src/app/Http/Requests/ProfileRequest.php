@@ -35,10 +35,10 @@ class ProfileRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'name.required'     => 'ユーザ名は必須です。',
-            'postcode.required' => '郵便番号は必須です。',
-            'postcode.regex'    => '郵便番号は 123-4567 の形式で入力してください。',
-            'address.required'  => '住所は必須です。',
+            'name.required'     => 'ユーザ名を入力してください',
+            'postcode.required' => '郵便番号を入力してください',
+            'postcode.regex'    => '郵便番号は 123-4567 の形式で入力してください',
+            'address.required'  => '住所を入力してください',
         ];
     }
 }
