@@ -14,7 +14,9 @@ class LogoutTest extends TestCase
      *
      * @return void
      */
-    
+
+    use RefreshDatabase;
+
     //ログアウトができる
     public function test_logout_successful() {
 
