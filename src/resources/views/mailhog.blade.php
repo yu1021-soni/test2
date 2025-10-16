@@ -16,12 +16,10 @@
         </p>
 
         <div class="mailhog__button">
-            {{-- Figmaの「認証はこちらから」＝ 開発中はMailhogへ --}}
             <a href="http://localhost:8025" target="_blank" rel="noopener" class="mailhog__button__form">
                 認証はこちらから
             </a>
 
-            {{-- 再送リンク（Fortify標準ルート） --}}
             <form method="POST" action="{{ route('verification.send') }}" class="resend-button">
             @csrf
                 <button type="submit" class="resend__link">認証メールを再送する</button>

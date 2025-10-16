@@ -19,31 +19,34 @@ use App\Http\Controllers\AccountController;
 
 Route::get('/',[ItemController::class,'index'])
  ->middleware('force.verified')->name('item.index'); // 一覧 ok
-Route::get('/search', [ItemController::class, 'search'])->name('items.search'); // 検索 ?? post ??
+Route::get('/search', [ItemController::class, 'search'])->name('items.search'); //検索
 
-Route::get('/detail/{item_id}',[ItemController::class,'detail'])->name('items.detail'); // 商品詳細画面 ok
+Route::get('/detail/{item_id}',[ItemController::class,'detail'])->name('items.detail'); // 商品詳細画面
 
 Route::middleware(['auth','verified'])->group(function () {
 
-    Route::post('/item/favorite', [ItemController::class, 'favorite'])->name('favorites.favorite'); //ok
+    Route::post('/item/favorite', [ItemController::class, 'favorite'])->name('favorites.favorite'); // いいね
 
-    Route::post('/comment', [OrderController::class, 'comment'])->name('comment.store'); // ok
+    Route::post('/comment', [OrderController::class, 'comment'])->name('comment.store'); // コメント
 
     Route::match(['get','post'], '/mypage', [AccountController::class, 'mypage'])->name('mypage');
+    //　マイページ
 
+    //GET を消すとブラウザ直アクセスやリダイレクトで405になるため残す
     Route::match(['get','post'], '/purchase', [OrderController::class, 'purchase'])->name('purchase.store');
 
-    Route::post('/mypage/profile',[AccountController::class,'edit'])->name('profile.edit'); // ok
-
+    // 会員登録処理が正常終了したとき
     Route::get('/mypage/profile', [AccountController::class, 'edit'])->name('profile.view');
 
-    Route::post('/update',[AccountController::class,'update'])->name('profile.update');
+    Route::post('/mypage/profile',[AccountController::class,'edit'])->name('profile.edit');
 
-    Route::get('/listing',[ItemController::class,'listing'])->name('item.listing');
+    Route::post('/update',[AccountController::class,'update'])->name('profile.update'); // プロフィール更新
 
-    Route::post('/sell',[ItemController::class,'sell'])->name('item.sell');
+    Route::get('/listing',[ItemController::class,'listing'])->name('item.listing'); // 出品
 
-    Route::post('/pay',[OrderController::class,'pay'])->name('item.pay');
+    Route::post('/sell',[ItemController::class,'sell'])->name('item.sell'); // マイページ出品するボタン
+
+    Route::post('/pay',[OrderController::class,'pay'])->name('item.pay'); //購入
 
      // 住所変更ページ (GET)
     Route::get('/address/{user_id}', [AccountController::class, 'address'])->name('address.edit');
