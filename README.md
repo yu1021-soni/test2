@@ -57,6 +57,21 @@ http://localhost:8025
 `php artisan queue:work`
 
 ## テスト実行
+1. テスト専用の環境設定ファイル .env.testing を用意
+2. .env.testingに以下を記述
+
+   APP_ENV=testing
+   APP_KEY=base64:（任意のキー）
+   APP_DEBUG=true
+
+   DB_CONNECTION=sqlite
+   DB_DATABASE=:memory:
+
+   CACHE_DRIVER=file
+   SESSION_DRIVER=file
+   QUEUE_CONNECTION=sync
+
+3. テスト実行
 `php artisan test`
 
 ## 使用技術

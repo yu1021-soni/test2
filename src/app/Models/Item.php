@@ -12,7 +12,6 @@ class Item extends Model
 
     protected $fillable = [
         'user_id',
-        //'category_id',
         'item_img_url',
         'name',
         'price',
@@ -38,7 +37,7 @@ class Item extends Model
     }
 
     public function categories() {
-    return $this->belongsToMany(Category::class,'category_item');
+    return $this->belongsToMany(Category::class,'category_item')->withTimestamps();
     }
 
      // 検索用のスコープ

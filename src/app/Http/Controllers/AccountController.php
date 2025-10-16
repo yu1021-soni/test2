@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Item;
-use App\Models\Profile;
 use App\Http\Requests\ProfileRequest;
 use Illuminate\Support\Facades\Storage;
 
@@ -88,7 +87,7 @@ class AccountController extends Controller
             : redirect('mypage');
     }
 
-    public function address($user_id,Request $request) {
+    public function address(Request $request) {
 
         $user = $request->user(); // ← ログイン中のユーザー取得
 

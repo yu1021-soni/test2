@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\Item;
-use App\Models\Profile;
 use App\Http\Requests\CommentRequest;
 use App\Http\Requests\PurchaseRequest;
 
@@ -28,7 +27,6 @@ class OrderController extends Controller
     public function purchase(Request $request) {
 
         // ① $request->input('item_id') フォームから送られてきた item_id を探す
-        //   $request->session()->get('checkout.item_id') なければ セッションに保存してある item_id 使用
         $itemId = $request->input('item_id') ?? $request->session()->get('checkout.item_id');
 
         // ② セッションに保持

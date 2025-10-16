@@ -48,7 +48,7 @@
 
     </div>
 
-    <div class="product-description">
+    <div class="product__description">
 
         {{-- 購入ボタン --}}
         {{-- 購入済みは Sold --}}

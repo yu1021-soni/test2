@@ -48,16 +48,16 @@ class ItemController extends Controller
 
     // ⑤ カテゴリも取得して、並び順指定
     $items = $query->with('categories')
-                    ->orderBy('id', 'desc')
-                    ->get();
+                    ->orderByDesc('id')
+                    ->paginate(16);
 
     $favoritedIds = $userId
         ? \App\Models\Favorite::where('user_id', $userId)->pluck('item_id')->all()
         : [];
 
     // 各アイテムに is_favorited を true/false で
-    foreach ($items as $it) {
-        $it->is_favorited = in_array($it->id, $favoritedIds, true);
+    foreach ($items as $item) {
+        $item->is_favorited = in_array($item->id, $favoritedIds, true);
     }
 
     return view('index', compact('items', 'tab'));
@@ -79,7 +79,7 @@ class ItemController extends Controller
     public function detail($item_id) {
         $item = Item::with([
                 'categories',
-                'comments.user',  // コメント表示でユーザー名を出す
+                'comments.user', // コメント表示でユーザー名を出す
         ])
             ->withCount(['order', 'comments', 'favorites'])
             ->findOrFail($item_id);
@@ -136,7 +136,6 @@ class ItemController extends Controller
             'description'  => $validated['description'],
             'price'        => $validated['price'],
             'condition'    => $validated['condition'],
-            //'category_id'  => $mainCategoryId,
             'item_img_url' => $img,
         ]);
 

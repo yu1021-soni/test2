@@ -16,26 +16,29 @@
       <h2>ログイン</h2>
     </div>
 
-      <div class="login__group">
-        <div class="login__group-title">
-          <span class="login__label--item">メールアドレス</span>
-        </div>
-        <div class="login__group-content">
-          <div class="login__input--text">
+    <div class="login__group">
+      <div class="login__group-title">
+        <span class="login__label--item">
+          メールアドレス
+        </span>
+      </div>
+      <div class="login__group-content">
+        <div class="login__input--text">
             <input type="text" name="email">
-          </div>
-          <div class="login__error">
-            @error('email')
-              {{ $message }}
-            @enderror
-          </div>
+        </div>
+        <div class="login__error">
+          @error('email')
+            {{ $message }}
+          @enderror
         </div>
       </div>
-      <div class="login__group">
-        <div class="login__group-title">
-          <span class="login__label--item">パスワード</span>
-        </div>
-        <div class="login__group-content">
+    </div>
+
+    <div class="login__group">
+      <div class="login__group-title">
+        <span class="login__label--item">パスワード</span>
+      </div>
+      <div class="login__group-content">
           <div class="login__input--text">
             <input type="password" name="password">
           </div>
@@ -47,12 +50,15 @@
         </div>
       </div>
       <div class="login__button">
-        <button class="login__button-submit" type="submit">ログインする</button>
+        <button class="login__button-submit" type="submit">
+          ログインする
+        </button>
       </div>
 
-      <a class="bottom__link" href="/register">会員登録はこちら</a>
+      <a class="bottom__link" href="/register">
+        会員登録はこちら
+      </a>
     </form>
-
 
 </div>
 @endsection

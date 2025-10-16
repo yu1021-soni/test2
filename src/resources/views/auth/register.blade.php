@@ -21,16 +21,16 @@
         <span class="register__label--item">ユーザ名</span>
       </div>
       <div class="register__group-content">
-      <div class="register__input--text">
-        <input type="text" name="name">
+        <div class="register__input--text">
+          <input type="text" name="name">
+        </div>
+        <div class="register__error">
+          @error('name')
+            {{ $message }}
+          @enderror
+        </div>
       </div>
-      <div class="register__error">
-        @error('name')
-          {{ $message }}
-        @enderror
       </div>
-    </div>
-    </div>
       <div class="register__group">
         <div class="register__group-title">
           <span class="register__label--item">メールアドレス</span>
@@ -77,7 +77,6 @@
 
       <a class="bottom__link" href="/login">ログインはこちら</a>
     </form>
-
 
 </div>
 @endsection

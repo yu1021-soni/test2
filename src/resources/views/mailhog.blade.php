@@ -8,7 +8,7 @@
 @endsection
 
 @section('content')
-<div class="mailhog__content">
+<div class="mailhog">
     <div class="mailhog__body">
         <p class="mailhog__text">
             登録していただいたメールアドレスに認証メールを送信しました。<br>
@@ -20,9 +20,9 @@
                 認証はこちらから
             </a>
 
-            <form method="POST" action="{{ route('verification.send') }}" class="resend-button">
+            <form method="POST" action="{{ route('verification.send') }}" class="mailhog__resend">
             @csrf
-                <button type="submit" class="resend__link">認証メールを再送する</button>
+                <button type="submit" class="mailhog__resend-button">認証メールを再送する</button>
             </form>
         </div>
     </div>

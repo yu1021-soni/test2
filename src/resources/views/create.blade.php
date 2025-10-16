@@ -31,7 +31,7 @@
         </div>
 
         <div class="item__detail">
-            <div class="detail___title">
+            <div class="detail__title">
                 <h2 class="sub__title">商品の詳細</h2>
             </div>
             <div class="category">
@@ -92,9 +92,7 @@
                 <div class="text__title">
                     <h3>商品の説明</h3>
                 </div>
-                <textarea name="description">
-                    {{ old('description') }}
-                </textarea>
+                <textarea name="description">{{ old('description') }}</textarea>
                 @error('description')
                     <p class="error">{{ $message }}</p>
                 @enderror

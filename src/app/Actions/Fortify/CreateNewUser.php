@@ -21,7 +21,7 @@ class CreateNewUser implements CreatesNewUsers
     public function create(array $input): User
     {
          // RegisterRequestのルール/メッセージを供給元としてだけ使う
-        $form = new RegisterRequest();  // ← 変数名を $form に統一
+        $form = new RegisterRequest();  // 変数名を $form に統一
 
         Validator::make(
             $input,

@@ -30,7 +30,7 @@
   </div>
 
   <div class="item__list">
-    @forelse ($items as $item)
+    @foreach ($items as $item)
       <div class="item__card">
 
         <a href="{{ route('items.detail', $item ) }}">
