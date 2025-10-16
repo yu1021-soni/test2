@@ -33,13 +33,12 @@ class OrderController extends Controller
         $request->session()->put('checkout.item_id', $itemId);
 
         $item    = Item::findOrFail($itemId);
-        $user    = $request->user();
-        $profile = $user?->profile;
+        $user = $request->user();
 
         // ③ 住所下書きは 商品ごと に保持
         $draft = $request->session()->get("checkout.address.$itemId");
 
-        return view('purchase', compact('item', 'user', 'profile', 'draft'));
+        return view('purchase', compact('item', 'user', 'draft'));
     }
 
     public function pay (PurchaseRequest $request) {

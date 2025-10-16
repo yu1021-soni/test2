@@ -6,7 +6,6 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
-use App\Models\Profile;
 
 class ProfileEditTest extends TestCase
 {
@@ -22,14 +21,11 @@ class ProfileEditTest extends TestCase
     public function test_profile_edit() {
 
         $user = User::factory()->create([
-            'name' => 'テスト名前',
-        ]);
-
-        Profile::factory()->create([
-            'user_id' => $user->id,
-            'user_img_url' => 'avatars/test.png',
-            'postcode' => '111-1111',
-            'address' => 'テスト住所',
+            'name'        => 'テスト名前',
+            'user_img_url'=> 'avatars/test.png',
+            'postcode'    => '111-1111',
+            'address'     => 'テスト住所',
+            'building'    => 'テスト建物',
         ]);
 
         //1. ユーザーにログインする
@@ -43,5 +39,6 @@ class ProfileEditTest extends TestCase
         $response->assertSee('/storage/avatars/test.png');
         $response->assertSee('111-1111');
         $response->assertSee('テスト住所');
+        $response->assertSee('テスト建物');
     }
 }

@@ -41,16 +41,16 @@
             </div>
 
             <div class="address">
-                {{ $draft['postcode'] ?? ($profile?->postcode ?? $user->postcode ?? '未設定') }}<br>
-                {{ $draft['address']  ?? ($profile?->address  ?? $user->address  ?? '未設定') }}<br>
-                {{ ($draft['building'] ?? null) ?: ($profile?->building ?: ($user->building ?? null)) }}
+                {{ data_get($draft, 'postcode') ?? ($user->postcode ?? '未設定') }}<br>
+                {{ data_get($draft, 'address')  ?? ($user->address  ?? '未設定') }}<br>
+                {{ data_get($draft, 'building') ?? ($user->building ?? null) }}
             </div>
             @php
                 // 結合
                 $shipping = collect([
-                    $draft['postcode'] ?? ($profile?->postcode ?? $user->postcode ?? null),
-                    $draft['address']  ?? ($profile?->address  ?? $user->address  ?? null),
-                    ($draft['building'] ?? null) ?: ($profile?->building ?: ($user->building ?? null)),
+                    data_get($draft, 'postcode') ?? $user->postcode,
+                    data_get($draft, 'address')  ?? $user->address,
+                    data_get($draft, 'building') ?? $user->building,
                 ])->filter(fn($v) => filled($v))->implode(' ');
             @endphp
 
