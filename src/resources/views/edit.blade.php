@@ -13,9 +13,9 @@
         <form action="{{ route('profile.update') }}" method="post" class="update" enctype="multipart/form-data">
             @csrf
         <div class="user__img">
-            <img src="{{ data_get($user, 'profile.user_img_url')
-            ? Storage::url(data_get($user, 'profile.user_img_url'))
-            : asset('img/avatar-default.png') }}" class="user__item"/>
+            <img src="{{ $user->user_img_url
+            ? Storage::url($user->user_img_url)
+            : asset('img/avatar-default.png') }}" class="user__item" class="user__item"/>
             <input id="user-img" class="uploader__input" type="file" name="user_img_url" accept=".jpg,.jpeg,.png,image/jpeg,image/png">
             <label for="user-img" class="uploader__button">画像を選択する</label>
         </div>
@@ -30,21 +30,21 @@
                 </div>
                 <div class="profile__postcode">
                     <p class="title">郵便番号</p>
-                    <input type="text" name="postcode" value="{{ optional($profile)->postcode }}" class="text">
+                    <input type="text" name="postcode" value="{{ $user->postcode }}" class="text">
                     @error('postcode')
                         <div class="form-error">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="profile__address">
                     <p class="title">住所</p>
-                    <input type="text" name="address" value="{{ optional($profile)->address }}" class="text">
+                    <input type="text" name="address" value="{{ $user->address }}" class="text">
                     @error('address')
                         <div class="form-error">{{ $message }}</div>
                     @enderror
                 </div>
                 <div class="profile__building">
                     <p class="title">建物名</p>
-                    <input type="text" name="building" value="{{ optional($profile)->building }}" class="text">
+                    <input type="text" name="building" value="{{ $user->building }}" class="text">
                     @error('building')
                         <div class="form-error">{{ $message }}</div>
                     @enderror
