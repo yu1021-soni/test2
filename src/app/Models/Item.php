@@ -37,7 +37,7 @@ class Item extends Model
     }
 
     public function categories() {
-    return $this->belongsToMany(Category::class,'category_item')->withTimestamps();
+    return $this->belongsToMany(Category::class,'category_items')->withTimestamps();
     }
 
      // 検索用のスコープ

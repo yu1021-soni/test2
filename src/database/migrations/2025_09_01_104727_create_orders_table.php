@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->foreignId('item_id')->constrained()->cascadeOnDelete();
             $table->tinyInteger('payment')->comment('1:コンビニ払い,2:カード払い');
-            $table->string('postcode', 10);
+            $table->string('postcode',8);
             $table->string('address');
             $table->string('building')->nullable();
             $table->unique('item_id');

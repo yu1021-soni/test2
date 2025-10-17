@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
 
             //プロフィール情報
-            $table->string('postcode', 10)->nullable();
+            $table->string('postcode',8)->nullable();
             $table->string('address')->nullable();
             $table->string('building')->nullable();
             $table->string('user_img_url')->nullable();
