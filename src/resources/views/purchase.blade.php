@@ -40,19 +40,23 @@
                 <a href="{{ route('address.edit', ['user_id' => auth()->id()]) }}">変更する</a>
             </div>
 
-            <div class="address">
-                {{ data_get($draft, 'postcode') ?? ($user->postcode ?? '未設定') }}<br>
-                {{ data_get($draft, 'address')  ?? ($user->address  ?? '未設定') }}<br>
-                {{ data_get($draft, 'building') ?? ($user->building ?? null) }}
-            </div>
             @php
-                // 結合
-                $shipping = collect([
-                    data_get($draft, 'postcode') ?? $user->postcode,
-                    data_get($draft, 'address')  ?? $user->address,
-                    data_get($draft, 'building') ?? $user->building,
-                ])->filter(fn($v) => filled($v))->implode(' ');
+                // ★ドラフト優先 → なければ users のカラムを使う
+                $postcode = data_get($draft, 'postcode') ?? $user->postcode;
+                $address  = data_get($draft, 'address')  ?? $user->address;
+                $building = data_get($draft, 'building') ?? $user->building;
+
+                $showPostcode = $postcode ?? '未設定';
+                $showAddress  = $address  ?? '未設定';
+                $showBuilding = $building ?? '';
             @endphp
+
+
+            <div class="address">
+                {{ $showPostcode }}<br>
+                {{ $showAddress }}<br>
+                {{ $showBuilding }}
+            </div>
 
         </div>
 
@@ -73,7 +77,9 @@
         <form action="{{ route('item.pay') }}" method="post" id="purchase-form">
             @csrf
             <input type="hidden" name="item_id" value="{{ $item->id }}">
-            <input type="hidden" name="shipping" value="{{ $shipping }}">
+            <input type="hidden" name="postcode" value="{{ $postcode }}">
+            <input type="hidden" name="address"  value="{{ $address }}">
+            <input type="hidden" name="building" value="{{ $building }}">
             <button type="submit" class="button_buy">購入する</button>
         </form>
     </div>

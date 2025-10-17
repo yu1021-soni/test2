@@ -25,14 +25,18 @@ class PurchaseRequest extends FormRequest
     {
         return [
             'payment' => ['required'],
-            'shipping' => ['required'],
+            'postcode' => ['required','string','size:8','regex:/^\d{3}-\d{4}$/'],
+            'address'  => ['required','string','max:255'],
+            'building' => ['nullable','string','max:255'],
         ];
     }
 
     public function messages() {
         return [
             'payment.required' => '支払い方法をお選びください',
-            'shipping.required' => '配送先を入力してください',
+            'postcode.required' => '郵便番号を入力してください',
+            'postcode.regex'    => '郵便番号は 123-4567 の形式で入力してください',
+            
         ];
     }
 }

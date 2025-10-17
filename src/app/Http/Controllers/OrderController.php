@@ -57,7 +57,9 @@ class OrderController extends Controller
             'user_id' => $user->id,
             'item_id' => $item->id,
             'payment' => $validated['payment'],
-            'shipping' => $validated['shipping'],
+            'postcode' => $validated['postcode'],
+            'address'  => $validated['address'],
+            'building' => $validated['building'] ?? null,
         ]);
 
         // ④ 完了画面やマイページにリダイレクト
