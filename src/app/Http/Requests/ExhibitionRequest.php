@@ -24,7 +24,7 @@ class ExhibitionRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required'],
+            'name' => ['required','max:255'],
             'description' => ['required','max:255'],
             'item_img_url' => ['required','file','mimes:jpeg,png','mimetypes:image/jpeg,image/png','max:5120'],
             'categories'   => ['required','array','min:1'],
@@ -38,13 +38,24 @@ class ExhibitionRequest extends FormRequest
     public function messages() {
         return [
             'name.required' => '商品名を入力してください',
+            'name.max' => '商品名は255文字以下で入力してください',
+
             'description.required' => '商品の説明を入力してください',
-            'description.max' => '商品の説明は255文字以内で入力してください',
-            'item_img_url.required' => '画像を選択してください',
+            'description.max' => '商品の説明は255文字以下で入力してください',
+
+            'item_img_url.required' => '商品画像を選択してください',
+            'item_img_url.file' => '商品画像はファイルを選択してください',
+            'item_img_url.mimes' => '商品画像はjpegまたはpng形式でアップロードしてください',
+            'item_img_url.mimetypes' => '商品画像はjpegまたはpng形式でアップロードしてください',
+            'item_img_url.max' => '商品画像は5MB以内でアップロードしてください',
+
             'categories.required' => 'カテゴリーを１つ以上選択してください',
+            'categories.min' => 'カテゴリーを１つ以上選択してください',
             'condition.required' => '商品の状態を選択してください',
+
             'price.required' => '販売価格を入力してください',
             'price.numeric' => '販売価格は半角数値で入力してください',
+            'price.min' => '販売価格は0円以上で入力してください',
         ];
     }
 }

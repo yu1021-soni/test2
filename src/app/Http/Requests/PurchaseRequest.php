@@ -34,9 +34,18 @@ class PurchaseRequest extends FormRequest
     public function messages() {
         return [
             'payment.required' => '支払い方法をお選びください',
+
             'postcode.required' => '郵便番号を入力してください',
-            'postcode.regex'    => '郵便番号は 123-4567 の形式で入力してください',
-            
+            'postcode.string' => '郵便番号は文字列で入力してください',
+            'postcode.size' => '郵便番号は8文字で入力してください（例：123-4567）',
+            'postcode.regex' => '郵便番号は 123-4567 の形式で入力してください',
+
+            'address.required' => '住所を入力してください',
+            'address.string' => '住所は文字列で入力してください',
+            'address.max' => '住所は255文字以下で入力してください',
+
+            'building.string' => '建物名は文字列で入力してください',
+            'building.max' => '建物名は255文字以下で入力してください',
         ];
     }
 }
