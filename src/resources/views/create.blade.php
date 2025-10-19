@@ -9,52 +9,55 @@
 @endsection
 
 @section('content')
-<div class="content__listing">
+<div class="listing">
 
     {{-- enctype="multipart/form-data 画像を送る --}}
     <form action="{{ route('item.sell') }}" method="post" enctype="multipart/form-data">
         @csrf
 
-        <div class="title">
-            <h2 class ="h2__title">商品の出品</h2>
+        <div class="listing__header">
+            <h2 class="listing__title">商品の出品</h2>
         </div>
 
-        <div class="item__img">
-            <h3 class="img__title">商品画像</h3>
+        <div class="listing__image">
+            <h3 class="listing__image-title">商品画像</h3>
 
-            <div class="uploader">
-                <input id="item-img" class="uploader__input" type="file" name="item_img_url" accept=".jpg,.jpeg,.png,image/jpeg,image/png">
-                <label for="item-img" class="uploader__button">画像を選択する</label>
+            <div class="listing__uploader">
+                <input id="item-img" class="listing__uploader-input" type="file" name="item_img_url" accept=".jpg,.jpeg,.png,image/jpeg,image/png">
+                <label for="item-img" class="listing__uploader-button">画像を選択する</label>
             </div>
             @error('item_img_url')
-                <p class="error">{{ $message }}</p>
+                <p class="listing__error">{{ $message }}</p>
             @enderror
         </div>
 
-        <div class="item__detail">
-            <div class="detail__title">
-                <h2 class="sub__title">商品の詳細</h2>
+        <div class="listing__detail">
+            <div class="listing__section-head">
+                <h2 class="listing__subtitle">商品の詳細</h2>
             </div>
-            <div class="category">
-                <div class="category__title">
+
+            <div class="listing__category">
+                <div class="listing__category-title">
                     <h3>カテゴリー</h3>
                 </div>
+
                 @foreach ($categories as $cat)
-                <input type="checkbox"
+                  <input
+                    type="checkbox"
                     id="cat{{ $cat->id }}"
                     name="categories[]"
                     value="{{ $cat->id }}"
                     {{ in_array($cat->id, old('categories', [])) ? 'checked' : '' }}>
-                <label for="cat{{ $cat->id }}" class="chip">{{ $cat->name }}</label>
+                  <label for="cat{{ $cat->id }}" class="listing__chip">{{ $cat->name }}</label>
                 @endforeach
 
                 @error('categories')
-                    <p class="error">{{ $message }}</p>
+                  <p class="listing__error">{{ $message }}</p>
                 @enderror
-
             </div>
-            <div class="condition">
-                <div class="condition__title">
+
+            <div class="listing__condition">
+                <div class="listing__condition-title">
                     <h3>商品の状態</h3>
                 </div>
                 <select name="condition">
@@ -65,51 +68,55 @@
                     <option value="4" {{ old('condition') == 4 ? 'selected' : '' }}>状態が悪い</option>
                 </select>
                 @error('condition')
-                    <p class="error">{{ $message }}</p>
+                    <p class="listing__error">{{ $message }}</p>
                 @enderror
             </div>
         </div>
 
-        <div class="item__description">
-            <div class="description__title">
-                <h2 class="sub__title">商品名と説明</h2>
+        <div class="listing__description">
+            <div class="listing__section-head">
+                <h2 class="listing__subtitle">商品名と説明</h2>
             </div>
-            <div class="name">
-                <div class="name__title">
+
+            <div class="listing__name">
+                <div class="listing__name-title">
                     <h3>商品名</h3>
                 </div>
-                <input type="text" name="name" class="box" value="{{ old('name') }}">
+                <input type="text" name="name" class="listing__input" value="{{ old('name') }}">
                 @error('name')
-                    <p class="error">{{ $message }}</p>
+                    <p class="listing__error">{{ $message }}</p>
                 @enderror
             </div>
-            <div class="brand">
-                <div class="brand__title">
+
+            <div class="listing__brand">
+                <div class="listing__brand-title">
                     <h3>ブランド名</h3>
                 </div>
-                <input type="text" name="brand" class="box" value="{{ old('brand') }}">
+                <input type="text" name="brand" class="listing__input" value="{{ old('brand') }}">
             </div>
-            <div class="item__text">
-                <div class="text__title">
+
+            <div class="listing__text">
+                <div class="listing__text-title">
                     <h3>商品の説明</h3>
                 </div>
                 <textarea name="description">{{ old('description') }}</textarea>
                 @error('description')
-                    <p class="error">{{ $message }}</p>
+                    <p class="listing__error">{{ $message }}</p>
                 @enderror
             </div>
-            <div class="item__price">
-                <div class="price__title">
+
+            <div class="listing__price">
+                <div class="listing__price-title">
                     <h3>販売価格</h3>
                 </div>
-                <input type="text" name="price" class="price__box" value="{{ old('price') }}">
+                <input type="text" name="price" class="listing__price-input" value="{{ old('price') }}">
                 @error('price')
-                    <p class="error">{{ $message }}</p>
+                    <p class="listing__error">{{ $message }}</p>
                 @enderror
             </div>
         </div>
-        <button type="submit" class="sell__button">出品する</button>
 
+        <button type="submit" class="listing__submit">出品する</button>
     </form>
 </div>
 @endsection

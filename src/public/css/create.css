@@ -2,7 +2,7 @@ body {
     font-family: "Inter", sans-serif;
 }
 
-.content__listing {
+.listing {
     width: 680px;
     margin: 50px auto;
     padding: 0;
@@ -10,15 +10,15 @@ body {
     box-sizing: border-box;
 }
 
-.content__listing * {
+.listing * {
     box-sizing: border-box;
 }
 
-.title {
+.listing__header {
     margin-top: 30px;
 }
 
-.h2__title {
+.listing__title {
     font-weight: bold;
     font-size: 36px;
     color: #000;
@@ -26,7 +26,7 @@ body {
     text-align: center;
 }
 
-.sub__title {
+.listing__subtitle {
     font-weight: bold;
     color: #5f5f5f;
     font-size: 30px;
@@ -39,9 +39,10 @@ h3 {
     font-weight: bold;
     font-size: 24px;
     margin-top: 40px;
+    margin-bottom: 20px;
 }
 
-.uploader {
+.listing__uploader {
     max-width: 680px;
     width: 100%;
     height: 150px;
@@ -54,11 +55,11 @@ h3 {
     box-sizing: border-box;
 }
 
-.uploader__input {
+.listing__uploader-input {
     display: none;
 }
 
-.uploader__button {
+.listing__uploader-button {
     display: inline-block;
     width: 165px;
     height: 44px;
@@ -70,11 +71,10 @@ h3 {
     text-align: center;
 }
 
-
-.box,
+/* 共通入力 */
+.listing__input,
 select,
-textarea,
-.sell {
+textarea {
     width: 100%;
     border: 1px solid #5f5f5f;
     border-radius: 4px;
@@ -85,7 +85,8 @@ textarea {
     height: 125px;
 }
 
-.sell__button {
+/* 送信ボタン */
+.listing__submit {
     width: 100%;
     height: 60px;
     border: none;
@@ -98,19 +99,18 @@ textarea {
     box-sizing: border-box;
 }
 
-/* カテゴリ（gap無しでも整うように marginで間隔） */
 input[type="checkbox"] {
     display: none;
 }
 
-.chips {
+.listing__chips {
     display: flex;
     flex-wrap: wrap;
     margin-top: 4px;
     margin-left: 10px;
 }
 
-.chip {
+.listing__chip {
     display: inline-block;
     margin: 15px 0 0 15px;
     padding: 6px 14px;
@@ -123,12 +123,13 @@ input[type="checkbox"] {
     white-space: nowrap;
 }
 
-input[type="checkbox"]:checked+.chip {
+input[type="checkbox"]:checked+.listing__chip {
     background: #ff4d4d;
     color: #fff;
 }
 
-.price__box {
+
+.listing__price-input {
     width: 100%;
     border: 1px solid #5f5f5f;
     border-radius: 4px;
@@ -137,12 +138,12 @@ input[type="checkbox"]:checked+.chip {
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24'%3E%3Ctext x='0' y='18' font-size='18' font-weight='700' font-family='Inter,Segoe UI,Roboto,Helvetica,Arial,sans-serif'%3E%C2%A5%3C/text%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: 12px center;
-    /* 横幅12px */
     background-size: 24px auto;
     padding-left: 40px;
 }
 
-.error {
+/* バリデーションメッセージ */
+.listing__error {
     font-size: 15px;
     margin-bottom: 30px;
     color: red;
@@ -151,11 +152,11 @@ input[type="checkbox"]:checked+.chip {
 
 @media (min-width: 1400px) and (max-width: 1540px) {
 
-    .h2__title {
+    .listing__title {
         font-size: 38px;
     }
 
-    .sub__title {
+    .listing__subtitle {
         font-size: 30px;
     }
 
@@ -163,26 +164,22 @@ input[type="checkbox"]:checked+.chip {
         margin-top: 32px;
     }
 
-    .sell {
-        margin-top: 80px;
-        height: 60px;
-    }
 }
 
 @media (min-width: 768px) and (max-width: 850px) {
-    
-    .content__listing {
+
+    .listing {
         width: 550px;
         margin: 35px auto;
         padding: 0;
     }
 
-    .h2__title {
+    .listing__title {
         font-size: 30px;
         margin-bottom: 15px;
     }
 
-    .sub__title {
+    .listing__subtitle {
         font-size: 25px;
         margin-top: 45px;
         padding-bottom: 10px;
@@ -193,18 +190,14 @@ input[type="checkbox"]:checked+.chip {
         margin-top: 25px;
     }
 
-    .sell {
-        height: 55px;
-        margin-top: 65px;
-    }
-
-    .chip {
+    .listing__chip {
         margin: 10px 10px 0 0;
         padding: 6px 12px;
         font-size: 13px;
     }
 
-    .sell__button {
+    .listing__submit {
         font-size: 20px;
+        height: 50px;
     }
 }
