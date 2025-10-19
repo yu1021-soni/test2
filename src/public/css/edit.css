@@ -58,7 +58,7 @@ body {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    background-color: gainsboro;
+    background-color: #d9d9d9;
     object-fit: cover;
 }
 

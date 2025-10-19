@@ -9,28 +9,28 @@
 @endsection
 
 @section('content')
-<div class="content">
+<div class="profile">
 
     {{-- 上：ユーザー情報 --}}
-    <div class="user">
-        <div class="user__img">
+    <div class="profile__user">
+        <div class="profile__avatar">
             <img src="{{ $user->user_img_url ? Storage::url($user->user_img_url) : asset('img/avatar-default.png') }}" >
         </div>
-        <div class="user__name">
+        <div class="profile__name">
             {{ $user->name }}
         </div>
-        <form action="{{ route('profile.edit') }}" class="edit" method="post">
+        <form action="{{ route('profile.edit') }}" class="profile__edit" method="post">
             @csrf
-            <button type="submit" class="button__edit">
+            <button type="submit" class="profile__edit-button">
                 プロフィールを編集
             </button>
         </form>
     </div>
 
     {{-- 下：アイテム一覧 --}}
-    <div class="item__table">
+    <div class="profile__table">
         {{-- タブリンク --}}
-        <div class="select__page">
+        <div class="profile__tabs">
             <a href="?page=sell" class="{{ request('page','sell')==='sell' ? 'is-active' : '' }}">
                 出品した商品
             </a>
@@ -41,10 +41,10 @@
 
         {{-- コンテンツ --}}
         @if ($tab === 'sell')
-        <div class="item__list">
+        <div class="profile__list">
             @foreach ($items as $item)
-            <div class="item__card">
-                <div class="item__img">
+            <div class="profile__card">
+                <div class="profile__image">
                     <img src="{{ $item->item_img_url ? Storage::url($item->item_img_url) : asset('img/placeholder.png') }}" alt="{{ $item->name }}">
                     @if (($item->order_count ?? 0) > 0)
                     <div class="badge-sold">
@@ -52,7 +52,7 @@
                     </div>
                     @endif
                 </div>
-                <div class="item__name">
+                <div class="profile__item-name">
                     {{ $item->name }}
                 </div>
             </div>
@@ -60,13 +60,13 @@
         </div>
         {{ $items->links() }}
         @else
-        <div class="item__list">
+        <div class="profile__list">
         @foreach ($orders as $order)
-            <div class="item__card">
-                <div class="item__img">
+            <div class="profile__card">
+                <div class="profile__image">
                     <img src="{{ optional($order->item)->item_img_url ? Storage::url($order->item->item_img_url) : asset('img/placeholder.png') }}" alt="{{ $order->item->name ?? '購入商品' }}">
                 </div>
-                <div class="item__name">
+                <div class="profile__item-name">
                     {{ $order->item->name ?? '' }}
                 </div>
             </div>
