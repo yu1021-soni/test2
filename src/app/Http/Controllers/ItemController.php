@@ -7,7 +7,7 @@ use App\Models\Item;
 use App\Models\Favorite;
 use App\Models\Category;
 use App\Http\Requests\ExhibitionRequest;
-use Illuminate\Support\Facades\Storage;
+//use Illuminate\Support\Facades\Storage;
 
 class ItemController extends Controller
 {
@@ -123,10 +123,12 @@ class ItemController extends Controller
         //Storage::disk('public') ファイル保存先指定
         //'items' 第一引数は保存先フォルダ
         //$validated['item_img_url'] 第二引数はアップロードされたファイル
-        $img = Storage::disk('public')->putFile('items', $validated['item_img_url']);
+        //$img = Storage::disk('public')->putFile('items', $validated['item_img_url']);
+
+        $imagePath = $request->file('item_img_url')->store('items', 'public');
 
         // 代表カテゴリ＝先頭
-        $mainCategoryId = (int) $validated['categories'][0];
+        //$mainCategoryId = (int) $validated['categories'][0];
 
 
         // items へ保存（DBにあるカラムだけ入れる）
@@ -136,7 +138,7 @@ class ItemController extends Controller
             'description'  => $validated['description'],
             'price'        => $validated['price'],
             'condition'    => $validated['condition'],
-            'item_img_url' => $img,
+            'item_img_url' => $imagePath,
         ]);
 
     // 多対多（category_item）へ全カテゴリを保存

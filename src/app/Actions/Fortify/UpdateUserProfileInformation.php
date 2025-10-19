@@ -7,6 +7,7 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\UpdatesUserProfileInformation;
+use Illuminate\Validation\ValidationException;
 
 class UpdateUserProfileInformation implements UpdatesUserProfileInformation
 {
@@ -17,7 +18,7 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
      */
     public function update(User $user, array $input): void
     {
-        Validator::make($input, [
+        $validator = Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
 
             'email' => [
@@ -27,7 +28,12 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
                 'max:255',
                 Rule::unique('users')->ignore($user->id),
             ],
-        ])->validateWithBag('updateProfileInformation');
+        ]);
+
+        if ($validator->fails()) {
+            throw (new ValidationException($validator))
+                ->errorBag('updateProfileInformation');
+        }
 
         if ($input['email'] !== $user->email &&
             $user instanceof MustVerifyEmail) {

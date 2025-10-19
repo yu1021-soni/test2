@@ -17,7 +17,7 @@ class ItemSeeder extends Seeder
         // 出品者
         $userIds = User::pluck('id');
 
-        $categories = Category::all();
+        //$categories = Category::all();
 
         // 状態ラベル → コード
         $map = ['良好'=>1,'目立った傷や汚れなし'=>2,'やや傷や汚れあり'=>3,'状態が悪い'=>4];
@@ -89,6 +89,7 @@ class ItemSeeder extends Seeder
                 'description'   => $desc,
                 'item_img_url'  => $stored ?: $url,
                 'condition'     => $toCode($condLabel),
+                'category_id'   => $representativeId,
             ]);
 
             $categoryIds = $resolveCategoryIds($categoryNames);
