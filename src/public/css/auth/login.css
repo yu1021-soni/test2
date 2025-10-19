@@ -8,7 +8,7 @@ body {
     font-family: "Inter", sans-serif;
 }
 
-.login-form__content {
+.login {
     width: 680px;
     margin: 80px auto;
     padding: 0;
@@ -16,42 +16,46 @@ body {
     box-sizing: border-box;
 }
 
-.login-form__heading {
+/* elements */
+.login__heading {
     text-align: center;
     margin-bottom: 35px;
-    font-size: 36px;
-    font-weight: bold;
 }
 
+h2.login__title {
+    font-size: 36px;
+    font-weight: bold;
+    color: black;
+}
 
 .login__group {
     width: 100%;
 }
 
-.login__group-title {
+.login__label-wrap {
     margin-bottom: 6px;
 }
 
-.login__label--item {
+.login__label {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 8px;
     color: #374151;
 }
 
-.login__input--text input,
-.login__group input[type="password"] {
+.login__input input,
+.login__control input[type="password"] {
     width: 680px;
     height: 57px;
-    border: 1px solid rgba(95,95,95,1);
+    border: 1px solid rgba(95, 95, 95, 1);
     border-radius: 4px;
     padding: 10px 12px;
     appearance: none;
     outline: none;
 }
 
-.login__input--text input:focus,
-.login__group input[type="password"]:focus {
+.login__input input:focus,
+.login__control input[type="password"]:focus {
     border-color: #60a5fa;
     box-shadow: 0 0 0 3px rgba(59, 130, 246, .25);
 }
@@ -63,12 +67,12 @@ body {
     padding: 6px 0 0;
 }
 
-.login__button {
+.login__actions {
     margin-top: 20px;
     text-align: center;
 }
 
-.login__button-submit {
+.login__submit {
     padding: 10px;
     width: 680px;
     height: 65.25px;
@@ -78,10 +82,10 @@ body {
     cursor: pointer;
     background-color: rgba(255, 85, 85, 1);
     font-size: 26px;
-    font-style: bold;
+    font-weight: bold;
 }
 
-.bottom__link {
+.login__link {
     display: block;
     text-align: center;
     text-decoration: none;
@@ -91,35 +95,37 @@ body {
     margin-top: 30px;
 }
 
+
 @media (min-width: 1400px) and (max-width: 1540px) {
-    .login-form__content {
+    .login {
         width: 720px;
         margin: 100px auto;
     }
 
-    .login__input--text input,
-    .login__group input[type="password"],
-    .login__button-submit {
+    .login__input input,
+    .login__control input[type="password"],
+    .login__submit {
         width: 720px;
     }
 }
 
+
 @media (min-width: 768px) and (max-width: 850px) {
-    .login-form__content {
+    .login {
         width: 70%;
     }
 
-    .login__input--text input,
-    .login__group input[type="password"],
-    .login__button-submit {
+    .login__input input,
+    .login__control input[type="password"],
+    .login__submit {
         width: 100%;
     }
 
-    .login-form__heading h2 {
+        h2.login__title {
         font-size: 26px;
     }
 
-    .bottom__link {
+    .login__link {
         font-size: 16px;
     }
 }

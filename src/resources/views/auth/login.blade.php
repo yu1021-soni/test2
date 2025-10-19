@@ -9,23 +9,22 @@
 @endsection
 
 @section('content')
-<div class="login-form__content">
+<div class="login">
 
-  <form action="/login" class="form" method="post">
-  @csrf
-    <div class="login-form__heading">
-      <h2>ログイン</h2>
+  <form action="/login" class="login__form" method="post">
+    @csrf
+
+    <div class="login__heading">
+      <h2 class="login__title">ログイン</h2>
     </div>
 
     <div class="login__group">
-      <div class="login__group-title">
-        <span class="login__label--item">
-          メールアドレス
-        </span>
+      <div class="login__label-wrap">
+        <span class="login__label">メールアドレス</span>
       </div>
-      <div class="login__group-content">
-        <div class="login__input--text">
-            <input type="text" name="email">
+      <div class="login__control">
+        <div class="login__input">
+          <input type="text" name="email">
         </div>
         <div class="login__error">
           @error('email')
@@ -36,30 +35,27 @@
     </div>
 
     <div class="login__group">
-      <div class="login__group-title">
-        <span class="login__label--item">パスワード</span>
+      <div class="login__label-wrap">
+        <span class="login__label">パスワード</span>
       </div>
-      <div class="login__group-content">
-          <div class="login__input--text">
-            <input type="password" name="password">
-          </div>
-          <div class="login__error">
-            @error('password')
-              {{ $message }}
-            @enderror
-          </div>
+      <div class="login__control">
+        <div class="login__input">
+          <input type="password" name="password">
+        </div>
+        <div class="login__error">
+          @error('password')
+            {{ $message }}
+          @enderror
         </div>
       </div>
-      <div class="login__button">
-        <button class="login__button-submit" type="submit">
-          ログインする
-        </button>
-      </div>
+    </div>
 
-      <a class="bottom__link" href="/register">
-        会員登録はこちら
-      </a>
-    </form>
+    <div class="login__actions">
+      <button class="login__submit" type="submit">ログインする</button>
+    </div>
+
+    <a class="login__link" href="/register">会員登録はこちら</a>
+  </form>
 
 </div>
 @endsection
