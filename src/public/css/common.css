@@ -23,14 +23,14 @@ body {
     height: 36px;
 }
 
-.search {
+.header__search {
     flex: 1;
     margin: 0 24px;
     display: flex;
     justify-content: center;
 }
 
-.search__input {
+.header__search-input {
     width: 100%;
     max-width: 500px;
     height: 50px;
@@ -54,9 +54,9 @@ body {
     margin-left: 16px;
 }
 
-.logout,
-.login,
-.mypage {
+.header__logout,
+.header__login,
+.header__mypage {
     background: transparent;
     color: #fff;
     border: none;
@@ -66,7 +66,7 @@ body {
     cursor: pointer;
 }
 
-.sell {
+.header__sell {
     background: #fff;
     color: #000;
     padding: 6px 14px;
@@ -83,15 +83,15 @@ body {
         padding: 15px 60px;
     }
 
-    .search__input {
+    .header__search-input {
         max-width: 600px;
         font-size: 26px;
     }
 
-    .logout,
-    .login,
-    .mypage,
-    .sell {
+    .header__logout,
+    .header__login,
+    .header__mypage,
+    .header__sell {
         font-size: 26px;
     }
 }
@@ -109,20 +109,20 @@ body {
         height: 28px;
     }
 
-    .search__input {
+    .header__search-input {
         max-width: 250px;
         height: 38px;
         font-size: 16px;
     }
 
-    .logout,
-    .login,
-    .mypage,
-    .sell {
+    .header__logout,
+    .header__login,
+    .header__mypage,
+    .header__sell {
         font-size: 16px;
     }
 
-    .sell {
+    .header__sell {
         width: 70px;
         height: 38px;
         font-size: 16px;

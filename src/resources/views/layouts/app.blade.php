@@ -21,8 +21,8 @@
                 {{-- login,register, mailhog ページではロゴだけ --}}
                 @if (!Route::is('register') && !Route::is('mailhog') && !Route::is('login') && !Route::is('verification.*'))
 
-                <form class="search" action="/search" method="get">
-                    <input class="search__input" type="text" name="keyword" placeholder="なにをお探しですか？" value="{{ request('keyword') }}" >
+                <form class="header__search" action="/search" method="get">
+                    <input class="header__search-input" type="text" name="keyword" placeholder="なにをお探しですか？" value="{{ request('keyword') }}" >
                 </form>
 
                 <nav class="header__nav">
@@ -31,22 +31,22 @@
                             @if(Auth::check())
                             <form method="post" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="logout">ログアウト</button>
+                                <button type="submit" class="header__logout">ログアウト</button>
                             </form>
                             @else
                             <form action="{{ route('login') }}" method="get">
-                                <button type="submit" class="login">ログイン</button>
+                                <button type="submit" class="header__login">ログイン</button>
                             </form>
                             @endif
                         </li>
                         <li>
                             <form method="post" action="{{ route('mypage') }}">
                                 @csrf
-                                <button type="submit" class="mypage">マイページ</button>
+                                <button type="submit" class="header__mypage">マイページ</button>
                             </form>
                         </li>
                         <li>
-                            <a href="{{ route('item.listing') }}" class="sell">出品</a>
+                            <a href="{{ route('item.listing') }}" class="header__sell">出品</a>
                         </li>
                     </ul>
                 </nav>
