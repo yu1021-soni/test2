@@ -17,29 +17,27 @@ img {
     display: block;
 }
 
-.content {
+.detail {
     width: 100%;
     display: flex;
     margin: 24px 0 60px;
     padding-inline: 4%;
-    /* 左右の余白をつける */
     gap: 6%;
-    /* 真ん中の余白24px */
 }
 
-.item__img {
+.detail__image {
     width: 50%;
     margin-top: 50px;
     box-sizing: border-box;
 }
 
-.img__url {
+.detail__image-img {
     width: 600px;
     height: 600px;
     box-sizing: border-box;
 }
 
-.badge-sold {
+.detail__badge-sold {
     display: inline-block;
     padding: 4px 8px;
     border: 2px solid red;
@@ -57,36 +55,36 @@ img {
     gap: 16px;
 }
 
-.product__area {
+.detail__area {
     padding: 18px;
 }
 
-.item__name {
+.detail__name {
     font-size: 45px;
     font-weight: 700;
     margin: 0 0 6px;
 }
 
-.item__brand {
+.detail__brand {
     font-size: 20px;
     font-weight: 400;
     margin-bottom: 10px;
 }
 
-.item__price {
+.detail__price {
     font-size: 30px;
     font-weight: 400;
     margin-bottom: 12px;
 }
 
-.item__price span {
+.detail__price span {
     font-size: 18px;
     font-weight: 400;
     color: #666;
 }
 
-.favorite,
-.comment__icon {
+.detail__favorite,
+.detail__comment-icon {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
@@ -96,7 +94,7 @@ img {
     vertical-align: top;
 }
 
-.favorite__button {
+.detail__favorite-button {
     border: none;
     background: none;
     padding: 0;
@@ -106,26 +104,26 @@ img {
     cursor: pointer;
 }
 
-.comment__icon i {
+.detail__comment-icon i {
     font-size: 40px;
     color: #333;
     line-height: 1;
     display: block;
 }
 
-.favorite p,
-.comment__icon p {
+.detail__favorite p,
+.detail__comment-icon p {
     margin: 0;
     font-size: 14px;
     line-height: 1;
     color: #333;
 }
 
-.product__description {
+.detail__description {
     padding: 18px;
 }
 
-.btn-buy {
+.detail__btn-buy {
     width: 570px;
     height: 56px;
     border-radius: 4px;
@@ -138,105 +136,99 @@ img {
     margin: 4px 0 16px;
 }
 
-/* 商品説明タイトル */
-.section-title {
+.detail__section-title {
     font-size: 36px;
     font-weight: 700;
-    margin: 14px 0 10px;
+    margin: 30px 0 10px;
     padding-bottom: 6px;
 }
 
-/* 商品説明文 */
-.item__description {
+.detail__desc-text {
     font-size: 24px;
     font-weight: 400;
     line-height: 1.8;
     white-space: pre-wrap;
 }
 
-/* 商品の情報 */
-.product__info {
+.detail__specs {
     padding: 18px;
 }
 
-.item__spec {
+.detail__spec {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-.item__spec .row {
+.detail__spec-row {
     display: flex;
     align-items: center;
     margin-bottom: 12px;
 }
 
-.item__spec .label {
+.detail__spec-label {
     font-size: 24px;
     font-weight: 700;
     margin-right: 50px;
 }
 
-.item__spec .value {
+.detail__spec-value {
     font-size: 20px;
     font-weight: 400;
     flex: 1;
     display: flex;
     flex-wrap: wrap;
-    gap: 6px 8px;/* 縦px 横px */
+    gap: 6px 8px;
+    align-items: center;
 }
 
-/* カテゴリの丸 */
-.chip {
-    display: flex;
-    padding: 0 18px ;
+.detail__chip {
+    display: inline-flex;;
+    padding: 0 18px;
     height: 30px;
     border: 1px solid #d9d9d9;
     background: #d9d9d9;
     border-radius: 15px;
-    /* まるいピル */
     margin-right: 8px;
     margin-bottom: 6px;
-    /* 折返し時の間隔 */
+    align-items: center;
+    line-height: 1;
 }
 
-.product__comments {
+.detail__comments {
     padding: 18px;
 }
 
-/* コメントの縦間隔 */
-.product__comments .comment+.comment {
+.detail__comments .detail__comment+.detail__comment {
     margin-top: 16px;
 }
 
-/* 画像と名前 */
-.product__comments .comment__head {
+.detail__comment-head {
     display: flex;
     align-items: center;
 }
 
-.product__comments .comment__head .avatar {
+.detail__comment-avatar {
     width: 70px;
     height: 70px;
     border-radius: 50%;
     overflow: hidden;
     background: #d9d9d9;
-    /* 画像が無いときの背景 */
     margin-right: 12px;
 }
 
-.product__comments .comment__head .avatar img {
+.detail__comment-avatar img {
     display: block;
     width: 100%;
     height: 100%;
 }
 
-.name {
+.detail__comment-name {
     font-size: 30px;
     font-weight: 700;
 }
 
-.product__comments .comment__body {
+.detail__comment-body {
     margin: 8px 0 0;
     padding: 10px 12px;
     background: white;
@@ -247,7 +239,7 @@ img {
     word-break: break-word;
 }
 
-.no__comment {
+.detail__no-comment {
     width: 570px;
     background-color: #e5e5e5;
     border-radius: 5px;
@@ -256,19 +248,18 @@ img {
     padding: 20px;
 }
 
-/*  コメント投稿フォーム */
-.product__comments .comment-form {
+.detail__comment-form {
     margin-top: 20px;
 }
 
-.comment-form .form-title {
+.detail__form-title {
     font-size: 28px;
     font-weight: 700;
     margin: 16px 0 10px;
     color: black;
 }
 
-.product__comments .comment-form textarea {
+.detail__comment-form textarea {
     display: block;
     width: 570px;
     height: 246px;
@@ -279,7 +270,7 @@ img {
     box-sizing: border-box;
 }
 
-.btn-comment {
+.detail__btn-comment {
     width: 570px;
     height: 56px;
     font-size: 25px;
@@ -294,8 +285,7 @@ img {
     margin-top: 50px;
 }
 
-/* エラー */
-.comment__error {
+.detail__comment-error {
     font-size: 18px;
     margin-top: 30px;
     color: red;
@@ -304,17 +294,15 @@ img {
 
 @media (min-width: 768px) and (max-width: 850px) {
 
-    .content {
+    .detail {
         display: flex;
         flex-direction: column;
-        /* 縦に */
         align-items: center;
-        /* 中央寄せ */
         gap: 24px;
         padding-inline: 6%;
     }
 
-    .item__img,
+    .detail__image,
     .detail__info {
         width: 100%;
         max-width: 720px;
@@ -322,7 +310,7 @@ img {
         padding: 0;
     }
 
-    .img__url {
+    .detail__image-img {
         width: 100%;
         height: auto;
         max-width: 640px;
@@ -330,57 +318,57 @@ img {
         display: block;
     }
 
-    .item__name {
+    .detail__name {
         font-size: 32px;
     }
 
-    .item__brand {
+    .detail__brand {
         font-size: 18px;
     }
 
-    .item__price {
+    .detail__price {
         font-size: 26px;
     }
 
-    .item__price span {
+    .detail__price span {
         font-size: 15px;
     }
 
-    .section-title {
+    .detail__section-title {
         font-size: 28px;
     }
 
-    .item__description {
+    .detail__desc-text {
         font-size: 18px;
         line-height: 1.9;
     }
 
-    .item__spec .label {
+    .detail__spec-label {
         font-size: 18px;
         margin-right: 24px;
         min-width: 120px;
     }
 
-    .item__spec .value {
+    .detail__spec-value {
         font-size: 16px;
         gap: 6px 8px;
     }
 
-    .btn-buy,
-    .product__comments .comment-form textarea,
-    .btn-comment,
-    .no__comment {
+    .detail__btn-buy,
+    .detail__comment-form textarea,
+    .detail__btn-comment,
+    .detail__no-comment {
         width: 100%;
         max-width: 720px;
     }
 
-    .favorite__button,
-    .comment__icon i {
+    .detail__favorite-button,
+    .detail__comment-icon i {
         font-size: 32px;
     }
 
-    .favorite p,
-    .comment__icon p {
+    .detail__favorite p,
+    .detail__comment-icon p {
         font-size: 12px;
     }
 }
