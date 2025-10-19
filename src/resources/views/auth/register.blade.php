@@ -9,20 +9,21 @@
 @endsection
 
 @section('content')
-<div class="register-form__content">
+<div class="register">
 
-  <form action="/register" class="form" method="post">
-  @csrf
-    <div class="register-form__heading">
-      <h2>会員登録</h2>
+  <form action="/register" class="register__form" method="post">
+    @csrf
+
+    <div class="register__heading">
+      <h2 class="register__title">会員登録</h2>
     </div>
 
     <div class="register__group">
-      <div class="register__group-title">
-        <span class="register__label--item">ユーザ名</span>
+      <div class="register__label-wrap">
+        <span class="register__label">ユーザ名</span>
       </div>
-      <div class="register__group-content">
-        <div class="register__input--text">
+      <div class="register__control">
+        <div class="register__input">
           <input type="text" name="name">
         </div>
         <div class="register__error">
@@ -31,53 +32,57 @@
           @enderror
         </div>
       </div>
-      </div>
-      <div class="register__group">
-        <div class="register__group-title">
-          <span class="register__label--item">メールアドレス</span>
-        </div>
-        <div class="register__group-content">
-          <div class="register__input--text">
-            <input type="text" name="email">
-          </div>
-          <div class="register__error">
-            @error('email')
-              {{ $message }}
-            @enderror
-          </div>
-        </div>
-      </div>
-      <div class="register__group">
-        <div class="register__group-title">
-          <span class="register__label--item">パスワード</span>
-        </div>
-        <div class="register__group-content">
-          <div class="register__input--text">
-            <input type="password" name="password">
-          </div>
-          <div class="register__error">
-            @error('password')
-              {{ $message }}
-            @enderror
-          </div>
-        </div>
-      </div>
-      <div class="register__group">
-        <div class="register__group-title">
-          <span class="register__label--item">確認用パスワード</span>
-        </div>
-        <div class="register__group-content">
-          <div class="register__input--text">
-            <input type="password" name="password_confirmation">
-          </div>
-        </div>
-      </div>
-      <div class="register__button">
-        <button class="register__button-submit" type="submit">登録する</button>
-      </div>
+    </div>
 
-      <a class="bottom__link" href="/login">ログインはこちら</a>
-    </form>
+    <div class="register__group">
+      <div class="register__label-wrap">
+        <span class="register__label">メールアドレス</span>
+      </div>
+      <div class="register__control">
+        <div class="register__input">
+          <input type="text" name="email">
+        </div>
+        <div class="register__error">
+          @error('email')
+            {{ $message }}
+          @enderror
+        </div>
+      </div>
+    </div>
+
+    <div class="register__group">
+      <div class="register__label-wrap">
+        <span class="register__label">パスワード</span>
+      </div>
+      <div class="register__control">
+        <div class="register__input">
+          <input type="password" name="password">
+        </div>
+        <div class="register__error">
+          @error('password')
+            {{ $message }}
+          @enderror
+        </div>
+      </div>
+    </div>
+
+    <div class="register__group">
+      <div class="register__label-wrap">
+        <span class="register__label">確認用パスワード</span>
+      </div>
+      <div class="register__control">
+        <div class="register__input">
+          <input type="password" name="password_confirmation">
+        </div>
+      </div>
+    </div>
+
+    <div class="register__actions">
+      <button class="register__submit" type="submit">登録する</button>
+    </div>
+
+    <a class="register__link" href="/login">ログインはこちら</a>
+  </form>
 
 </div>
 @endsection
