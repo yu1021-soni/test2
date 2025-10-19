@@ -16,8 +16,8 @@
         メール認証を完了してください。
         </p>
 
-        <div class="mailhog__button">
-            <a href="http://localhost:8025" target="_blank" rel="noopener" class="mailhog__button__form">
+        <div class="mailhog__actions">
+            <a href="http://localhost:8025" target="_blank" rel="noopener" class="mailhog__actions-link">
                 認証はこちらから
             </a>
 

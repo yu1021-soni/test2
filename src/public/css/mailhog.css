@@ -2,8 +2,7 @@ body {
     font-family: "Inter", sans-serif;
 }
 
-
-.mailhog__content {
+.mailhog {
     width: 100%;
     background: #fff;
     display: flex;
@@ -23,21 +22,22 @@ body {
     font-size: 24px;
     line-height: 1.9;
     color: black;
-    font-weight:700;
+    font-weight: 700;
     margin: 0 0 28px;
 }
 
-.mailhog__button {
+.mailhog__actions {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 14px;
 }
 
-.mailhog__button__form {
+.mailhog__actions-link {
     margin-top: 40px;
     display: flex;
-    align-items: center;justify-content: center;
+    align-items: center;
+    justify-content: center;
     width: 257px;
     height: 69px;
     background: #d9d9d9;
@@ -63,7 +63,7 @@ body {
 }
 
 @media screen and (min-width: 1400px) and (max-width: 1540px) {
-    .mailhog__content {
+    .mailhog {
         padding: 80px 24px 120px;
     }
 
@@ -76,7 +76,7 @@ body {
         line-height: 2;
     }
 
-    .mailhog__button__form {
+    .mailhog__actions-link {
         width: 300px;
         height: 80px;
         font-size: 26px;
@@ -95,7 +95,7 @@ body {
 }
 
 @media screen and (min-width: 768px) and (max-width: 850px) {
-    .mailhog__content {
+    .mailhog {
         padding: 40px 12px 80px;
     }
 
@@ -108,7 +108,7 @@ body {
         line-height: 1.6;
     }
 
-    .mailhog__button__form {
+    .mailhog__actions-link {
         width: 220px;
         height: 60px;
         font-size: 20px;
