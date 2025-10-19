@@ -2,11 +2,11 @@ body {
     font-family: "Inter", sans-serif;
 }
 
-.content {
+.catalog {
     margin-top: 60px;
 }
 
-.select__page {
+.catalog__tabs {
     display: flex;
     border-bottom: 1px solid black;
     padding-bottom: 2px;
@@ -15,19 +15,19 @@ body {
     padding-left: 100px;
 }
 
-.select__page-link {
+.catalog__tab-link {
     margin-left: 100px;
     color: #000;
     text-decoration: none;
 }
 
-.select__page .select__page-link.is-active,
-.select__page .select__page-link.is-active:visited {
+.catalog__tabs .catalog__tab-link.is-active,
+.catalog__tabs .catalog__tab-link.is-active:visited {
     color: red;
     font-weight: bold;
 }
 
-.badge-sold {
+.catalog__badge-sold {
     display: inline-block;
     padding: 2px 4px;
     border: 2px solid red;
@@ -37,72 +37,73 @@ body {
     margin-bottom: 1px;
 }
 
-.item__list {
+.catalog__list {
     display: flex;
     flex-wrap: wrap;
 }
 
-.item__card {
+.catalog__card {
     width: 25%;
     padding: 20px;
     box-sizing: border-box;
 }
 
-.item__img img {
+.catalog__image img {
     width: 100%;
     display: block;
 }
 
-.nothing {
+.catalog__empty {
     margin-top: 30px;
     margin-left: 30px;
     font-size: 20px;
 }
 
-.item__card a {
+.catalog__card a {
     text-decoration: none;
     color: black;
 }
 
-.item__name {
+.catalog__name {
     font-weight: 400;
     font-size: 25px;
     font-style: Regular;
+    margin-top: 7px;
 }
 
 @media (min-width: 1400px) and (max-width: 1540px) {
-    .item__card {
+    .catalog__card {
         width: 25%;
     }
 }
 
 @media (min-width: 768px) and (max-width: 850px) {
-    .select__page {
+    .catalog__tabs {
         padding-left: 40px;
         font-size: 20px;
     }
 
-    .select__page-link {
+    .catalog__tab-link {
         margin-left: 40px;
     }
 
-    .item__card {
+    .catalog__card {
         width: 50%;
     }
 
-    .nothing {
+    .catalog__empty {
         margin-top: 20px;
         margin-left: 20px;
         font-size: 15px;
     }
 
-    .item__name {
-    font-weight: bold;
-    font-size: 25px;
-    font-style: Regular;
+    .catalog__name {
+        font-weight: bold;
+        font-size: 25px;
+        font-style: Regular;
     }
 
-    .item__name {
+    .catalog__name {
         font-weight: 400;
         font-size: 18px;
         font-style: Regular;

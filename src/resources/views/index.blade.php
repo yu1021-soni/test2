@@ -13,43 +13,42 @@
   $searchParams = request()->except('tab', 'page');
 @endphp
 
-
 @section('content')
-<div class="content">
-  <div class="select__page">
+<div class="catalog">
+  <div class="catalog__tabs">
     <a
-    href="{{ route('item.index', $searchParams) }}"
-    class="select__page-link {{ request('tab') !== 'mylist' ? 'is-active' : '' }}"
-  >おすすめ</a>
+      href="{{ route('item.index', $searchParams) }}"
+      class="catalog__tab-link {{ request('tab') !== 'mylist' ? 'is-active' : '' }}"
+    >おすすめ</a>
 
   {{-- マイリスト（?tab=mylist の時に active） --}}
   {{-- array_merge は 配列どうしを合体する関数 --}}
   <a
     href="{{ route('item.index', array_merge($searchParams, ['tab' => 'mylist'])) }}"
-    class="select__page-link {{ request('tab') === 'mylist' ? 'is-active' : '' }}"
+    class="catalog__tab-link {{ request('tab') === 'mylist' ? 'is-active' : '' }}"
   >マイリスト</a>
   </div>
 
-  <div class="item__list">
+  <div class="catalog__list">
     @foreach ($items as $item)
-      <div class="item__card">
+      <div class="catalog__card">
 
         <a href="{{ route('items.detail', $item ) }}">
         {{-- リンク先URL = route('ルート名', ['プレースホルダ名' => 値]) --}}
-        <div class="item__img">
+        <div class="catalog__image">
           <img
             src="{{ $item->item_img_url ? Storage::url($item->item_img_url) : asset('img/placeholder.png') }}"
             alt="{{ $item->name }}">
         </div>
 
-        <div class="item__name">
+        <div class="catalog__name">
             {{ $item->name }}
         </div>
         </a>
 
         {{-- 購入済みは Sold --}}
         @if ($item->order)
-          <p class="badge-sold">Sold</p>
+          <p class="catalog__badge-sold">Sold</p>
         @endif
 
       </div>
