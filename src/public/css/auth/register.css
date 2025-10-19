@@ -8,7 +8,6 @@ body {
     font-family: "Inter", sans-serif;
 }
 
-/* block */
 .register {
     width: 680px;
     margin: 80px auto;
@@ -17,7 +16,6 @@ body {
     box-sizing: border-box;
 }
 
-/* elements */
 .register__heading {
     text-align: center;
     margin-bottom: 30px;
@@ -90,7 +88,6 @@ body {
     margin-top: 30px;
 }
 
-/* PC 1400–1540px */
 @media (min-width: 1400px) and (max-width: 1540px) {
 
     .register__title {
@@ -106,7 +103,6 @@ body {
     }
 }
 
-/* Tablet 768–850px */
 @media (min-width: 768px) and (max-width: 850px) {
     .register {
         width: 60%;

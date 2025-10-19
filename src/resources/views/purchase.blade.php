@@ -9,24 +9,24 @@
 @endsection
 
 @section('content')
-<div class="purchase__content">
+<div class="purchase">
 
     {{-- 左：商品画像など --}}
-    <div class="left__content">
+    <div class="purchase__left">
 
-        <div class="item__info">
-            <div class="item__img">
+        <div class="purchase__item">
+            <div class="purchase__item-image">
                 <img src="{{ $item->item_img_url ? Storage::url($item->item_img_url) : asset('img/placeholder.png') }}" alt="{{ $item->name }}">
             </div>
-            <div class="detail__info">
-                <p class="item__name">{{ $item->name }}</p>
-                <div class="item__price">
+            <div class="purchase__details">
+                <p class="purchase__item-name">{{ $item->name }}</p>
+                <div class="purchase__item-price">
                     ¥{{ number_format($item->price) }}
                 </div>
             </div>
         </div>
 
-        <div class="pay__method">
+        <div class="purchase__payment">
             <h3>支払い方法</h3>
             <select name="payment" form="purchase-form" required>
                 <option value="" selected disabled>選択してください</option>
@@ -35,8 +35,8 @@
             </select>
         </div>
 
-        <div class="shipping__address">
-            <div class="shipping__title">
+        <div class="purchase__shipping">
+            <div class="purchase__shipping-title">
                 <h3>配送先</h3>
                 <a href="{{ route('address.edit', ['user_id' => auth()->id()]) }}">変更する</a>
             </div>
@@ -53,7 +53,7 @@
             @endphp
 
 
-            <div class="address">
+            <div class="purchase__address">
                 {{ $showPostcode }}<br>
                 {{ $showAddress }}<br>
                 {{ $showBuilding }}
@@ -64,15 +64,15 @@
     </div>
 
     {{-- 右：決済方法など --}}
-    <div class="right__content">
-        <div class="confirm">
-            <div class="confirm__price">
-                <p class="confirm__title">商品代金</p>
-                <p class="confirm__content">¥{{ number_format($item->price) }}</p>
+    <div class="purchase__right">
+        <div class="purchase__confirm">
+            <div class="purchase__confirm-price">
+                <p class="purchase__confirm-title">商品代金</p>
+                <p class="purchase__confirm-content">¥{{ number_format($item->price) }}</p>
             </div>
-            <div class="confirm__pay">
-                <p class="confirm__title">支払い方法</p>
-                <p class="confirm__content"></p>
+            <div class="purchase__confirm-pay">
+                <p class="purchase__confirm-title">支払い方法</p>
+                <p class="purchase__confirm-content"></p>
             </div>
         </div>
         <form action="{{ route('item.pay') }}" method="post" id="purchase-form">
@@ -81,7 +81,7 @@
             <input type="hidden" name="postcode" value="{{ $postcode }}">
             <input type="hidden" name="address"  value="{{ $address }}">
             <input type="hidden" name="building" value="{{ $building }}">
-            <button type="submit" class="button_buy">購入する</button>
+            <button type="submit" class="purchase__button">購入する</button>
         </form>
     </div>
 
