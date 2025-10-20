@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Item;
 use App\Models\User;
@@ -35,7 +34,7 @@ class ShippingTest extends TestCase
         //2. 送付先住所変更画面で住所を登録する
         $this->withSession([
             "checkout.address.{$item->id}" => [
-                'postcode' => 'テストpostcode',
+                'postcode' => '111-1111',
                 'address'  => 'テスト住所',
                 'building' => 'テストビル',
             ],
@@ -45,7 +44,7 @@ class ShippingTest extends TestCase
         $this->get(route('purchase.store', ['item_id' => $item->id]))
             ->assertOk()
             //登録した住所が商品購入画面に正しく反映される
-            ->assertSee('テストpostcode')
+            ->assertSee('111-1111')
             ->assertSee('テスト住所')
             ->assertSee('テストビル');
     }
@@ -64,7 +63,7 @@ class ShippingTest extends TestCase
 
         //2. 送付先住所変更画面で住所を登録する
         $this->post(route('address.change'), [
-            'postcode' => 'テストpostcode',
+            'postcode' => '222-2222',
             'address'  => 'テスト住所',
             'building' => 'テストビル',
         ]);
@@ -73,14 +72,18 @@ class ShippingTest extends TestCase
         $this->post(route('item.pay'), [
             'item_id'  => $item->id,
             'payment'  => 2,
-            'shipping' => 'テストpostcode テスト住所 テストビル',
+            'postcode' => '222-2222',
+            'address'  => 'テスト住所',
+            'building' => 'テストビル',
         ]);
 
         //正しく送付先住所が紐づいている
         $this->assertDatabaseHas('orders', [
             'user_id'  => $buyer->id,
             'item_id'  => $item->id,
-            'shipping' => 'テストpostcode テスト住所 テストビル',
+            'postcode' => '222-2222',
+            'address'  => 'テスト住所',
+            'building' => 'テストビル',
         ]);
     }
 }

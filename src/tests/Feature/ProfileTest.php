@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\Item;
 use App\Models\User;
@@ -47,7 +46,9 @@ class ProfileTest extends TestCase
             'user_id'  => $user->id,
             'item_id'  => $buyItem->id,
             'payment'  => 2,
-            'shipping' => 'テスト住所',
+            'postcode' => '111-1111',
+            'address'  => 'テストアドレス',
+            'building' => 'テストビル',
         ]);
 
         //2.プロフィールページを開く
@@ -59,7 +60,7 @@ class ProfileTest extends TestCase
         // 出品一覧タブ
         $this->get(route('mypage', ['page' => 'sell']))
             ->assertOk()
-            ->assertSee('テスト出品商品');
+            ->assertSee($sellItem->name);
 
         // 購入一覧タブ
         $this->get(route('mypage', ['page' => 'buy']))

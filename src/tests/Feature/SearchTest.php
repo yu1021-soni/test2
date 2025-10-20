@@ -3,12 +3,9 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Item;
-use App\Models\Order;
-use Illuminate\Support\Facades\DB;
 use Database\Seeders\CategorySeeder;
 
 
@@ -27,8 +24,6 @@ class SearchTest extends TestCase
 
         $this->seed(CategorySeeder::class);
 
-        $user = User::factory()->create();
-
         $matchItem = Item::factory()->create(['name' => 'コーヒーミル']);
         $notMatchItem = Item::factory()->create(['name' => '紅茶カップ']);
 
@@ -39,8 +34,8 @@ class SearchTest extends TestCase
         $response->assertOk();
 
         //部分一致する商品が表示される
-        $response->assertSeeText('コーヒーミル');
-        $response->assertDontSeeText('紅茶カップ');
+        $response->assertSeeText($matchItem->name);
+        $response->assertDontSeeText($notMatchItem->name);
     }
 
     //検索状態がマイリストでも保持されている
@@ -50,7 +45,7 @@ class SearchTest extends TestCase
 
         $user = User::factory()->create();
 
-        $Item = Item::factory()->create(['name' => 'コーヒーミル']);
+        $item = Item::factory()->create(['name' => 'コーヒーミル']);
 
         // ログイン状態
         $this->actingAs($user);
@@ -59,12 +54,12 @@ class SearchTest extends TestCase
         $response = $this->get(route('items.search', ['keyword' => 'コーヒー']));
 
         //2. 検索結果が表示される
-        $response->assertSeeText('コーヒーミル');
+        $response->assertSeeText($item->name);
         $response->assertSee('value="コーヒー"',false);
 
         //3. マイリストページに遷移
         $response = $this->get(route('item.index', ['tab' => 'mylist', 'keyword' => 'コーヒー']));
-        
+
         //検索キーワードが保持されている
         $response->assertOk();
         $response->assertSee('value="コーヒー"', false);

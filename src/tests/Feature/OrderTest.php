@@ -3,14 +3,9 @@
 namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Item;
-use App\Models\Order;
-use App\Models\Comment;
-use App\Models\Category;
-use Illuminate\Support\Facades\DB;
 use Database\Seeders\CategorySeeder;
 
 class OrderTest extends TestCase
@@ -38,19 +33,21 @@ class OrderTest extends TestCase
         $this->get(route('purchase.store', ['item_id' => $item->id]))->assertOk();
 
         //3. 商品を選択して「購入する」ボタンを押下
-        $response = $this->post(route('item.pay'),[
-            'user_id' => $user->id,
+        $this->post(route('item.pay'),[
             'item_id' => $item->id,
             'payment'  => 2,
-            'shipping' => 'テスト住所',
+            'postcode' => '111-1111',
+            'address'  => 'テストアドレス',
+            'building' => 'テストビル',
         ]);
 
         //購入が完了する
         $this->assertDatabaseHas('orders', [
-            'user_id' => $user->id,
             'item_id' => $item->id,
             'payment'  => 2,
-            'shipping' => 'テスト住所',
+            'postcode' => '111-1111',
+            'address'  => 'テストアドレス',
+            'building' => 'テストビル',
         ]);
     }
 
@@ -75,7 +72,9 @@ class OrderTest extends TestCase
         $response = $this->post(route('item.pay'), [
             'item_id'  => $item->id,
             'payment'  => 2,
-            'shipping' => '東京都渋谷区',
+            'postcode' => '111-1111',
+            'address'  => 'テストアドレス',
+            'building' => 'テストビル',
         ]);
 
         $response->assertStatus(302);
@@ -109,7 +108,9 @@ class OrderTest extends TestCase
         $response = $this->post(route('item.pay'), [
             'item_id'  => $item->id,
             'payment'  => 2,
-            'shipping' => '東京都渋谷区',
+            'postcode' => '111-1111',
+            'address'  => 'テストアドレス',
+            'building' => 'テストビル',
         ]);
         $response->assertStatus(302);
 

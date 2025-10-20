@@ -20,7 +20,9 @@ class OrderFactory extends Factory
             'user_id' => User::factory(), //購入者
             'item_id' => Item::factory(), //購入商品
             'payment'  => 2,
-            'shipping' => '東京都渋谷区',
+            'postcode' => '150-0001',
+            'address'  => '東京都渋谷区神宮前1-1-1',
+            'building' => 'テストビル101',
         ];
     }
 }

@@ -2,16 +2,11 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Item;
-use App\Models\Order;
-use App\Models\Comment;
-use App\Models\Category;
-use Illuminate\Support\Facades\DB;
 use Database\Seeders\CategorySeeder;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CommentTest extends TestCase
 {
@@ -29,6 +24,7 @@ class CommentTest extends TestCase
         $this->seed(CategorySeeder::class);
 
         $user = User::factory()->create();
+
         $item = Item::factory()->create();
 
         //1. ユーザーにログインする
