@@ -113,7 +113,7 @@
 - Mailhog
 
 ## ER図
-![ER Diagram](docs/images/er-diagram.png)
+![ER Diagram](docs/images/test2.png)
 
 ## URL
 - アプリケーション: http://localhost
