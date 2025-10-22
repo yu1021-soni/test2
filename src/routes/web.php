@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ItemController;
-use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AccountController;
 
@@ -53,4 +52,5 @@ Route::middleware(['auth','verified'])->group(function () {
 
     // 住所変更処理 (POST)
     Route::post('/change', [AccountController::class, 'change'])->name('address.change');
+
 });
