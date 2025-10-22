@@ -42,17 +42,17 @@
                 </div>
 
                 @foreach ($categories as $cat)
-                  <input
+                <input
                     type="checkbox"
                     id="cat{{ $cat->id }}"
                     name="categories[]"
                     value="{{ $cat->id }}"
                     {{ in_array($cat->id, old('categories', [])) ? 'checked' : '' }}>
-                  <label for="cat{{ $cat->id }}" class="listing__chip">{{ $cat->name }}</label>
+                <label for="cat{{ $cat->id }}" class="listing__chip">{{ $cat->name }}</label>
                 @endforeach
 
                 @error('categories')
-                  <p class="listing__error">{{ $message }}</p>
+                <p class="listing__error">{{ $message }}</p>
                 @enderror
             </div>
 
