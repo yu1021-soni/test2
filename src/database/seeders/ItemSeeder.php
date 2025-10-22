@@ -76,11 +76,6 @@ class ItemSeeder extends Seeder
              //複数カテゴリ → ID配列に
             $categoryIds = $resolveCategoryIds($categoryNames);
 
-
-            // 代表カテゴリ 先頭IDを items.category_id に入れる
-            $representativeId = $categoryIds[0];
-
-
             $item = Item::create([
                 'user_id'       => $sellerId,
                 'name'          => $name,
@@ -89,11 +84,8 @@ class ItemSeeder extends Seeder
                 'description'   => $desc,
                 'item_img_url'  => $stored ?: $url,
                 'condition'     => $toCode($condLabel),
-                'category_id'   => $representativeId,
             ]);
 
-            $categoryIds = $resolveCategoryIds($categoryNames);
-            
             $item->categories()->sync($categoryIds);
         }
     }
