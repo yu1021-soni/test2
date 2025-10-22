@@ -10,8 +10,9 @@
 
    `docker-compose up -d --build`
 
-   Apple Silicon (M1/M2) でビルドできない場合.
-   docker-compose.yml の services.mysql に以下を追加してください:
+   Apple Silicon (M1/M2) でビルドできない場合
+
+   docker-compose.yml の services.mysql に以下を追加してください
 
    ```
    services:
@@ -63,10 +64,13 @@
 
 ## メール認証テスト
 
-Mailhogを利用. 
-ブラウザで以下にアクセス. 
-http://localhost:8025. 
-`php artisan queue:work`
+   Mailhogを利用。
+
+   ブラウザで以下にアクセス。
+
+   http://localhost:8025
+
+   `php artisan queue:work`
 
 ## テスト実行
 1. テスト専用の環境設定ファイル .env.testing を用意
