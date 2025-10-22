@@ -22,6 +22,15 @@ class CreateOrdersTable extends Migration
             $table->string('address');
             $table->string('building')->nullable();
             $table->unique('item_id');
+
+            // Stripe
+            //支払いの進行状況をアプリ側で確認
+            $table->string('payment_status')->default('pending');
+            //どのセッションでこの注文を処理したか
+            $table->string('stripe_session_id')->nullable()->index();
+            $table->string('stripe_payment_intent')->nullable()->index();
+            $table->integer('amount')->default(0); // 円（金額はCheckout作成時に設定）
+
             $table->timestamps();
         });
     }

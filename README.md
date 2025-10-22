@@ -120,3 +120,6 @@
 - アプリケーション: http://localhost
 - phpMyAdmin: http://localhost:8080
 - Mailhog: http://localhost:8025
+
+docker compose exec php bash
+composer require stripe/stripe-php
