@@ -112,6 +112,8 @@
 - phpMyAdmin
 - Mailhog
 
+## ER図
+![ER Diagram](docs/images/er-diagram.png)
 
 ## URL
 - アプリケーション: http://localhost
