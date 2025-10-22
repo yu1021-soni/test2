@@ -4,10 +4,11 @@
 
 1. リポジトリをクローン
 
-   https://github.com/yu1021-soni/test2
+   `git clone https://github.com/yu1021-soni/test2.git`
 
 2. Docker起動
 
+   `cd test2/docker`
    `docker-compose up -d --build`
 
    Apple Silicon (M1/M2) でビルドできない場合
@@ -21,16 +22,11 @@
          image: mysql:8.0.26
          environment:
    ```
+3. 「.env.example」ファイルを 「.env」ファイルに命名を変更。または、新しく.envファイルを作成。
 
-3. `docker-compose exec php bash`
+   `cp -p .env.example .env`
 
-4. Composerインストール
-
-   `composer install`
-
-5. 「.env.example」ファイルを 「.env」ファイルに命名を変更。または、新しく.envファイルを作成。
-
-6. .envの記述を以下に変更
+4. .envの記述を以下に変更
 
    ```
    DB_CONNECTION=mysql
@@ -50,15 +46,20 @@
    MAIL_FROM_NAME="${APP_NAME}"
    ```
 
-7. アプリケーションキーの作成
+5. Composerインストール
+
+   `docker-compose exec php bash`
+   `composer install`
+
+6. アプリケーションキーの作成
 
    `php artisan key:generate`
 
-8. マイグレーション & シーディング
+7. マイグレーション & シーディング
 
    `php artisan migrate:fresh --seed`
 
-9. ストレージリンク
+8. ストレージリンク
 
    `php artisan storage:link`
 
