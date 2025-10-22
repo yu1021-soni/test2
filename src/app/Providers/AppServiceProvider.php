@@ -23,8 +23,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton(LogoutResponse::class, CustomLogoutResponse::class);
 
-        // 既定の Fortify LoginRequest → 自作の FormRequest に差し替え
-        $this->app->bind(FortifyLoginRequestContract::class, MyLoginRequest::class);
+        $this->app->bind(FortifyLoginRequest::class, MyLoginRequest::class);
     }
 
     /**
