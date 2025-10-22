@@ -28,7 +28,7 @@
 
    `composer install`
 
-5. 「.env.example」ファイルを 「.env」ファイルに命名を変更。または、新しく.envファイルを作成
+5. 「.env.example」ファイルを 「.env」ファイルに命名を変更。または、新しく.envファイルを作成。
 
 6. .envの記述を以下に変更
 
@@ -78,7 +78,7 @@
 
    ```
    APP_ENV=testing
-   APP_KEY=base64:（任意のキー）
+   APP_KEY=base64:1mCk2My8jyGVuCUlri8p/gSc//X8EBsjCzu+DZD/h7I=
 
    APP_DEBUG=true
 
