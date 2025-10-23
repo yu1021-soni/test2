@@ -24,6 +24,7 @@
    ```
 3. 「.env.example」ファイルを 「.env」ファイルに命名を変更。または、新しく.envファイルを作成。
 
+   `cd ../src`
    `cp -p .env.example .env`
 
 4. .envの記述を以下に変更
@@ -54,6 +55,7 @@
 
 5. Composerインストール
 
+   `cd ../docker`
    `docker-compose exec php bash`
    `composer install`
 
