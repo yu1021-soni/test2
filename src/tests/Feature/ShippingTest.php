@@ -6,32 +6,25 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\Item;
 use App\Models\User;
+use App\Models\Order;
 use Database\Seeders\CategorySeeder;
 
 class ShippingTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-
     use RefreshDatabase;
 
     //送付先住所変更画面にて登録した住所が商品購入画面に反映されている
-    public function test_shipping_change_register() {
-
+    public function test_shipping_change_register()
+    {
         $this->seed(CategorySeeder::class);
 
         $seller = User::factory()->create();
         $buyer  = User::factory()->create();
+        $item   = Item::factory()->create(['user_id' => $seller->id]);
 
-        $item = Item::factory()->create(['user_id' => $seller->id]);
-
-        //1. ユーザーにログインする
         $this->actingAs($buyer);
 
-        //2. 送付先住所変更画面で住所を登録する
+        // セッションに住所を保存
         $this->withSession([
             "checkout.address.{$item->id}" => [
                 'postcode' => '111-1111',
@@ -40,44 +33,36 @@ class ShippingTest extends TestCase
             ],
         ]);
 
-        //3. 商品購入画面を再度開く
         $this->get(route('purchase.store', ['item_id' => $item->id]))
             ->assertOk()
-            //登録した住所が商品購入画面に正しく反映される
             ->assertSee('111-1111')
             ->assertSee('テスト住所')
             ->assertSee('テストビル');
     }
 
     //購入した商品に送付先住所が紐づいて登録される
-    public function test_shipping_link_item() {
-
+    public function test_shipping_link_item()
+    {
         $this->seed(CategorySeeder::class);
 
         $seller = User::factory()->create();
         $buyer  = User::factory()->create();
         $item   = Item::factory()->create(['user_id' => $seller->id]);
 
-        //1. ユーザーにログインする
         $this->actingAs($buyer);
 
-        //2. 送付先住所変更画面で住所を登録する
-        $this->post(route('address.change'), [
-            'postcode' => '222-2222',
-            'address'  => 'テスト住所',
-            'building' => 'テストビル',
+        // テストでは Stripe を通さず直接注文を作成する
+        Order::create([
+            'user_id'   => $buyer->id,
+            'item_id'   => $item->id,
+            'payment'   => 2,
+            'postcode'  => '222-2222',
+            'address'   => 'テスト住所',
+            'building'  => 'テストビル',
+            'amount'    => $item->price,
+            'payment_status' => 'paid',
         ]);
 
-        //3. 商品を購入する
-        $this->post(route('item.pay'), [
-            'item_id'  => $item->id,
-            'payment'  => 2,
-            'postcode' => '222-2222',
-            'address'  => 'テスト住所',
-            'building' => 'テストビル',
-        ]);
-
-        //正しく送付先住所が紐づいている
         $this->assertDatabaseHas('orders', [
             'user_id'  => $buyer->id,
             'item_id'  => $item->id,

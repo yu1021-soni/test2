@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Order;
 use App\Models\Item;
 use App\Http\Requests\CommentRequest;
-use App\Http\Requests\PurchaseRequest;
 
 class OrderController extends Controller
 {
@@ -39,31 +37,5 @@ class OrderController extends Controller
         $draft = $request->session()->get("checkout.address.$itemId");
 
         return view('purchase', compact('item', 'user', 'draft'));
-    }
-
-    public function pay (PurchaseRequest $request) {
-
-        $validated = $request->validated();
-
-        // ① 購入する商品IDを受け取る
-        $itemId = $request->input('item_id');
-        $item   = Item::findOrFail($itemId);
-
-        // ② ログインユーザーを取得
-        $user = $request->user();
-
-        // ③ 注文データをDBに登録
-        Order::create([
-            'user_id' => $user->id,
-            'item_id' => $item->id,
-            'payment' => $validated['payment'],
-            'postcode' => $validated['postcode'],
-            'address'  => $validated['address'],
-            'building' => $validated['building'] ?? null,
-        ]);
-
-        // ④ 完了画面やマイページにリダイレクト
-        return redirect()->route('mypage')
-                        ->with('message', '購入が完了しました！');
     }
 }

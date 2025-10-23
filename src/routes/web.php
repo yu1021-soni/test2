@@ -54,15 +54,14 @@ Route::middleware(['auth','verified'])->group(function () {
     // 住所変更処理 (POST)
     Route::post('/change', [AccountController::class, 'change'])->name('address.change');
 
-    //Route::post('/pay',[OrderController::class,'pay'])->name('item.pay'); //購入
 
-    Route::post('/pay', [CheckoutController::class, 'create'])->name('item.pay'); // ← OrderController@pay から変更
+    Route::post('/pay', [CheckoutController::class, 'create'])->name('item.pay');
+
     Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
+
     Route::get('/checkout/cancel',  [CheckoutController::class, 'cancel'])->name('checkout.cancel');
 
 });
 
-// Webhook（外部POST、CSRF除外必要）
 Route::withoutMiddleware([VerifyCsrfToken::class])
-    ->post('/stripe/webhook', [StripeWebhookController::class, 'handle'])
-    ->name('stripe.webhook');
+    ->post('/stripe/webhook', [StripeWebhookController::class, 'handle'])->name('stripe.webhook');
