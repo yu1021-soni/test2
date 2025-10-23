@@ -59,6 +59,6 @@ class CheckoutController extends Controller
     }
     public function cancel()
     {
-        return 'キャンセルしました';
+        return view('stripe_cancel');
     }
 }
