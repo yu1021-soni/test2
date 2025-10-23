@@ -46,6 +46,7 @@
    MAIL_FROM_ADDRESS=admin@example.com
    MAIL_FROM_NAME="${APP_NAME}"
 
+   実際のキーは Stripe ダッシュボードで発行
    STRIPE_KEY=pk_test_REDACTED
    STRIPE_SECRET=sk_test_REDACTED
    STRIPE_WEBHOOK_SECRET=whsec_REDACTED
@@ -92,7 +93,7 @@
 
    ```
    APP_ENV=testing
-   APP_KEY=base64:1mCk2My8jyGVuCUlri8p/gSc//X8EBsjCzu+DZD/h7I=
+   APP_KEY=base64:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
    APP_DEBUG=true
 
