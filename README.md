@@ -26,7 +26,7 @@
 3. 「.env.example」ファイルを 「.env」ファイルに命名を変更。または、新しく.envファイルを作成。
 
    `cd ../src`
-   
+
    `cp -p .env.example .env`
 
 4. .envの記述を以下に変更
@@ -48,10 +48,10 @@
    MAIL_FROM_ADDRESS=admin@example.com
    MAIL_FROM_NAME="${APP_NAME}"
 
-   実際のキーは Stripe ダッシュボードで発行
-   STRIPE_KEY=pk_test_REDACTED
-   STRIPE_SECRET=sk_test_REDACTED
-   STRIPE_WEBHOOK_SECRET=whsec_REDACTED
+   # Stripe のキーは各自でダッシュボードから発行してください
+   STRIPE_KEY=pk_test_xxxxx
+   STRIPE_SECRET=sk_test_xxxxx
+   STRIPE_WEBHOOK_SECRET=whsec_xxxxx
    STRIPE_CURRENCY=JPY
    STRIPE_TEST_FORCE_COMPLETE=1
    ```
