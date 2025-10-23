@@ -9,6 +9,7 @@
 2. Docker起動
 
    `cd test2/docker`
+
    `docker-compose up -d --build`
 
    Apple Silicon (M1/M2) でビルドできない場合
@@ -25,6 +26,7 @@
 3. 「.env.example」ファイルを 「.env」ファイルに命名を変更。または、新しく.envファイルを作成。
 
    `cd ../src`
+   
    `cp -p .env.example .env`
 
 4. .envの記述を以下に変更
@@ -57,12 +59,16 @@
 5. Composerインストール
 
    `cd ../docker`
+
    `docker-compose exec php bash`
+
    `composer install`
+
 
 6. Stripe の PHP SDK を追加インストール
 
    `docker-compose exec php bash`
+
    `composer require stripe/stripe-php`
 
 7. アプリケーションキーの作成
