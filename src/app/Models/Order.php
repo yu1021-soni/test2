@@ -16,6 +16,10 @@ class Order extends Model
         'postcode',
         'address',
         'building',
+        'amount',
+        'payment_status',
+        'stripe_session_id',
+        'stripe_payment_intent'
     ];
 
     public function user() {

@@ -5,6 +5,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Middleware\VerifyCsrfToken;
 use App\Http\Controllers\StripeWebhookController;
 
 /*
@@ -62,4 +63,6 @@ Route::middleware(['auth','verified'])->group(function () {
 });
 
 // Webhook（外部POST、CSRF除外必要）
-Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle'])->name('stripe.webhook');
+Route::withoutMiddleware([VerifyCsrfToken::class])
+    ->post('/stripe/webhook', [StripeWebhookController::class, 'handle'])
+    ->name('stripe.webhook');
