@@ -1,4 +1,6 @@
-# test2 プロジェクト概要
+# test2
+
+## プロジェクト概要
 このプロジェクトは「coachtechフリマ」の開発計画に基づいたフリマアプリケーションです。
 
 ユーザー登録・ログイン、商品出品・購入、コメント、Stripe 決済、メール認証などの機能を備えています。
@@ -122,6 +124,19 @@
 3. テスト実行
 
 `php artisan test`
+
+## 一般ユーザー情報
+Seeder により以下のユーザーが作成されます。
+
+いずれも **パスワードは `password`** です。
+
+- 佐藤 太郎 / sato.taro@example.com  
+- 鈴木 花子 / suzuki.hanako@example.com  
+- 高橋 健 / takahashi.ken@example.com  
+- 田中 美咲 / tanaka.misaki@example.com  
+- 伊藤 翔 / ito.sho@example.com  
+- 中村 彩 / nakamura.aya@example.com  
+- 小林 大輔 / kobayashi.daisuke@example.com
 
 ## 使用技術
 
