@@ -97,6 +97,8 @@
 1. テスト専用の環境設定ファイル .env.testing を用意
 2. .env.testingに以下を記述
 
+   テスト用アプリケーションキーの作成 
+   `php artisan key:generate --env=testing`
    ```
    APP_ENV=testing
    APP_KEY=base64:xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx

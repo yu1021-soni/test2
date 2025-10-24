@@ -22,9 +22,7 @@ class StripeWebhookController extends Controller
             return response('OK', 200);
         }
 
-        // -----------------------------
-        // 1) Checkout 完了イベント
-        // -----------------------------
+        //1) Checkout 完了イベント
         if ($event->type === 'checkout.session.completed') {
             $session = $event->data->object;  // CheckoutSession オブジェクト
             $metadata = $session->metadata ? $session->metadata->toArray() : [];
@@ -41,9 +39,7 @@ class StripeWebhookController extends Controller
             );
         }
 
-        // -----------------------------
         // 2) 支払い成功イベント（特にカード）
-        // -----------------------------
         if ($event->type === 'payment_intent.succeeded') {
             $paymentIntent = $event->data->object;  // PaymentIntent オブジェクト
             $metadata = $paymentIntent->metadata ? $paymentIntent->metadata->toArray() : [];
@@ -60,10 +56,7 @@ class StripeWebhookController extends Controller
         return response('OK', 200);
     }
 
-    /**
-     * 注文レコードを作成する
-     * （同じ PaymentIntent / Session が存在する場合はスキップして二重作成防止）
-     */
+     // 注文レコードを作成する
     private function createOrder(array $metadata, string $status, ?string $sessionId, ?string $paymentIntentId)
     {
         // 重複チェック
