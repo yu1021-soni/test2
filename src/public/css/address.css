@@ -5,7 +5,6 @@ body {
 .address {
     width: 680px;
     margin: 80px auto;
-    text-align: center;
 }
 
 /* 見出し */
@@ -13,6 +12,7 @@ body {
     font-size: 36px;
     font-weight: bold;
     margin-bottom: 40px;
+    text-align: center;
 }
 
 /* ラベル */
@@ -47,6 +47,13 @@ body {
     font-weight: bold;
     cursor: pointer;
     height: 60px;
+}
+
+.address__error {
+    font-size: 15px;
+    margin-bottom: 30px;
+    color: red;
+    padding: 6px 0 0;
 }
 
 @media screen and (min-width: 1400px) and (max-width: 1540px) {

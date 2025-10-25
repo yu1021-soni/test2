@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\AddressRequest;
 use App\Models\Order;
 use App\Models\Item;
 use App\Http\Requests\ProfileRequest;
@@ -92,15 +93,15 @@ class AccountController extends Controller
     }
 
     // 住所変更処理（セッションに保存、DBは更新しない）
-    public function change(Request $request) {
-        $validated = $request->validate([
-            'item_id'  => ['required','integer','exists:items,id'],
-            'postcode' => ['required','regex:/^\d{3}-\d{4}$/'],
-            'address'  => ['required','string'],
-            'building' => ['nullable','string'],
-        ]);
+    public function change(AddressRequest $request) {
 
+        $validated = $request->validated();
         $itemId = $validated['item_id'];
+        $request->session()->put("checkout.address.$itemId", [
+            'postcode' => $validated['postcode'],
+            'address'  => $validated['address'],
+            'building' => $validated['building'] ?? null,
+        ]);
 
         // 商品ごとに下書きを保存 checkout.address.{itemId}に配列を保存
         $request->session()->put("checkout.address.$itemId", [
