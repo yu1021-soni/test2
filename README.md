@@ -90,6 +90,13 @@
 
    `php artisan storage:link`
 
+## Stripeを使用した決済行う場合
+   別ターミナルで以下を実行してください（起動中は閉じないこと）
+
+   `stripe listen --forward-to http://localhost/stripe/webhook`
+
+   ※ ターミナルを閉じると Stripe Webhook が届かなくなり、DBに反映されません。
+
 ## メール認証テスト
 
    Mailhogを利用。

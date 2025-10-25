@@ -34,8 +34,7 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::match(['get','post'], '/mypage', [AccountController::class, 'mypage'])->name('mypage');
     //　マイページ
 
-    //GET を消すとブラウザ直アクセスやリダイレクトで405になるため残す
-    Route::match(['get','post'], '/purchase', [OrderController::class, 'purchase'])->name('purchase.store');
+    Route::post('/purchase', [OrderController::class, 'purchase'])->name('purchase.store');
 
     // 会員登録処理が正常終了したとき
     Route::get('/mypage/profile', [AccountController::class, 'edit'])->name('profile.view');
