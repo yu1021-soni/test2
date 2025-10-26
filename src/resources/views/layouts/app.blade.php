@@ -46,7 +46,7 @@
                             </form>
                         </li>
                         <li>
-                            <a href="{{ route('item.listing') }}" class="header__sell">出品</a>
+                            <a href="{{ route('item.sell') }}" class="header__sell">出品</a>
                         </li>
                     </ul>
                 </nav>

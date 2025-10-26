@@ -44,9 +44,9 @@ Route::middleware(['auth','verified'])->group(function () {
 
     Route::post('/update',[AccountController::class,'update'])->name('profile.update'); // プロフィール更新
 
-    Route::get('/listing',[ItemController::class,'listing'])->name('item.listing'); // 出品
+    Route::get('/sell',[ItemController::class,'sell'])->name('item.sell'); // 出品
 
-    Route::post('/sell',[ItemController::class,'sell'])->name('item.sell'); // マイページ出品するボタン
+    Route::post('/listing',[ItemController::class,'listing'])->name('item.listing'); // マイページ出品するボタン
 
      // 住所変更ページ (GET)
     Route::get('/address/{user_id}', [AccountController::class, 'address'])->name('address.edit');

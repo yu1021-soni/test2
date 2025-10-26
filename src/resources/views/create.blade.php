@@ -12,7 +12,7 @@
 <div class="listing">
 
     {{-- enctype="multipart/form-data 画像を送る --}}
-    <form action="{{ route('item.sell') }}" method="post" enctype="multipart/form-data">
+    <form action="{{ route('item.listing') }}" method="post" enctype="multipart/form-data">
         @csrf
 
         <div class="listing__header">

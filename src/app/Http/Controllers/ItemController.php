@@ -106,14 +106,14 @@ class ItemController extends Controller
         return back();
     }
 
-    public function listing(Request $request) {
+    public function sell(Request $request) {
         $user = $request -> user();
         $categories = Category::all();
 
         return view('create',compact('user','categories'));
     }
 
-    public function sell(ExhibitionRequest $request) {
+    public function listing(ExhibitionRequest $request) {
 
          // バリデーション済みデータを取得
         $validated = $request->validated();
