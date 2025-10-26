@@ -29,9 +29,13 @@ class PaymentTest extends TestCase
         $item = Item::factory()->create(['user_id' => $seller->id]);
 
         $this->actingAs($buyer);
+        $buyer  = User::factory()->create(['email_verified_at' => now()]);
 
         //1. 支払い方法選択画面を開く
-        $response = $this->post(route('purchase.store', ['item_id' => $item->id]));
+        $response = $this
+            ->withSession(['checkout.item_id' => $item->id])
+            ->get(route('purchase.show'));
+
         $response->assertOk()
                     ->assertSee('支払い方法')
                     ->assertSee('コンビニ払い')
@@ -43,9 +47,12 @@ class PaymentTest extends TestCase
             'payment'  => 2,
             'shipping' => 'テスト住所',
         ]);
-        
+
         //選択した支払い方法が正しく反映される
-        $response = $this->post(route('purchase.store', ['item_id' => $item->id]));
+        $response = $this
+            ->withSession(['checkout.item_id' => $item->id])
+            ->get(route('purchase.show'));
+
         $response->assertOk()
                 ->assertSee('カード払い');
     }

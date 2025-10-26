@@ -45,7 +45,7 @@ class ListingTest extends TestCase
         $this->actingAs($user);
 
         //各項目に適切な情報を入力して保存する" 各項目が正しく保存されている
-        $response = $this->post(route('item.sell'), [
+        $response = $this->post(route('item.listing'), [
             'item_img_url' => $file,          // ダミー画像
             'categories'   => [$category->id],
             'condition'    => 1,

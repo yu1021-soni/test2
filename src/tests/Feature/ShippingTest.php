@@ -26,6 +26,7 @@ class ShippingTest extends TestCase
 
         // セッションに住所を保存
         $this->withSession([
+            "checkout.item_id"          => $item->id,
             "checkout.address.{$item->id}" => [
                 'postcode' => '111-1111',
                 'address'  => 'テスト住所',
@@ -33,7 +34,7 @@ class ShippingTest extends TestCase
             ],
         ]);
 
-        $this->post(route('purchase.store', ['item_id' => $item->id]))
+        $this->get(route('purchase.show', ['item_id' => $item->id]))
             ->assertOk()
             ->assertSee('111-1111')
             ->assertSee('テスト住所')

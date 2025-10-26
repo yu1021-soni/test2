@@ -25,6 +25,7 @@ class ProfileEditTest extends TestCase
             'postcode'    => '111-1111',
             'address'     => 'テスト住所',
             'building'    => 'テスト建物',
+            'email_verified_at' => now(),
         ]);
 
         //1. ユーザーにログインする
