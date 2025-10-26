@@ -19,8 +19,7 @@
         <div class="profile__name">
             {{ $user->name }}
         </div>
-        <form action="{{ route('profile.edit') }}" class="profile__edit" method="post">
-            @csrf
+        <form action="{{ route('profile.view') }}" class="profile__edit" method="get">
             <button type="submit" class="profile__edit-button">
                 プロフィールを編集
             </button>

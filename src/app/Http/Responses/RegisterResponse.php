@@ -12,6 +12,6 @@ class RegisterResponse implements RegisterResponseContract
         // true が入っている → 初回フラグがON
         $request->session()->put('onboarding', true);
 
-        return redirect()->route('profile.edit');
+        return redirect()->route('profile.view');
     }
 }

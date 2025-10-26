@@ -20,7 +20,8 @@ use App\Http\Controllers\StripeWebhookController;
 */
 
 Route::get('/',[ItemController::class,'index'])
- ->middleware('force.verified')->name('item.index'); // 一覧 ok
+->middleware('force.verified')->name('item.index');//ok
+
 Route::get('/search', [ItemController::class, 'search'])->name('items.search'); //検索
 
 Route::get('/detail/{item_id}',[ItemController::class,'detail'])->name('items.detail'); // 商品詳細画面
@@ -39,7 +40,7 @@ Route::middleware(['auth','verified'])->group(function () {
     // 会員登録処理が正常終了したとき
     Route::get('/mypage/profile', [AccountController::class, 'edit'])->name('profile.view');
 
-    Route::post('/mypage/profile',[AccountController::class,'edit'])->name('profile.edit');
+    //Route::post('/mypage/profile',[AccountController::class,'edit'])->name('profile.edit');
 
     Route::post('/update',[AccountController::class,'update'])->name('profile.update'); // プロフィール更新
 
