@@ -33,7 +33,7 @@ class ShippingTest extends TestCase
             ],
         ]);
 
-        $this->get(route('purchase.store', ['item_id' => $item->id]))
+        $this->post(route('purchase.store', ['item_id' => $item->id]))
             ->assertOk()
             ->assertSee('111-1111')
             ->assertSee('テスト住所')

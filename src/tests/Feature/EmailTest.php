@@ -84,10 +84,10 @@ class EmailTest extends TestCase
 
         // ユーザーが認証リンク
         $response = $this->actingAs($user)
-                    ->withSession(['url.intended' => route('profile.edit')])
+                    ->withSession(['url.intended' => route('profile.view')])
                     ->get($url);
 
          //2 プロフィール設定画面を表示する
-        $response->assertRedirect(route('profile.edit'));
+        $response->assertRedirect(route('profile.view'));
     }
 }

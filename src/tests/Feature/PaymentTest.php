@@ -31,7 +31,7 @@ class PaymentTest extends TestCase
         $this->actingAs($buyer);
 
         //1. 支払い方法選択画面を開く
-        $response = $this->get(route('purchase.store', ['item_id' => $item->id]));
+        $response = $this->post(route('purchase.store', ['item_id' => $item->id]));
         $response->assertOk()
                     ->assertSee('支払い方法')
                     ->assertSee('コンビニ払い')
@@ -45,7 +45,7 @@ class PaymentTest extends TestCase
         ]);
         
         //選択した支払い方法が正しく反映される
-        $response = $this->get(route('purchase.store', ['item_id' => $item->id]));
+        $response = $this->post(route('purchase.store', ['item_id' => $item->id]));
         $response->assertOk()
                 ->assertSee('カード払い');
     }

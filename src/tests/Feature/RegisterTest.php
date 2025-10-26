@@ -136,7 +136,7 @@ class RegisterTest extends TestCase
         ]);
 
         // プロフィール編集画面にリダイレクトすることを確認
-        $response->assertRedirect(route('profile.edit'));
+        $response->assertRedirect(route('profile.view'));
     }
 
     //クラスの中のメソッドから、自分のメソッドや機能を呼ぶときに $this->を使用
