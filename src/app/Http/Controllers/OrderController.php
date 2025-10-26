@@ -38,4 +38,16 @@ class OrderController extends Controller
 
         return view('purchase', compact('item', 'user', 'draft'));
     }
+
+    public function show(Request $request) {
+        // purchase() と同じセッションキーを使用
+        $itemId = $request->session()->get('checkout.item_id');
+
+
+        $item  = Item::findOrFail($itemId);
+        $user  = $request->user();
+        $draft = $request->session()->get("checkout.address.$itemId");
+
+        return view('purchase', compact('item', 'user', 'draft'));
+    }
 }

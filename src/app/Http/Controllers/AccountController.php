@@ -84,7 +84,10 @@ class AccountController extends Controller
 
         $user = $request->user(); // ← ログイン中のユーザー取得
 
-        $draft = $request->session()->get('checkout.address');
+        $itemId = $request->session()->get('checkout.item_id');
+
+        // 商品ごとの下書きに合わせる
+        $draft = $itemId ? $request->session()->get("checkout.address.$itemId") : null;
 
         return view('address', [
             'user' => $user,
@@ -96,12 +99,7 @@ class AccountController extends Controller
     public function change(AddressRequest $request) {
 
         $validated = $request->validated();
-        $itemId = $validated['item_id'];
-        $request->session()->put("checkout.address.$itemId", [
-            'postcode' => $validated['postcode'],
-            'address'  => $validated['address'],
-            'building' => $validated['building'] ?? null,
-        ]);
+        $itemId = (int)$validated['item_id'];
 
         // 商品ごとに下書きを保存 checkout.address.{itemId}に配列を保存
         $request->session()->put("checkout.address.$itemId", [
@@ -111,6 +109,6 @@ class AccountController extends Controller
         ]);
 
         // purchase へ戻る（item_id はセッションに入っている）
-        return redirect()->route('purchase.store');
+        return redirect()->route('purchase.show');
     }
 }

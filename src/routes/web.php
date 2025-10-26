@@ -37,6 +37,9 @@ Route::middleware(['auth','verified'])->group(function () {
 
     Route::post('/purchase', [OrderController::class, 'purchase'])->name('purchase.store');
 
+    // 購入画面（表示）
+    Route::get('/purchase', [OrderController::class, 'show'])->name('purchase.show');
+
     // 会員登録処理が正常終了したとき
     Route::get('/mypage/profile', [AccountController::class, 'edit'])->name('profile.view');
 
