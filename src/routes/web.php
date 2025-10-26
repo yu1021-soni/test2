@@ -43,8 +43,6 @@ Route::middleware(['auth','verified'])->group(function () {
     // 会員登録処理が正常終了したとき
     Route::get('/mypage/profile', [AccountController::class, 'edit'])->name('profile.view');
 
-    //Route::post('/mypage/profile',[AccountController::class,'edit'])->name('profile.edit');
-
     Route::post('/update',[AccountController::class,'update'])->name('profile.update'); // プロフィール更新
 
     Route::get('/sell',[ItemController::class,'sell'])->name('item.sell'); // 出品

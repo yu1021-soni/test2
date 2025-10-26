@@ -120,16 +120,7 @@ class ItemController extends Controller
 
         $user = $request -> user();
 
-        //Storage::disk('public') ファイル保存先指定
-        //'items' 第一引数は保存先フォルダ
-        //$validated['item_img_url'] 第二引数はアップロードされたファイル
-        //$img = Storage::disk('public')->putFile('items', $validated['item_img_url']);
-
         $imagePath = $request->file('item_img_url')->store('items', 'public');
-
-        // 代表カテゴリ＝先頭
-        //$mainCategoryId = (int) $validated['categories'][0];
-
 
         // items へ保存（DBにあるカラムだけ入れる）
         $item = Item::create([
