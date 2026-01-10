@@ -15,80 +15,25 @@
 
 2. Docker起動
 
-   `cd test2/docker`
+3. プロジェクト直下で、以下のコマンドを実行する
 
-   `docker-compose up -d --build`
+    `make init`
 
-   Apple Silicon (M1/M2) でビルドできない場合
+    Apple Silicon (M1/M2) でビルドできない場合
 
-   docker-compose.yml の services.mysql に以下を追加してください
+    docker-compose.yml の services.mysql に以下を追加してください
 
-   ```
-   services:
-      mysql:
-         platform: linux/x86_64(この文追加)
-         image: mysql:8.0.26
-         environment:
-   ```
-3. 「.env.example」ファイルを 「.env」ファイルに命名を変更。または、新しく.envファイルを作成。
+    ```
+    services:
+        mysql:
+            platform: linux/x86_64(この文追加)
+            image: mysql:8.0.26
+            environment:
+    ```
 
-   `cd ../src`
+4. Stripe の PHP SDK を追加インストール
 
-   `cp -p .env.example .env`
-
-4. .envの記述を以下に変更
-
-   ```
-   DB_CONNECTION=mysql
-   DB_HOST=mysql
-   DB_PORT=3306
-   DB_DATABASE=laravel_db
-   DB_USERNAME=laravel_user
-   DB_PASSWORD=laravel_pass
-
-   MAIL_MAILER=smtp
-   MAIL_HOST=mailhog
-   MAIL_PORT=1025
-   MAIL_USERNAME=null
-   MAIL_PASSWORD=null
-   MAIL_ENCRYPTION=null
-   MAIL_FROM_ADDRESS=admin@example.com
-   MAIL_FROM_NAME="${APP_NAME}"
-
-   # Stripe のキーは各自でダッシュボードから発行してください
-   STRIPE_KEY=pk_test_xxxxx
-   STRIPE_SECRET=sk_test_xxxxx
-   STRIPE_WEBHOOK_SECRET=whsec_xxxxx
-   STRIPE_CURRENCY=JPY
-   STRIPE_TEST_FORCE_COMPLETE=1
-   ```
-
-5. Composerインストール
-
-   `cd ../docker`
-
-   `docker-compose exec php bash`
-
-   `composer install`
-
-
-6. Stripe の PHP SDK を追加インストール
-
-   `docker-compose exec php bash`
-
-   `composer require stripe/stripe-php`
-
-7. アプリケーションキーの作成
-
-   `php artisan key:generate`
-
-8. マイグレーション & シーディング
-
-   `php artisan migrate:fresh --seed`
-
-9. ストレージリンク
-
-   `php artisan storage:link`
+   `make stripe`
 
 ## Stripeを使用した決済行う場合
    別ターミナルで以下を実行してください（起動中は閉じないこと）
