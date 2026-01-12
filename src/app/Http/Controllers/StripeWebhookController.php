@@ -17,7 +17,7 @@ class StripeWebhookController extends Controller
 
         try {
             $event = \Stripe\Webhook::constructEvent($payload, $signature, $webhookSecret);
-        } catch (\Throwable) {
+        } catch (\Throwable $e) {
             return response('OK', 200);
         }
 
