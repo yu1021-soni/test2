@@ -9,10 +9,10 @@ use Illuminate\Http\Request;
 
 class TransactionController extends Controller
 {
-    public function  show(Transaction $transaction) {
+    public function  show(Transaction $transaction, Request $request) {
 
         $authUser = auth()->user();
-        $transaction->load(['item', 'order']);
+        $transaction->load(['item', 'order','messages.sender']);
         $item = $transaction->item;
 
         // 相手ユーザー（自分がsellerならbuyer、buyerならseller）
@@ -32,7 +32,10 @@ class TransactionController extends Controller
                 })
             ->get();
 
-        return view ('transaction', compact('item','user','authUser', 'transaction', 'transactions'));
+        $editMessageId = $request->query('edit');
+
+
+        return view ('transaction', compact('item','user','authUser', 'transaction', 'transactions','editMessageId'));
     }
 
     public function messages(Request $request, Transaction $transaction) {
@@ -68,4 +71,66 @@ class TransactionController extends Controller
         return redirect()->route('transaction.show', $transaction);
     }
 
+    public function edit(Request $request, Transaction      $transaction, $message_id) {
+
+        // ① メッセージが入力されているかチェック
+        $request->validate(
+            ['message' => 'required|string|max:1000'],
+            ['message.required' => 'メッセージを入力してください']
+        );
+
+        // ② 編集したいメッセージを探す
+        $message = Message::find($message_id);
+
+        // ③ メッセージが存在しない、取引のものじゃない場合
+        if (!$message) {
+            abort(404);
+        }
+
+        if ($message->transaction_id !== $transaction->id) {
+            abort(404);
+        }
+
+        // ④ 自分のメッセージかどうかチェック
+        if ($message->sender_id !== auth()->id()) {
+            abort(403);
+        }
+
+        // ⑤ メッセージ内容を更新
+        $message->message = $request->message;
+        $message->save();
+
+        // ⑥ 取引画面に戻る
+        return redirect()
+            ->route('transaction.show', $transaction->id)
+            ->with('success', 'メッセージを編集しました');
+    }
+
+    public function delete(Transaction $transaction, $message_id) {
+        
+        // ① 削除したいメッセージを探す
+        $message = Message::find($message_id);
+
+        // ②メッセージが存在しない、取引のものじゃない場合
+        if (!$message) {
+            abort(404);
+        }
+
+        if ($message->transaction_id !== $transaction->id) {
+            abort(404);
+        }
+
+        // ③ 自分のメッセージかどうかチェック
+        if ($message->sender_id !== auth()->id()) {
+            abort(403);
+        }
+
+        // ④ メッセージを削除
+        $message->delete();
+
+        // ⑤ 取引画面に戻る
+        return redirect()
+            ->route('transaction.show', $transaction->id)
+            ->with('success', 'メッセージを削除しました');
+    }
 }

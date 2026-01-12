@@ -57,11 +57,11 @@
 
             <div class="chat__list">
 
-            {{-- エラーが出ないように空配列 --}}
-            @foreach(($transaction->messages ?? []) as $messages)
+                {{-- エラーが出ないように空配列 --}}
+                @foreach(($transaction->messages ?? []) as $messages)
 
-            {{-- 自分のメッセージ --}}
-            @if($messages->sender_id === auth()->id())
+                {{-- 自分のメッセージ --}}
+                @if($messages->sender_id === auth()->id())
                 <div class="chat__row chat__row--me">
 
                     <div class="chat__bubble">
@@ -74,7 +74,39 @@
                             {{ auth()->user()->name }}
                         </div>
                         <div class="chat__message">
+
+                        @if($editMessageId == $messages->id)
+                            <form action="{{ route('message.edit', ['transaction' => $transaction->id, 'message_id' => $messages->id]) }}" method="POST">
+                            @csrf
+                                <input type="text" name="message" value="{{ old('message', $messages->message) }}" required>
+                                <button type="submit">
+                                    更新
+                                </button>
+
+                                {{-- キャンセル --}}
+                                <a href="{{ route('transaction.show', $transaction->id) }}">キャンセル</a>
+                            </form>
+
+                            @error('message')
+                            <p class="error">{{ $message }}</p>
+                            @enderror
+
+                            @else
+                            {{-- 通常表示 --}}
                             {{ $messages->message }}
+
+                            {{-- 編集ボタン --}}
+                            <a href="{{ route('transaction.show', $transaction->id) }}?edit={{ $messages->id }}">編集</a>
+
+                            {{-- 削除（POST） --}}
+                            <form action="{{ route('message.delete', ['transaction' => $transaction->id, 'message_id' => $messages->id]) }}" method="POST" style="display:inline;">
+                            @csrf
+                                <button type="submit" onclick="return confirm('削除しますか？')">
+                                    削除
+                                </button>
+                            </form>
+                            @endif
+
                         </div>
                         @if($messages->image_path)
                         <div class="chat__photo">

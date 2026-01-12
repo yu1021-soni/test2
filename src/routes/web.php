@@ -66,6 +66,10 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('/transaction/{transaction}',[TransactionController::class,'show'])->name('transaction.show');
 
     Route::post('/transaction/{transaction}/messages',[TransactionController::class,'messages'])->name('transaction.message');
+
+    Route::post('/transaction/{transaction}/messages/{message_id}/edit',[TransactionController::class,'edit'])->name('message.edit');
+
+    Route::post('/transaction/{transaction}/messages/{message_id}/delete',[TransactionController::class,'delete'])->name('message.delete');
 });
 
 Route::withoutMiddleware([VerifyCsrfToken::class])
