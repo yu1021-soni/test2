@@ -64,6 +64,8 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get('/checkout/cancel',  [CheckoutController::class, 'cancel'])->name('checkout.cancel');
 
     Route::get('/transaction/{transaction}',[TransactionController::class,'show'])->name('transaction.show');
+
+    Route::post('/transaction/{transaction}/messages',[TransactionController::class,'messages'])->name('transaction.message');
 });
 
 Route::withoutMiddleware([VerifyCsrfToken::class])

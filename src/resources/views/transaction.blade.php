@@ -53,11 +53,82 @@
                 </div>
             </div>
 
-            <div class="transaction__chat">
-                
+            <div class="chat">
+
+            <div class="chat__list">
+
+            @foreach(($transaction->messages ?? []) as $messages)
+
+            {{-- 自分のメッセージ --}}
+            @if($messages->sender_id === auth()->id())
+                <div class="chat__row chat__row--me">
+
+                    <div class="chat__bubble">
+                        <div class="chat__avatar">
+                            <img src="{{ auth()->user()->user_img_url
+                            ? Storage::url(auth()->user()->user_img_url)
+                            : asset('img/avatar-default.png') }}">
+                        </div>
+                        <div class="chat__name">
+                            {{ auth()->user()->name }}
+                        </div>
+                        <div class="chat__message">
+                            {{ $messages->message }}
+                        </div>
+                        @if($messages->image_path)
+                        <div class="chat__photo">
+                            <img src="{{ Storage::url($messages->image_path) }}" alt="chat image">
+                        </div>
+                        @endif
+                    </div>
+
+                </div>
+
+                {{-- 相手のメッセージ --}}
+                @else
+                <div class="chat__row chat__row--other">
+
+                    <div class="chat__avatar">
+                        <img src="{{ $messages->sender->user_img_url
+                        ? Storage::url($messages->sender->user_img_url)
+                        : asset('img/avatar-default.png') }}">
+                    </div>
+
+                    <div class="chat__bubble">
+                        <div class="chat__name">
+                            {{ $messages->sender->name }}
+                        </div>
+                        <div class="chat__message">
+                            {{ $messages->message }}
+                        </div>
+                        @if($messages->image_path)
+                        <div class="chat__photo">
+                            <img src="{{ Storage::url($messages->image_path) }}" alt="chat image">
+                        </div>
+                        @endif
+                    </div>
+
+                </div>
+                @endif
+                @endforeach
+
             </div>
+
+            <form class="chat__form" action="{{ route('transaction.message', $transaction) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+                <input class="chat__input" type="text" name="message" placeholder="取引メッセージを記入してください" value="{{ old('message') }}" required>
+                <label class="chat__image">
+                    画像を追加
+                    <input type="file" name="image" hidden>
+                </label>
+                <button class="chat__send" type="submit" aria-label="送信">
+                    ➤
+                </button>
+            </form>
 
         </div>
 
     </div>
+
+</div>
 @endsection

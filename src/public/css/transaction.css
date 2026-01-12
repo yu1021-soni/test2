@@ -1,0 +1,24 @@
+.detail__image-img {
+    width: 203px;
+    height: 206px;
+}
+
+.profile__avatar img {
+    width: 79px;
+    height: 79px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.chat__avatar img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.chat__photo img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
