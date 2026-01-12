@@ -36,6 +36,10 @@
    `make stripe`
 
 ## Stripeを使用した決済行う場合
+
+   Stripe のキーは各自でダッシュボードから発行してください
+   取得したキーは `.env` に設定します
+
    別ターミナルで以下を実行してください（起動中は閉じないこと）
 
    `stripe listen --forward-to http://localhost/stripe/webhook`
