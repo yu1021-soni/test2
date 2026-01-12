@@ -84,18 +84,22 @@
         <div class="profile__list">
             @foreach ($transactions as $transaction)
                 <div class="profile__card">
-                    <div class="profile__image">
-                        <img src="{{    $transaction->item->item_img_url
-                        ? Storage::url($transaction->item->item_img_url)
-                        : asset('img/placeholder.png') }}">
-                    </div>
-                    <div class="profile__item-name">
-                        {{ $transaction->item->name }}
-                    </div>
+                    <a href="{{ route('transaction.show', $transaction->id) }}">
+                        <div class="profile__image">
+                            <img src="{{        $transaction->item->item_img_url
+                            ? Storage::url($transaction->item->item_img_url)
+                            : asset('img/placeholder.png') }}">
+                        </div>
+
+                        <div class="profile__item-name">
+                            {{ $transaction->item->name }}
+                        </div>
+                    </a>
                 </div>
             @endforeach
         </div>
         {{ $transactions->links() }}
+
     @endif
     </div>
 

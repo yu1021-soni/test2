@@ -6,6 +6,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\StripeWebhookController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Middleware\VerifyCsrfToken;
 
 /*
@@ -62,6 +63,7 @@ Route::middleware(['auth','verified'])->group(function () {
 
     Route::get('/checkout/cancel',  [CheckoutController::class, 'cancel'])->name('checkout.cancel');
 
+    Route::get('/transaction/{transaction}',[TransactionController::class,'show'])->name('transaction.show');
 });
 
 Route::withoutMiddleware([VerifyCsrfToken::class])
