@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\AddressRequest;
 use App\Models\Order;
 use App\Models\Item;
+use App\Models\Transaction;
 use App\Http\Requests\ProfileRequest;
 use Illuminate\Support\Facades\Storage;
 
@@ -16,24 +17,36 @@ class AccountController extends Controller
 
         $user = $request->user();
 
-        // ?page=sell | buy（それ以外は sell）
-        $tab = $request->query('page');
-        $tab = $tab === 'buy' ? 'buy' : 'sell';
+        $tab = $request->query('page', 'sell');
+        if (!in_array($tab, ['sell', 'buy', 'transaction'])) {
+        $tab = 'sell';}
+
+        $items = null;
+        $orders = null;
+        $transactions = null;
 
         if ($tab === 'sell') {
             // 自分が出品した商品。order の件数で SOLD 判定
             $items = Item::withCount('order')
                 ->where('user_id', $user->id)->paginate(12);
-            $orders = null;
-        } else {
+        } elseif ($tab === 'buy') {
              // 自分が購入した商品（orders）＋商品データ
             $orders = Order::with('item')
                 ->where('user_id', $user->id)
                 ->paginate(12);
-            $items = null;
+        } elseif ($tab === 'transaction') {
+            // 取引中の商品
+        $transactions = Transaction::with('item')
+            ->where('status', Transaction::STATUS_IN_PROGRESS)
+            ->where(function ($q) use ($user) {
+                $q->where('buyer_id', $user->id)
+                ->orWhere('seller_id', $user->id);
+            })
+            ->orderByDesc('last_message_at')
+            ->paginate(12);
         }
 
-    return view('profile', compact('user', 'tab', 'items', 'orders'));
+    return view('profile', compact('user', 'tab', 'items', 'orders','transactions'));
     }
 
     public function edit(Request $request){

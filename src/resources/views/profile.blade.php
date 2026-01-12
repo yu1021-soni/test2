@@ -36,10 +36,14 @@
             <a href="?page=buy"  class="{{ request('page','sell')==='buy'  ? 'is-active' : '' }}">
                 購入した商品
             </a>
+            <a href="?page=transaction"  class="{{ request('page')==='transaction'  ? 'is-active' : '' }}">
+                取引中の商品
+            </a>
         </div>
 
         {{-- コンテンツ --}}
         @if ($tab === 'sell')
+        {{-- 出品した商品 --}}
         <div class="profile__list">
             @foreach ($items as $item)
             <div class="profile__card">
@@ -58,7 +62,9 @@
         @endforeach
         </div>
         {{ $items->links() }}
-        @else
+
+        @elseif ($tab === 'buy')
+        {{-- 購入した商品 --}}
         <div class="profile__list">
         @foreach ($orders as $order)
             <div class="profile__card">
@@ -72,7 +78,25 @@
             @endforeach
         </div>
         {{ $orders->links() }}
-        @endif
+
+        @elseif ($tab === 'transaction')
+        {{-- 取引中の商品 --}}
+        <div class="profile__list">
+            @foreach ($transactions as $transaction)
+                <div class="profile__card">
+                    <div class="profile__image">
+                        <img src="{{    $transaction->item->item_img_url
+                        ? Storage::url($transaction->item->item_img_url)
+                        : asset('img/placeholder.png') }}">
+                    </div>
+                    <div class="profile__item-name">
+                        {{ $transaction->item->name }}
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        {{ $transactions->links() }}
+    @endif
     </div>
 
 </div>
