@@ -16,6 +16,7 @@ class TransactionController extends Controller
         $item = $transaction->item;
 
         // 相手ユーザー（自分がsellerならbuyer、buyerならseller）
+        // ? : は三項演算子（もし〜ならA、ちがうならB）
         $partnerId = ($authUser->id === $transaction->seller_id)
             ? $transaction->buyer_id
             : $transaction->seller_id;
@@ -35,6 +36,7 @@ class TransactionController extends Controller
     }
 
     public function messages(Request $request, Transaction $transaction) {
+
         // ① バリデーション
         $request->validate([
             'message' => ['nullable', 'string', 'max:2000'],

@@ -57,6 +57,7 @@
 
             <div class="chat__list">
 
+            {{-- エラーが出ないように空配列 --}}
             @foreach(($transaction->messages ?? []) as $messages)
 
             {{-- 自分のメッセージ --}}
