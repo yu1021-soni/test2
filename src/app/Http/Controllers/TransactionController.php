@@ -24,12 +24,8 @@ class TransactionController extends Controller
         $user = User::findOrFail($partnerId);
 
         $transactions = Transaction::with('item')
-            // 今表示している取引は除外
-            ->where('id', '!=', $transaction->id)
-            ->where(function ($q) use ($user) {
-                $q->where('buyer_id', $user->id)
-                    ->orWhere('seller_id', $user->id);
-                })
+            ->where('seller_id', $authUser->id)   // 自分が seller
+            ->where('id', '!=', $transaction->id) // 今表示中の取引は除外
             ->get();
 
         $editMessageId = $request->query('edit');

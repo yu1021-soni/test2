@@ -17,11 +17,13 @@
                 <h3>その他の取引</h3>
             </div>
             <div class="select__box-name">
-                @foreach($transactions as $transaction)
+                @if($transaction->seller_id === auth()->id())
+                    @foreach($transactions as $t)
                     <div class="catalog__name">
-                        {{ $transaction->item->name }}
+                        {{ $t->item->name }}
                     </div>
-                @endforeach
+                    @endforeach
+                @endif
             </div>
         </div>
 
