@@ -20,6 +20,10 @@ class CreateMessagesTable extends Migration
                     ->constrained()
                     ->cascadeOnDelete();
 
+            $table->foreignId('receiver_id')
+                    ->constrained('users')
+                    ->cascadeOnDelete();
+
             // 誰が送ったか
             $table->foreignId('sender_id')
                     ->constrained('users')
@@ -28,6 +32,10 @@ class CreateMessagesTable extends Migration
             // メッセージ本文
             $table->text('message');
             $table->string('image_path')->nullable();
+
+            $table->tinyInteger('is_read')
+                ->default(0)
+                ->comment('0:未読 1:既読');
 
             // created_at / updated_at
             $table->timestamps();

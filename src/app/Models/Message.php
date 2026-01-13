@@ -11,9 +11,15 @@ class Message extends Model
 
     protected $fillable = [
         'transaction_id',
+        'receiver_id',
         'sender_id',
         'message',
         'image_path',
+        'is_read',
+    ];
+
+    protected $casts = [
+        'is_read' => 'boolean',
     ];
 
     public function transaction() {

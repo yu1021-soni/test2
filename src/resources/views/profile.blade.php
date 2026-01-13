@@ -38,6 +38,9 @@
             </a>
             <a href="?page=transaction"  class="{{ request('page')==='transaction'  ? 'is-active' : '' }}">
                 取引中の商品
+                @if($unreadMessageCount > 0)
+                <span class="badge">{{ $unreadMessageCount }}</span>
+                @endif
             </a>
         </div>
 

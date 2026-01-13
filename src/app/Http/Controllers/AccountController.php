@@ -7,6 +7,7 @@ use App\Http\Requests\AddressRequest;
 use App\Models\Order;
 use App\Models\Item;
 use App\Models\Transaction;
+use App\Models\Message;
 use App\Http\Requests\ProfileRequest;
 use Illuminate\Support\Facades\Storage;
 
@@ -46,7 +47,11 @@ class AccountController extends Controller
             ->paginate(12);
         }
 
-    return view('profile', compact('user', 'tab', 'items', 'orders','transactions'));
+        $unreadMessageCount = Message::where('receiver_id', $user->id)
+            ->where('is_read', 0)
+            ->count();
+
+    return view('profile', compact('user', 'tab', 'items', 'orders','transactions', 'unreadMessageCount'));
     }
 
     public function edit(Request $request){

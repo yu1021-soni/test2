@@ -30,6 +30,10 @@ class TransactionController extends Controller
 
         $editMessageId = $request->query('edit');
 
+        Message::where('transaction_id', $transaction->id)
+        ->where('receiver_id', $authUser->id)
+        ->where('is_read', 0)
+        ->update(['is_read' => 1]);
 
         return view ('transaction', compact('item','user','authUser', 'transaction', 'transactions','editMessageId'));
     }
@@ -55,12 +59,22 @@ class TransactionController extends Controller
             $imagePath = $request->file('image')->store('chat_images', 'public');
         }
 
+        // ✅ 追加：送信者ID
+        $senderId = auth()->id();
+
+        // ✅ 相手（受信者）IDを決める
+        $receiverId = ($senderId === $transaction->seller_id)
+        ? $transaction->buyer_id
+        : $transaction->seller_id;
+
         // ④ DBに保存
         Message::create([
             'transaction_id' => $transaction->id,
-            'sender_id'      => auth()->id(),
+            'receiver_id'    => $receiverId,
+            'sender_id'      => $senderId,
             'message'        => $request->input('message', ''),
             'image_path'     => $imagePath,
+            'is_read'        => 0,
         ]);
 
         // ⑤ 元の取引画面に戻る
