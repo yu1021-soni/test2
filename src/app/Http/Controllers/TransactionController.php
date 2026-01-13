@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Transaction;
 use App\Models\User;
 use App\Models\Message;
+use App\Models\Evaluation;
 use Illuminate\Http\Request;
 
 class TransactionController extends Controller
@@ -158,7 +159,27 @@ class TransactionController extends Controller
         ]);
     }
 
-    public function evaluation(Transaction $transaction) {
+    public function evaluation(Transaction $transaction,Request $request) {
+
+        $authId = auth()->id();
+
+        $request->validate([
+            'rating' => ['required', 'integer', 'between:1,5'],
+        ]);
+
+        if ($authId === $transaction->buyer_id) {
+            $evaluateeId = $transaction->seller_id;
+        } else {
+            $evaluateeId = $transaction->buyer_id;
+        }
+
+        Evaluation::create([
+        'transaction_id' => $transaction->id,
+        'evaluator_id'   => $authId,
+        'evaluatee_id'   => $evaluateeId,
+        'rating'         => $request->rating,
+        ]);
+
         return redirect()
             ->route('transaction.show', $transaction->id);
     }
