@@ -11,6 +11,8 @@
 @section('content')
     <div class="content">
 
+        @include('modal')
+
         {{-- 左：取引中商品一覧 --}}
         <div class="select__box">
             <div class="select__box-title">
@@ -39,9 +41,23 @@
                         「{{ $user->name }}」さんとの取引画面
                     </p>
                 </div>
-                <div class="complete">
-                    取引を完了する
-                </div>
+                <form action="{{ route('transaction.complete', ['transaction' => $transaction->id]) }}" method="POST">
+                @csrf
+
+                    <button type="submit" class="complete">
+                        取引を完了する
+                    </button>
+                    
+                    {{-- @if($transaction->status == 1)
+                    <button type="submit" class="complete">
+                        取引を完了する
+                    </button>
+                    @else
+                    <div class="complete__message">
+                        取引は完了しました
+                    </div>
+                    @endif --}}
+                </form>
             </div>
 
             <div class="transaction__item">

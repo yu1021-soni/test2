@@ -35,7 +35,9 @@ class TransactionController extends Controller
         ->where('is_read', 0)
         ->update(['is_read' => 1]);
 
-        return view ('transaction', compact('item','user','authUser', 'transaction', 'transactions','editMessageId'));
+        $openRatingModal = $request->query('modal') === 'rating';
+
+        return view ('transaction', compact('item','user','authUser', 'transaction', 'transactions','editMessageId', 'openRatingModal'));
     }
 
     public function messages(Request $request, Transaction $transaction) {
@@ -142,5 +144,22 @@ class TransactionController extends Controller
         return redirect()
             ->route('transaction.show', $transaction->id)
             ->with('success', 'メッセージを削除しました');
+    }
+
+    public function complete(Transaction $transaction) {
+
+        $transaction->update([
+            'status' => 2, //取引完了
+        ]);
+
+        return redirect()->route('transaction.show', [
+            'transaction' => $transaction->id,
+            'modal' => 'rating',
+        ]);
+    }
+
+    public function evaluation(Transaction $transaction) {
+        return redirect()
+            ->route('transaction.show', $transaction->id);
     }
 }
