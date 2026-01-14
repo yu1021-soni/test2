@@ -10,6 +10,7 @@ class Transaction extends Model
     use HasFactory;
 
     const STATUS_IN_PROGRESS = 'in_progress';
+    public const STATUS_WAITING_RATINGS = 'waiting_ratings';
     const STATUS_COMPLETED = 'completed';
 
     protected $fillable = [

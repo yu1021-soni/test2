@@ -31,12 +31,26 @@ class TransactionController extends Controller
 
         $editMessageId = $request->query('edit');
 
+        // 既読
         Message::where('transaction_id', $transaction->id)
         ->where('receiver_id', $authUser->id)
         ->where('is_read', 0)
         ->update(['is_read' => 1]);
 
-        $openRatingModal = $request->query('modal') === 'rating';
+        // ✅ 自分がすでに評価したか？
+        $alreadyRated = Evaluation::where('transaction_id', $transaction->id)
+            ->where('evaluator_id', $authUser->id)
+            ->exists();
+
+        // ✅ モーダルを開く条件
+        $openRatingModal =
+            // 手動（?modal=rating）
+            ($request->query('modal') === 'rating')
+            // 自動（評価待ち＆自分が未評価）
+            || (
+                $transaction->status === Transaction::STATUS_WAITING_RATINGS
+                && !$alreadyRated
+        );
 
         return view ('transaction', compact('item','user','authUser', 'transaction', 'transactions','editMessageId', 'openRatingModal'));
     }
@@ -84,7 +98,7 @@ class TransactionController extends Controller
         return redirect()->route('transaction.show', $transaction);
     }
 
-    public function edit(Request $request, Transaction      $transaction, $message_id) {
+    public function edit(Request $request, Transaction $transaction, $message_id) {
 
         // ① メッセージが入力されているかチェック
         $request->validate(
@@ -150,7 +164,7 @@ class TransactionController extends Controller
     public function complete(Transaction $transaction) {
 
         $transaction->update([
-            'status' => 2, //取引完了
+            'status' => Transaction::STATUS_WAITING_RATINGS,
         ]);
 
         return redirect()->route('transaction.show', [
@@ -179,6 +193,24 @@ class TransactionController extends Controller
         'evaluatee_id'   => $evaluateeId,
         'rating'         => $request->rating,
         ]);
+
+        // 両者が評価したかチェック
+        $buyerRated = Evaluation::where('transaction_id', $transaction->id)
+            ->where('evaluator_id', $transaction->buyer_id)
+            ->exists();
+
+        $sellerRated = Evaluation::where('transaction_id', $transaction->id)
+            ->where('evaluator_id', $transaction->seller_id)
+            ->exists();
+
+        // status 更新
+        if ($buyerRated && $sellerRated) {
+            $transaction->status = Transaction::STATUS_COMPLETED;
+        } else {
+            $transaction->status = Transaction::STATUS_WAITING_RATINGS;
+        }
+
+        $transaction->save();
 
         return redirect()
             ->route('transaction.show', $transaction->id);

@@ -47,15 +47,17 @@
                     <button type="submit" class="complete">
                         取引を完了する
                     </button>
-                    
-                    {{-- @if($transaction->status == 1)
-                    <button type="submit" class="complete">
-                        取引を完了する
-                    </button>
-                    @else
-                    <div class="complete__message">
-                        取引は完了しました
-                    </div>
+
+                    {{-- @if (auth()->id() === $transaction->buyer_id)
+                        @if ($transaction->status == 1)
+                        <button type="submit" class="complete">
+                            取引を完了する
+                        </button>
+                        @else
+                        <div class="complete__message">
+                            取引は完了しました
+                        </div>
+                        @endif
                     @endif --}}
                 </form>
             </div>

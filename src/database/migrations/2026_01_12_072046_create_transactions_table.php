@@ -23,7 +23,7 @@ class CreateTransactionsTable extends Migration
             $table->foreignId('seller_id')->constrained('users')->cascadeOnDelete();
 
             // 取引状態
-            $table->string('status')->comment('in_progress:取引中,completed:取引完了');
+            $table->string('status')->comment('in_progress:,waiting_ratings:評価待ち,completed:取引完了');
 
             // 取引管理用
             $table->timestamp('completed_at')->nullable();

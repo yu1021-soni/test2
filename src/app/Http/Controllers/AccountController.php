@@ -38,7 +38,9 @@ class AccountController extends Controller
         } elseif ($tab === 'transaction') {
             // 取引中の商品
         $transactions = Transaction::with('item')
-            ->where('status', Transaction::STATUS_IN_PROGRESS)
+            ->whereIn('status', [
+                Transaction::STATUS_IN_PROGRESS,
+                Transaction::STATUS_WAITING_RATINGS,])
             ->where(function ($q) use ($user) {
                 $q->where('buyer_id', $user->id)
                 ->orWhere('seller_id', $user->id);
