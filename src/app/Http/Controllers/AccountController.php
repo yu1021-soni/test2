@@ -38,7 +38,8 @@ class AccountController extends Controller
                 ->paginate(12);
         } elseif ($tab === 'transaction') {
             // 取引中の商品
-        $transactions = Transaction::with('item')
+            $transactions = Transaction::with('item')
+            ->withMax('messages', 'created_at') // 最新メッセージ日時を取得
             ->whereIn('status', [
                 Transaction::STATUS_IN_PROGRESS,
                 Transaction::STATUS_WAITING_RATINGS,])
@@ -46,7 +47,8 @@ class AccountController extends Controller
                 $q->where('buyer_id', $user->id)
                 ->orWhere('seller_id', $user->id);
             })
-            ->orderByDesc('last_message_at')
+            ->orderByRaw('messages_max_created_at IS NULL ASC')
+            ->orderByDesc('messages_max_created_at')
             ->paginate(12);
         }
 
