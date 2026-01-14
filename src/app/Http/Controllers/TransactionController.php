@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Message;
 use App\Models\Evaluation;
 use Illuminate\Http\Request;
+use App\Http\Requests\MessageRequest;
 
 class TransactionController extends Controller
 {
@@ -55,41 +56,28 @@ class TransactionController extends Controller
         return view ('transaction', compact('item','user','authUser', 'transaction', 'transactions','editMessageId', 'openRatingModal'));
     }
 
-    public function messages(Request $request, Transaction $transaction) {
+    public function messages(MessageRequest $request, Transaction $transaction) {
 
-        // ① バリデーション
-        $request->validate([
-            'message' => ['nullable', 'string', 'max:2000'],
-            'image'   => ['nullable', 'image', 'max:2048'], // 2MBまで
-        ]);
-
-        // ② メッセージも画像も無い送信は禁止
-        if (!$request->filled('message') && !$request->hasFile('image')) {
-            return back()
-                ->withErrors(['message' => 'メッセージまたは画像を入力してください'])
-                ->withInput();
-        }
-
-        // ③ 画像があれば保存
+        // 画像があれば保存
         $imagePath = null;
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('chat_images', 'public');
         }
 
-        // ✅ 追加：送信者ID
+        // 送信者ID
         $senderId = auth()->id();
 
-        // ✅ 相手（受信者）IDを決める
+        // 受信者IDを決める
         $receiverId = ($senderId === $transaction->seller_id)
         ? $transaction->buyer_id
         : $transaction->seller_id;
 
-        // ④ DBに保存
+        // DBに保存
         Message::create([
             'transaction_id' => $transaction->id,
             'receiver_id'    => $receiverId,
             'sender_id'      => $senderId,
-            'message'        => $request->input('message', ''),
+            'message'        => $request->message,
             'image_path'     => $imagePath,
             'is_read'        => 0,
         ]);
@@ -102,8 +90,11 @@ class TransactionController extends Controller
 
         // ① メッセージが入力されているかチェック
         $request->validate(
-            ['message' => 'required|string|max:1000'],
-            ['message.required' => 'メッセージを入力してください']
+            ['message' => 'required|string|max:400'],
+            [
+                'message.required' => '本文を入力してください',
+                'message.max' => '本文は400文字以内で入力してください',
+            ]
         );
 
         // ② 編集したいメッセージを探す

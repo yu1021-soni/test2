@@ -170,7 +170,7 @@
 
             <form class="chat__form" action="{{ route('transaction.message', $transaction) }}" method="POST" enctype="multipart/form-data">
             @csrf
-                <input class="chat__input" type="text" name="message" placeholder="取引メッセージを記入してください" value="{{ old('message') }}" required>
+                <input class="chat__input" type="text" name="message" placeholder="取引メッセージを記入してください" value="{{ old('message') }}">
                 <label class="chat__image">
                     画像を追加
                     <input type="file" name="image" hidden>
@@ -179,6 +179,10 @@
                     ➤
                 </button>
             </form>
+
+            @error('message')
+                <div class="message__error">{{ $message }}</div>
+            @enderror
 
         </div>
 
