@@ -12,7 +12,3 @@ docker/mysql/logs/
 
 # Logs
 *.log
-
-# Docker MySQL
-docker/mysql/data/
-docker/mysql/logs/
