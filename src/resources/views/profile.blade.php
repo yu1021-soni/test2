@@ -19,6 +19,19 @@
         <div class="profile__name">
             {{ $user->name }}
         </div>
+
+        @if($ratingAvgRounded !== null)
+        <div class="profile__rating">
+            @for ($i = 1; $i <= 5; $i++)
+                @if ($i <= $ratingAvgRounded)
+                    <span class="star star--active">★</span>
+                @else
+                    <span class="star">★</span>
+                @endif
+            @endfor
+        </div>
+        @endif
+
         <form action="{{ route('profile.view') }}" class="profile__edit" method="get">
             <button type="submit" class="profile__edit-button">
                 プロフィールを編集

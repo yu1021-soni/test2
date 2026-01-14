@@ -84,6 +84,14 @@ body {
     font-style: Regular;
 }
 
+.star {
+    color: #ccc;
+}
+
+.star--active {
+    color: #f5c518;
+}
+
 @media (min-width: 1400px) and (max-width: 1540px) {
     .profile__card {
         width: 25%;

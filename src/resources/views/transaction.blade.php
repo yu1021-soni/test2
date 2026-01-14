@@ -44,11 +44,7 @@
                 <form action="{{ route('transaction.complete', ['transaction' => $transaction->id]) }}" method="POST">
                 @csrf
 
-                    <button type="submit" class="complete">
-                        取引を完了する
-                    </button>
-
-                    {{-- @if (auth()->id() === $transaction->buyer_id)
+                    @if (auth()->id() === $transaction->buyer_id)
                         @if ($transaction->status == 1)
                         <button type="submit" class="complete">
                             取引を完了する
@@ -58,7 +54,7 @@
                             取引は完了しました
                         </div>
                         @endif
-                    @endif --}}
+                    @endif
                 </form>
             </div>
 

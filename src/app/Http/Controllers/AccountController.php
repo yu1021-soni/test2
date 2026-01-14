@@ -8,6 +8,7 @@ use App\Models\Order;
 use App\Models\Item;
 use App\Models\Transaction;
 use App\Models\Message;
+use App\Models\Evaluation;
 use App\Http\Requests\ProfileRequest;
 use Illuminate\Support\Facades\Storage;
 
@@ -53,7 +54,23 @@ class AccountController extends Controller
             ->where('is_read', 0)
             ->count();
 
-    return view('profile', compact('user', 'tab', 'items', 'orders','transactions', 'unreadMessageCount'));
+        // 評価の件数を数える
+        $ratingCount = Evaluation::where('evaluatee_id', $user->id)
+        //その条件に合う 行の数
+        ->count();
+
+        $ratingAvgRounded = null;
+        // 評価が1件以上ある場合だけ処理
+        if ($ratingCount > 0) {
+            $query = Evaluation::where('evaluatee_id', $user->id);
+            // 平均値を計算して返す
+            $avg = $query->avg('rating');
+            $ratingAvgRounded = ($avg);
+        }
+
+        return view('profile', compact(
+            'user', 'tab', 'items', 'orders','transactions', 'unreadMessageCount','ratingCount','ratingAvgRounded'
+            ));
     }
 
     public function edit(Request $request){
