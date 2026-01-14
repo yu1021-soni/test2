@@ -213,6 +213,6 @@ class TransactionController extends Controller
         $transaction->save();
 
         return redirect()
-            ->route('transaction.show', $transaction->id);
+            ->route('item.index');
     }
 }
