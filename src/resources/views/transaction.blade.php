@@ -26,9 +26,9 @@
             <div class="select__box-name">
                 @if($transaction->seller_id === auth()->id())
                     @foreach($transactions as $t)
-                    <div class="catalog__name">
+                    <a href="{{ route('transaction.show', $t->id) }}">
                         {{ $t->item->name }}
-                    </div>
+                    </a>
                     @endforeach
                 @endif
             </div>
