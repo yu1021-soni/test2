@@ -9,6 +9,11 @@
 @endsection
 
 @section('content')
+
+    @php
+        use App\Models\Transaction;
+    @endphp
+
     <div class="content">
 
         @include('modal')
@@ -45,7 +50,7 @@
                 @csrf
 
                     @if (auth()->id() === $transaction->buyer_id)
-                        @if ($transaction->status == 1)
+                        @if ($transaction->status === Transaction::STATUS_IN_PROGRESS)
                         <button type="submit" class="complete">
                             取引を完了する
                         </button>
