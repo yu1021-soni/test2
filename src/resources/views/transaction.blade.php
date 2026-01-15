@@ -26,7 +26,7 @@
             <div class="select__box-name">
                 @if($transaction->seller_id === auth()->id())
                     @foreach($transactions as $t)
-                    <a href="{{ route('transaction.show', $t->id) }}" name="item__name">
+                    <a href="{{ route('transaction.show', $t->id) }}" name="item__name" class="item__name">
                         {{ $t->item->name }}
                     </a>
                     @endforeach
@@ -86,13 +86,15 @@
                 <div class="chat__row chat__row--me">
 
                     <div class="chat__bubble">
-                        <div class="chat__avatar">
-                            <img src="{{ auth()->user()->user_img_url
+                        <div class="chat___user">
+                            <div class="chat__avatar">
+                                <img src="{{ auth()->user()->user_img_url
                             ? Storage::url(auth()->user()->user_img_url)
                             : asset('img/avatar-default.png') }}">
-                        </div>
-                        <div class="chat__name">
-                            {{ auth()->user()->name }}
+                            </div>
+                            <div class="chat__name">
+                                {{ auth()->user()->name }}
+                            </div>
                         </div>
                         <div class="chat__message">
 
@@ -116,7 +118,9 @@
                             {{-- 通常表示 --}}
                             {{ $messages->message }}
 
-                            {{-- 編集ボタン --}}
+                        </div>
+                        <div class="message__button">
+                                {{-- 編集ボタン --}}
                             <a href="{{ route('transaction.show', $transaction->id) }}?edit={{ $messages->id }}">編集</a>
 
                             {{-- 削除（POST） --}}
@@ -142,15 +146,18 @@
                 @else
                 <div class="chat__row chat__row--other">
 
-                    <div class="chat__avatar">
-                        <img src="{{ $messages->sender->user_img_url
-                        ? Storage::url($messages->sender->user_img_url)
-                        : asset('img/avatar-default.png') }}">
-                    </div>
 
                     <div class="chat__bubble">
-                        <div class="chat__name">
-                            {{ $messages->sender->name }}
+
+                        <div class="chat__sender--user">
+                            <div class="chat__avatar">
+                                <img src="{{ $messages->sender->user_img_url
+                                ? Storage::url($messages->sender->user_img_url)
+                                : asset('img/avatar-default.png') }}">
+                                <div class="chat__name">
+                                    {{ $messages->sender->name }}
+                                </div>
+                            </div>
                         </div>
                         <div class="chat__message">
                             {{ $messages->message }}

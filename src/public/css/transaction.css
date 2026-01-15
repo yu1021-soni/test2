@@ -26,13 +26,18 @@ body {
 }
 
 .item__name {
+  display: block;
   width: 197px;
   height: 40px;
-  margin-top: 30px;
+  margin: 30px auto 0;
   font-size: 24px;
   font-weight: 400;
   background: rgba(238, 239, 235, 1);
+  color: black;
   text-align: center;
+  line-height: 40px;
+  text-decoration: none;
+  border-radius: 5px;
 }
 
 .transaction__detail {
@@ -118,19 +123,61 @@ body {
   flex: 1;
   overflow-y: auto;
   min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat__row--me {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.chat__row--other {
+  
+}
+
+.chat__name {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.chat__message {
+  width: 461px;
+  height: 60px;
+  background: rgba(217, 217, 217, 1);
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
 }
 
 .chat__avatar img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    object-fit: cover;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #d9d9d9;
+  object-fit: cover;
 }
 
 .chat__photo img{
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.message__button a,
+.message__button button {
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1;
+  color: black;
+  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 }
 
 .chat__form {
