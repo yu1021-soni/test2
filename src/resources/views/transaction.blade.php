@@ -26,7 +26,7 @@
             <div class="select__box-name">
                 @if($transaction->seller_id === auth()->id())
                     @foreach($transactions as $t)
-                    <a href="{{ route('transaction.show', $t->id) }}">
+                    <a href="{{ route('transaction.show', $t->id) }}" name="item__name">
                         {{ $t->item->name }}
                     </a>
                     @endforeach
@@ -35,32 +35,30 @@
         </div>
 
         {{-- 右：取引中商品詳細 --}}
-        <div class="tradition__detail">
+        <div class="transaction__detail">
 
             <div class="profile">
                 <div class="profile__avatar">
-                    <img src="{{ $user->user_img_url ? Storage::url($user->user_img_url) : asset('img/avatar-default.png') }}" >
+                    <img src="{{ $user->user_img_url ? Storage::url($user->user_img_url) : asset('img/avatar-default.png') }}">
                 </div>
+
                 <div class="profile__name">
-                    <p>
-                        「{{ $user->name }}」さんとの取引画面
-                    </p>
+                    <p>「{{ $user->name }}」さんとの取引画面</p>
                 </div>
-                <form action="{{ route('transaction.complete', ['transaction' => $transaction->id]) }}" method="POST">
-                @csrf
+
+                <div class="complete-area">
+                    <form action="{{ route('transaction.complete', ['transaction' => $transaction->id]) }}" method="POST">
+                    @csrf
 
                     @if (auth()->id() === $transaction->buyer_id)
                         @if ($transaction->status === Transaction::STATUS_IN_PROGRESS)
-                        <button type="submit" class="complete">
-                            取引を完了する
-                        </button>
+                            <button type="submit" class="complete">取引を完了する</button>
                         @else
-                        <div class="complete__message">
-                            取引は完了しました
-                        </div>
+                            <div class="complete__message">取引は完了しました</div>
                         @endif
                     @endif
-                </form>
+                    </form>
+                </div>
             </div>
 
             <div class="transaction__item">
@@ -68,9 +66,11 @@
                     <img
                         src="{{ $item->item_img_url ? Storage::url($item->item_img_url) : asset('img/placeholder.png') }}" alt="{{ $item->name }}" class="detail__image-img">
                 </div>
-                <h1 class="detail__name">{{ $item->name }}</h1>
-                <div class="detail__price">
-                    ¥{{ number_format($item->price) }} <span>（税込）</span>
+                <div class="detail__header">
+                    <h1 class="detail__name">{{ $item->name }}</h1>
+                    <div class="detail__price">
+                        ¥{{ number_format($item->price) }} <span>（税込）</span>
+                    </div>
                 </div>
             </div>
 
@@ -170,19 +170,30 @@
 
             <form class="chat__form" action="{{ route('transaction.message', $transaction) }}" method="POST" enctype="multipart/form-data">
             @csrf
-                <input class="chat__input" type="text" name="message" placeholder="取引メッセージを記入してください" value="{{ old('message') }}">
+
+                <div class="chat__input-wrapper">
+
+                    @error('message')
+                    <div class="message__error">{{ $message }}</div>
+                    @enderror
+
+                    <input
+                        class="chat__input"
+                        type="text"
+                        name="message"
+                        placeholder="取引メッセージを記入してください"
+                        value="{{ old('message') }}"
+                        >
+                </div>
+
                 <label class="chat__image">
                     画像を追加
                     <input type="file" name="image" hidden>
                 </label>
                 <button class="chat__send" type="submit" aria-label="送信">
-                    ➤
+                    <img src="{{ asset('img/enter.jpg') }}" alt="送信">
                 </button>
             </form>
-
-            @error('message')
-                <div class="message__error">{{ $message }}</div>
-            @enderror
 
         </div>
 
