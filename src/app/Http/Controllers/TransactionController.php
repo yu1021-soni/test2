@@ -8,6 +8,8 @@ use App\Models\Message;
 use App\Models\Evaluation;
 use Illuminate\Http\Request;
 use App\Http\Requests\MessageRequest;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\TransactionCompletedMail;
 
 class TransactionController extends Controller
 {
@@ -154,10 +156,21 @@ class TransactionController extends Controller
 
     public function complete(Transaction $transaction) {
 
-        $transaction->update([
-            'status' => Transaction::STATUS_WAITING_RATINGS,
-        ]);
+        // 取引を「評価待ち」にする
+        $transaction->status = Transaction::STATUS_WAITING_RATINGS;
+        $transaction->save();
 
+        // 出品者と商品を取得
+        $seller = User::findOrFail($transaction->seller_id);
+        $transaction->load('item');
+
+        // Mail::to(宛先)->send(new Mailableクラス());
+        // 出品者へメール送信
+        Mail::to($seller->email)->send(
+            new TransactionCompletedMail($seller, $transaction->item)
+        );
+
+        // 評価モーダルを開く
         return redirect()->route('transaction.show', [
             'transaction' => $transaction->id,
             'modal' => 'rating',
