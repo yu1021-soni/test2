@@ -141,9 +141,6 @@ body {
   justify-content: flex-end;
 }
 
-.chat__row--other {
-}
-
 .chat__name {
   font-size: 20px;
   font-weight: 700;
@@ -284,9 +281,6 @@ body {
   margin-left: 37px;
 }
 
-/* =========================
-   モーダル背景（画面全体）
-   ========================= */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -322,30 +316,35 @@ body {
    モーダル本体（カード）
    ========================= */
 .modal__content {
-  width: 360px;
-  max-width: 90%;
+  width: 598px;
+  height: 367px;
+  background: rgba(253, 252, 230, 1);
+  border-radius: 15px;
 
-  background: #fffde8;
-  border-radius: 10px;
-
-  padding: 20px;
-
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+  padding: 25px;           /* ← 余白はここにまとめる */
+  box-sizing: border-box;
 }
 
 /* =========================
    モーダルヘッダー
    ========================= */
 .modal__header {
-  display: flex;
-  justify-content: flex-end;
+  font-size: 35px;
+  font-weight: 400;
+
+  /* 線をカード端まで伸ばす */
+  margin: -25px -25px 0;   /* ← 上/左右を親padding分だけ打ち消す */
+  padding: 25px 25px 20px; /* ← 文字位置は内側に戻す */
+
+  border-bottom: 1px solid rgba(0, 0, 0, 1);
+  box-sizing: border-box;
 }
 
-.modal__close {
+.question {
+  margin: 20px 0; /* ← 横は0（親のpaddingがあるのでOK） */
   font-size: 20px;
-  color: #666;
-  text-decoration: none;
-  cursor: pointer;
+  font-weight: 400;
+  color: rgba(134, 134, 134, 1);
 }
 
 /* =========================
@@ -356,9 +355,13 @@ body {
   flex-direction: row-reverse;
   justify-content: center;
   gap: 8px;
+  font-size: 100px;
 
-  font-size: 32px;
-  margin: 16px 0;
+  /* 下の線をカード端まで伸ばす */
+  margin: 30px -25px 0;    /* ← 左右を親padding分だけ打ち消す */
+  padding: 0 25px 25px;    /* ← 星は内側、下に余白 */
+  border-bottom: 1px solid rgba(0, 0, 0, 1);
+  box-sizing: border-box;
 }
 
 .stars input {
@@ -366,29 +369,34 @@ body {
 }
 
 .stars label {
-  color: #ddd;
+  color: rgba(217, 217, 217, 1);
   cursor: pointer;
 }
 
 .stars input:checked ~ label,
 .stars label:hover,
 .stars label:hover ~ label {
-  color: #f5c518;
+  color: rgba(255, 240, 72, 1);
 }
 
 /* =========================
-   送信ボタン
+   ボタン
    ========================= */
 .modal button {
   display: block;
-  margin-left: auto;
-
-  background: #ff7f7f;
+  margin: 20px 0 0 auto; /* ← 右寄せ + 上余白 */
+  width: 127px;
+  height: 49px;
+  background: rgba(255, 130, 130, 1);
   color: #fff;
-
   border: none;
-  border-radius: 6px;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
-  padding: 8px 16px;
+.modal__close {
+  font-size: 20px;
+  color: #666;
+  text-decoration: none;
   cursor: pointer;
 }

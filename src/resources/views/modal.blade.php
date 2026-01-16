@@ -4,12 +4,12 @@
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal__content">
         <div class="modal__header">
-            <a class="modal__close"
+            {{-- <a class="modal__close"
                 href="{{ route('transaction.show', request()->route()->parameters() + request()->except('modal')) }}"
-                aria-label="閉じる">×</a>
-        </div>
+                aria-label="閉じる">×</a> --}}
 
-        <h2 id="modalTitle">取引が完了しました</h2>
+            <h2 id="modalTitle">取引が完了しました。</h2>
+        </div>
 
         {{-- ★評価フォーム --}}
         <form method="POST" action="{{ route('transaction.evaluation', ['transaction' => $transaction->id]) }}">
