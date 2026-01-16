@@ -100,7 +100,7 @@
         <div class="profile__list">
             @foreach ($transactions as $transaction)
                 <div class="profile__card">
-                    <a href="{{ route('transaction.show', $transaction->id) }}">
+                    <a href="{{ route('transaction.show', $transaction->id) }}#bottom">
                         <div class="profile__image">
                             <img src="{{        $transaction->item->item_img_url
                             ? Storage::url($transaction->item->item_img_url)

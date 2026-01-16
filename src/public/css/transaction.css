@@ -70,6 +70,9 @@ body {
   font-weight: 700;
 }
 
+.complete-area {
+  margin-left: auto;
+}
 
 .complete {
   width: 172px;
@@ -82,6 +85,12 @@ body {
   font-weight: 700;
 }
 
+.complete__message {
+  font-size: 20px;
+  font-weight: 700;
+  color: rgba(255, 130, 130, 1);
+}
+
 .transaction__item {
   display: flex;
   align-items: center;
@@ -91,14 +100,14 @@ body {
 }
 
 .detail__image-img {
-    width: 203px;
-    height: 206px;
+  width: 203px;
+  height: 206px;
 }
 
 .detail__header {
   margin-left: 35px;
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .detail__name {

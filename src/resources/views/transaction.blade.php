@@ -168,6 +168,8 @@
                 @endif
                 @endforeach
 
+                <div id="bottom"></div>
+
             </div>
 
             <form class="chat__form" action="{{ route('transaction.message', $transaction) }}" method="POST" enctype="multipart/form-data">
