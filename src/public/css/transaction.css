@@ -285,81 +285,57 @@ body {
   position: fixed;
   top: 0;
   left: 0;
-
   width: 100vw;
   height: 100vh;
-
   background: rgba(0, 0, 0, 0.6);
-
   z-index: 9998;
 }
 
-/* =========================
-   モーダル中央配置
-   ========================= */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
-
   width: 100vw;
   height: 100vh;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   z-index: 9999;
 }
 
-/* =========================
-   モーダル本体（カード）
-   ========================= */
 .modal__content {
   width: 598px;
   height: 367px;
   background: rgba(253, 252, 230, 1);
   border-radius: 15px;
-
-  padding: 25px;           /* ← 余白はここにまとめる */
+  padding: 25px; 
   box-sizing: border-box;
 }
 
-/* =========================
-   モーダルヘッダー
-   ========================= */
 .modal__header {
   font-size: 35px;
   font-weight: 400;
-
-  /* 線をカード端まで伸ばす */
-  margin: -25px -25px 0;   /* ← 上/左右を親padding分だけ打ち消す */
-  padding: 25px 25px 20px; /* ← 文字位置は内側に戻す */
-
+  margin: -25px -25px 0;
+  padding: 25px 25px 20px;
   border-bottom: 1px solid rgba(0, 0, 0, 1);
   box-sizing: border-box;
 }
 
 .question {
-  margin: 20px 0; /* ← 横は0（親のpaddingがあるのでOK） */
+  margin: 20px 0;
   font-size: 20px;
   font-weight: 400;
   color: rgba(134, 134, 134, 1);
 }
 
-/* =========================
-   星評価
-   ========================= */
 .stars {
   display: flex;
   flex-direction: row-reverse;
   justify-content: center;
   gap: 8px;
   font-size: 100px;
-
-  /* 下の線をカード端まで伸ばす */
-  margin: 30px -25px 0;    /* ← 左右を親padding分だけ打ち消す */
-  padding: 0 25px 25px;    /* ← 星は内側、下に余白 */
+  margin: 30px -25px 0;
+  padding: 0 25px 25px;
   border-bottom: 1px solid rgba(0, 0, 0, 1);
   box-sizing: border-box;
 }
@@ -379,24 +355,14 @@ body {
   color: rgba(255, 240, 72, 1);
 }
 
-/* =========================
-   ボタン
-   ========================= */
 .modal button {
   display: block;
-  margin: 20px 0 0 auto; /* ← 右寄せ + 上余白 */
+  margin: 20px 0 0 auto;
   width: 127px;
   height: 49px;
   background: rgba(255, 130, 130, 1);
   color: #fff;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
-}
-
-.modal__close {
-  font-size: 20px;
-  color: #666;
-  text-decoration: none;
   cursor: pointer;
 }

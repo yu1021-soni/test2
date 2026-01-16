@@ -4,10 +4,6 @@
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal__content">
         <div class="modal__header">
-            {{-- <a class="modal__close"
-                href="{{ route('transaction.show', request()->route()->parameters() + request()->except('modal')) }}"
-                aria-label="閉じる">×</a> --}}
-
             <h2 id="modalTitle">取引が完了しました。</h2>
         </div>
 
@@ -25,8 +21,8 @@
                 <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
             </div>
 
-        <button type="submit">送信</button>
-      </form>
+            <button type="submit">送信</button>
+        </form>
     </div>
-  </div>
+</div>
 @endif
