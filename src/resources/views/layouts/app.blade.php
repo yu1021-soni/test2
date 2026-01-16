@@ -18,8 +18,8 @@
                     <img src="{{ asset('img/logo.svg') }}" alt="COACHTECH" class="header__logo">
                 </a>
 
-                {{-- login,register, mailhog ページではロゴだけ --}}
-                @if (!Route::is('register') && !Route::is('mailhog') && !Route::is('login') && !Route::is('verification.*'))
+                {{-- login,register, mailhog,transaction ページではロゴだけ --}}
+                @if (!Route::is('register') && !Route::is('transaction.*') && !Route::is('mailhog') && !Route::is('login') && !Route::is('verification.*'))
 
                 <form class="header__search" action="/search" method="get">
                     <input class="header__search-input" type="text" name="keyword" placeholder="なにをお探しですか？" value="{{ request('keyword') }}" >
