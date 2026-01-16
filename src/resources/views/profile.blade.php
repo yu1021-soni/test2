@@ -16,21 +16,23 @@
         <div class="profile__avatar">
             <img src="{{ $user->user_img_url ? Storage::url($user->user_img_url) : asset('img/avatar-default.png') }}" >
         </div>
-        <div class="profile__name">
-            {{ $user->name }}
-        </div>
+        <div class="profile__info">
+            <div class="profile__name">
+                {{ $user->name }}
+            </div>
 
-        @if($ratingAvgRounded !== null)
-        <div class="profile__rating">
-            @for ($i = 1; $i <= 5; $i++)
-                @if ($i <= $ratingAvgRounded)
-                    <span class="star star--active">★</span>
-                @else
-                    <span class="star">★</span>
-                @endif
-            @endfor
+            @if($ratingAvgRounded !== null)
+            <div class="profile__rating">
+                @for ($i = 1; $i <= 5; $i++)
+                    @if ($i <= $ratingAvgRounded)
+                        <span class="star star--active">★</span>
+                    @else
+                        <span class="star">★</span>
+                    @endif
+                @endfor
+            </div>
+            @endif
         </div>
-        @endif
 
         <form action="{{ route('profile.view') }}" class="profile__edit" method="get">
             <button type="submit" class="profile__edit-button">

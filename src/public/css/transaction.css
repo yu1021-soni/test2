@@ -15,6 +15,7 @@ body {
 .select__box {
   width: 259px;
   background: rgba(134, 134, 134, 1);
+  flex-shrink: 0;
 }
 
 .select__box-title {
@@ -91,6 +92,7 @@ body {
   color: rgba(255, 130, 130, 1);
 }
 
+/* 商品詳細 */
 .transaction__item {
   display: flex;
   align-items: center;
@@ -102,6 +104,7 @@ body {
 .detail__image-img {
   width: 203px;
   height: 206px;
+  object-fit: cover;
 }
 
 .detail__header {
@@ -146,30 +149,10 @@ body {
   font-weight: 700;
 }
 
-.chat__message {
-  width: 461px;
-  min-height: 60px;
-  background: rgba(217, 217, 217, 1);
-  font-size: 20px;
-  font-weight: 700;
+.chat__sender--user {
   display: flex;
   align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  line-height: 1.4;
-  padding: 20px 16px; 
-}
-
-.chat__message input {
-  background: rgba(217, 217, 217, 1);
-  border: none;
-  outline: none;
-  border-bottom: 1px dashed #999;
-  cursor: text;
-  font-size: 20px;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
+  padding: 20px;
 }
 
 .chat__avatar img {
@@ -180,7 +163,35 @@ body {
   object-fit: cover;
 }
 
-.chat__photo img{
+.chat__message {
+  width: 461px;
+  max-width: 100%;
+  min-height: 60px;
+  background: rgba(217, 217, 217, 1);
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  line-height: 1.4;
+  padding: 20px 16px;
+  margin: 0 20px;
+  word-break: break-word;
+}
+
+.chat__message input {
+  width: 100%;
+  background: rgba(217, 217, 217, 1);
+  border: none;
+  outline: none;
+  border-bottom: 1px dashed #999;
+  cursor: text;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.chat__photo img {
   width: 100px;
   height: 100px;
   object-fit: cover;
@@ -191,6 +202,7 @@ body {
   justify-content: flex-end;
   margin-right: 20px;
   margin-top: 5px;
+  gap: 15px; /* margin-leftの代わりにgap */
 }
 
 .message__button a,
@@ -204,7 +216,6 @@ body {
   border: none;
   padding: 0;
   cursor: pointer;
-  margin-left: 15px;
 }
 
 .chat__form {
@@ -217,30 +228,31 @@ body {
   gap: 12px;
 }
 
-.chat__sender--user {
-  display: flex;
-  align-items: center;
-  padding: 20px;
-}
-
-.chat__message {
-  margin: 0 20px;
-}
-
 .chat__input-wrapper {
   display: flex;
   flex-direction: column;
+  position: relative;
+  flex: 1;
+  min-width: 0;
 }
 
 .chat__input {
-  width: 937px;
+  width: 100%;
   height: 44px;
   border: 1px solid rgba(95, 95, 95, 1);
   font-size: 20px;
   font-weight: 700;
-  box-sizing: border-box;
   padding-left: 16px;
   margin-left: 25px;
+}
+
+.message__error {
+  position: absolute;
+  left: 25px;
+  top: -26px;
+  color: #ff5555;
+  font-size: 20px;
+  white-space: nowrap;
 }
 
 .chat__image {
@@ -256,6 +268,7 @@ body {
   font-size: 20px;
   font-weight: 700;
   margin-left: 25px;
+  flex-shrink: 0;
 }
 
 .chat__send {
@@ -263,22 +276,13 @@ body {
   border: none;
   padding: 0;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .chat__send img {
   width: 80px;
   height: 61px;
   object-fit: contain;
-}
-
-.message__error {
-  position: absolute;
-  left: 0;
-  top: -15px;
-  color: #ff5555;
-  font-size: 20px;
-  white-space: nowrap;
-  margin-left: 37px;
 }
 
 .modal-overlay {
@@ -308,8 +312,7 @@ body {
   height: 367px;
   background: rgba(253, 252, 230, 1);
   border-radius: 15px;
-  padding: 25px; 
-  box-sizing: border-box;
+  padding: 25px;
 }
 
 .modal__header {
@@ -318,7 +321,6 @@ body {
   margin: -25px -25px 0;
   padding: 25px 25px 20px;
   border-bottom: 1px solid rgba(0, 0, 0, 1);
-  box-sizing: border-box;
 }
 
 .question {
@@ -337,7 +339,6 @@ body {
   margin: 30px -25px 0;
   padding: 0 25px 25px;
   border-bottom: 1px solid rgba(0, 0, 0, 1);
-  box-sizing: border-box;
 }
 
 .stars input {
@@ -365,4 +366,123 @@ body {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+@media (min-width: 1400px) and (max-width: 1540px) {
+  .detail__name {
+    font-size: 44px;
+  }
+
+  .detail__price {
+    font-size: 32px;
+  }
+
+  .chat__message {
+    width: 440px;
+  }
+
+  .chat__input {
+    margin-left: 20px;
+  }
+
+  .chat__image {
+    margin-left: 20px;
+  }
+
+  .message__error {
+    left: 20px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 850px) {
+  .select__box { width: 200px; }
+
+  .select__box-title {
+    font-size: 22px;
+  }
+
+  .item__name {
+    width: 160px;
+    font-size: 18px;
+    height: 36px;
+    line-height: 36px;
+  }
+
+  .profile__name {
+    font-size: 22px;
+  }
+
+  .profile__avatar img {
+    width: 56px;
+    height: 56px;
+    margin-right: 16px;
+  }
+
+  .detail__image-img {
+    width: 140px; height: 140px;
+  }
+
+  .detail__header {
+    margin-left: 16px;
+  }
+
+  .detail__name {
+    font-size: 28px;
+  }
+
+  .detail__price {
+    font-size: 22px;
+    margin-top: 10px;
+  }
+
+  .chat__sender--user {
+    padding: 12px;
+  }
+
+  .chat__name {
+    margin-left: 15px;
+  }
+
+  .chat__message {
+    width: auto;
+    max-width: 300px;
+    font-size: 16px;
+    padding: 14px 12px;
+    margin: 0 12px;
+  }
+
+  .chat__form {
+    gap: 8px;
+    padding: 10px;
+  }
+
+  .chat__input {
+    margin-left: 0;
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .message__error {
+    left: 0;
+    top: -22px;
+    font-size: 16px;
+  }
+
+  .chat__image {
+    width: 110px;
+    height: 40px;
+    font-size: 16px;
+    margin-left: 0;
+  }
+
+  .chat__send img {
+    width: 64px;
+    height: 50px;
+  }
+
+  .complete {
+    width: 150px;
+    height: 46px;
+    font-size: 16px;
+  }
 }
