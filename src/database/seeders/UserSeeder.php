@@ -12,65 +12,31 @@ class UserSeeder extends Seeder
     {
         $now = now();
 
-        $users = [
+        User::insert([
             [
-                'name' => '佐藤 太郎',
-                'email' => 'sato.taro@example.com',
+                'name' => '出品者A',
+                'email' => 'sellerA@example.com',
                 'password' => Hash::make('password'),
                 'email_verified_at' => $now,
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
             [
-                'name' => '鈴木 花子',
-                'email' => 'suzuki.hanako@example.com',
+                'name' => '出品者B',
+                'email' => 'sellerB@example.com',
                 'password' => Hash::make('password'),
                 'email_verified_at' => $now,
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
             [
-                'name' => '高橋 健',
-                'email' => 'takahashi.ken@example.com',
+                'name' => '未紐付ユーザ',
+                'email' => 'free@example.com',
                 'password' => Hash::make('password'),
                 'email_verified_at' => $now,
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
-            [
-                'name' => '田中 美咲',
-                'email' => 'tanaka.misaki@example.com',
-                'password' => Hash::make('password'),
-                'email_verified_at' => $now,
-                'created_at' => $now,
-                'updated_at' => $now,
-            ],
-            [
-                'name' => '伊藤 翔',
-                'email' => 'ito.sho@example.com',
-                'password' => Hash::make('password'),
-                'email_verified_at' => $now,
-                'created_at' => $now,
-                'updated_at' => $now,
-            ],
-            [
-                'name' => '中村 彩',
-                'email' => 'nakamura.aya@example.com',
-                'password' => Hash::make('password'),
-                'email_verified_at' => $now,
-                'created_at' => $now,
-                'updated_at' => $now,
-            ],
-            [
-                'name' => '小林 大輔',
-                'email' => 'kobayashi.daisuke@example.com',
-                'password' => Hash::make('password'),
-                'email_verified_at' => $now,
-                'created_at' => $now,
-                'updated_at' => $now,
-            ],
-        ];
-
-        User::insert($users);
+        ]);
     }
 }

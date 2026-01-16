@@ -86,13 +86,9 @@ Seeder により以下のユーザーが作成されます。
 
 いずれも **パスワードは `password`** です。
 
-- 佐藤 太郎 / sato.taro@example.com  
-- 鈴木 花子 / suzuki.hanako@example.com  
-- 高橋 健 / takahashi.ken@example.com  
-- 田中 美咲 / tanaka.misaki@example.com  
-- 伊藤 翔 / ito.sho@example.com  
-- 中村 彩 / nakamura.aya@example.com  
-- 小林 大輔 / kobayashi.daisuke@example.com
+- 出品者A / sellerA@example.com  
+- 出品者B / sellerB@example.com  
+- 未紐付ユーザ / free@example.com  
 
 ## 使用技術
 
