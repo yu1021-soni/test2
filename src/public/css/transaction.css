@@ -92,7 +92,6 @@ body {
   color: rgba(255, 130, 130, 1);
 }
 
-/* 商品詳細 */
 .transaction__item {
   display: flex;
   align-items: center;
@@ -192,8 +191,9 @@ body {
 }
 
 .chat__photo img {
-  width: 100px;
-  height: 100px;
+  margin-top: 20px;
+  margin-left: 20px;
+  max-width: 400px;
   object-fit: cover;
 }
 
@@ -443,12 +443,23 @@ body {
     margin-left: 15px;
   }
 
+  .chat__message,
+  .chat__photo img {
+    max-width: 300px;
+  }
+
   .chat__message {
     width: auto;
-    max-width: 300px;
     font-size: 16px;
     padding: 14px 12px;
     margin: 0 12px;
+  }
+
+  .chat__photo img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    margin: 15px 12px;
   }
 
   .chat__form {
