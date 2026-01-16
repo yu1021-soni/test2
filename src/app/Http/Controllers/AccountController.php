@@ -11,6 +11,7 @@ use App\Models\Message;
 use App\Models\Evaluation;
 use App\Http\Requests\ProfileRequest;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
 
 
 class AccountController extends Controller
@@ -70,9 +71,17 @@ class AccountController extends Controller
             $ratingAvgRounded = ($avg);
         }
 
+        $unreadCounts = Message::select('transaction_id', DB::raw('COUNT(*) as unread_count'))
+            ->where('receiver_id', $user->id)
+            ->where('is_read', 0)
+            ->groupBy('transaction_id')
+            ->pluck('unread_count', 'transaction_id');
+
         return view('profile', compact(
-            'user', 'tab', 'items', 'orders','transactions', 'unreadMessageCount','ratingCount','ratingAvgRounded'
-            ));
+            'user', 'tab', 'items', 'orders', 'transactions',
+            'unreadMessageCount', 'unreadCounts',
+            'ratingCount', 'ratingAvgRounded'
+        ));
     }
 
     public function edit(Request $request){

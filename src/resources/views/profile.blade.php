@@ -105,6 +105,14 @@
                             <img src="{{        $transaction->item->item_img_url
                             ? Storage::url($transaction->item->item_img_url)
                             : asset('img/placeholder.png') }}">
+
+                            @php
+                            $count = $unreadCounts[$transaction->id] ?? 0;
+                            @endphp
+
+                            @if($count > 0)
+                                <span class="image__badge">{{ $count }}</span>
+                            @endif
                         </div>
 
                         <div class="profile__item-name">
