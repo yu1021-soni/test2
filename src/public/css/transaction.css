@@ -133,7 +133,6 @@ body {
 }
 
 .chat__row--other {
-  
 }
 
 .chat__name {
@@ -143,7 +142,7 @@ body {
 
 .chat__message {
   width: 461px;
-  height: 60px;
+  min-height: 60px;
   background: rgba(217, 217, 217, 1);
   font-size: 20px;
   font-weight: 700;
@@ -151,6 +150,20 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 4px;
+  line-height: 1.4;
+  padding: 20px 16px; 
+}
+
+.chat__message input {
+  background: rgba(217, 217, 217, 1);
+  border: none;
+  outline: none;
+  border-bottom: 1px dashed #999;
+  cursor: text;
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
 }
 
 .chat__avatar img {
@@ -167,6 +180,13 @@ body {
   object-fit: cover;
 }
 
+.message__button {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 20px;
+  margin-top: 5px;
+}
+
 .message__button a,
 .message__button button {
   font-size: 15px;
@@ -178,6 +198,7 @@ body {
   border: none;
   padding: 0;
   cursor: pointer;
+  margin-left: 15px;
 }
 
 .chat__form {
@@ -187,7 +208,17 @@ body {
   padding: 12px;
   display: flex;
   align-items: center;
-  gap: 12px;   
+  gap: 12px;
+}
+
+.chat__sender--user {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+
+.chat__message {
+  margin: 0 20px;
 }
 
 .chat__input-wrapper {

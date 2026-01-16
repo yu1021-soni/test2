@@ -86,7 +86,7 @@
                 <div class="chat__row chat__row--me">
 
                     <div class="chat__bubble">
-                        <div class="chat___user">
+                        <div class="chat__sender--user">
                             <div class="chat__avatar">
                                 <img src="{{ auth()->user()->user_img_url
                             ? Storage::url(auth()->user()->user_img_url)
@@ -96,35 +96,29 @@
                                 {{ auth()->user()->name }}
                             </div>
                         </div>
-                        <div class="chat__message">
 
-                        @if($editMessageId == $messages->id)
+                        {{-- メッセージ --}}
+                        <div class="chat__message">
+                            @if($editMessageId == $messages->id)
                             <form action="{{ route('message.edit', ['transaction' => $transaction->id, 'message_id' => $messages->id]) }}" method="POST">
                             @csrf
                                 <input type="text" name="message" value="{{ old('message', $messages->message) }}" required>
-                                <button type="submit">
-                                    更新
-                                </button>
-
-                                {{-- キャンセル --}}
-                                <a href="{{ route('transaction.show', $transaction->id) }}">キャンセル</a>
                             </form>
-
-                            @error('message')
-                            <p class="error">{{ $message }}</p>
-                            @enderror
-
                             @else
-                            {{-- 通常表示 --}}
-                            {{ $messages->message }}
-
+                                {{ $messages->message }}
+                            @endif
                         </div>
+
+                        {{-- ボタンエリア --}}
                         <div class="message__button">
-                                {{-- 編集ボタン --}}
+
+                            @if($editMessageId == $messages->id)
+                            <button form="edit-form" type="submit">更新</button>
+                            <a href="{{ route('transaction.show', $transaction->id) }}">キャンセル</a>
+                            @else
                             <a href="{{ route('transaction.show', $transaction->id) }}?edit={{ $messages->id }}">編集</a>
 
-                            {{-- 削除（POST） --}}
-                            <form action="{{ route('message.delete', ['transaction' => $transaction->id, 'message_id' => $messages->id]) }}" method="POST" style="display:inline;">
+                            <form action="{{ route('message.delete', ['transaction' => $transaction->id, 'message_id' => $messages->id]) }}" method="POST">
                             @csrf
                                 <button type="submit" onclick="return confirm('削除しますか？')">
                                     削除
@@ -154,9 +148,10 @@
                                 <img src="{{ $messages->sender->user_img_url
                                 ? Storage::url($messages->sender->user_img_url)
                                 : asset('img/avatar-default.png') }}">
-                                <div class="chat__name">
-                                    {{ $messages->sender->name }}
-                                </div>
+                            </div>
+
+                            <div class="chat__name">
+                                {{ $messages->sender->name }}
                             </div>
                         </div>
                         <div class="chat__message">
