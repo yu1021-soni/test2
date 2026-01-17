@@ -42,7 +42,6 @@
             </div>
 
             @php
-                // ★ドラフト優先 → なければ users のカラムを使う
                 $postcode = data_get($draft, 'postcode') ?? $user->postcode;
                 $address  = data_get($draft, 'address')  ?? $user->address;
                 $building = data_get($draft, 'building') ?? $user->building;
