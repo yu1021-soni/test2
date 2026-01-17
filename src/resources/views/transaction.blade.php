@@ -10,44 +10,49 @@
 
 @section('content')
 
-    @php
-        use App\Models\Transaction;
-    @endphp
+@php
+    use App\Models\Transaction;
+@endphp
 
-    <div class="content">
+<div class="content">
 
-        @include('modal')
+    @include('modal')
 
-        {{-- 左：取引中商品一覧 --}}
-        <div class="select__box">
-            <div class="select__box-title">
-                <h3>その他の取引</h3>
-            </div>
-            <div class="select__box-name">
-                @if($transaction->seller_id === auth()->id())
-                    @foreach($transactions as $t)
-                    <a href="{{ route('transaction.show', $t->id) }}#bottom" name="item__name" class="item__name">
-                        {{ $t->item->name }}
-                    </a>
-                    @endforeach
-                @endif
-            </div>
+    <form id="global-chat-form" method="POST" enctype="multipart/form-data" style="display:none;">
+        @csrf
+    </form>
+
+    {{-- 左：取引中商品一覧 --}}
+    <div class="select__box">
+        <div class="select__box-title">
+            <h3>その他の取引</h3>
         </div>
 
-        {{-- 右：取引中商品詳細 --}}
-        <div class="transaction__detail">
+        <div class="select__box-name">
+            @if($transaction->seller_id === auth()->id())
+                @foreach($transactions as $t)
+                    <button type="submit" class="item__name" form="global-chat-form" formaction="{{ route('transaction.draft.redirect', $transaction->id) }}" formmethod="POST" name="redirect_to" value="{{ route('transaction.show', $t->id) }}#bottom">
+                        {{ $t->item->name }}
+                    </button>
+                @endforeach
+            @endif
+        </div>
+    </div>
 
-            <div class="profile">
-                <div class="profile__avatar">
-                    <img src="{{ $user->user_img_url ? Storage::url($user->user_img_url) : asset('img/avatar-default.png') }}">
-                </div>
+    {{-- 右：取引中商品詳細 --}}
+    <div class="transaction__detail">
 
-                <div class="profile__name">
-                    <p>「{{ $user->name }}」さんとの取引画面</p>
-                </div>
+        <div class="profile">
+            <div class="profile__avatar">
+                <img src="{{ $user->user_img_url ? Storage::url($user->user_img_url) : asset('img/avatar-default.png') }}">
+            </div>
 
-                <div class="complete-area">
-                    <form action="{{ route('transaction.complete', ['transaction' => $transaction->id]) }}" method="POST">
+            <div class="profile__name">
+                <p>「{{ $user->name }}」さんとの取引画面</p>
+            </div>
+
+            <div class="complete-area">
+                <form action="{{ route('transaction.complete', ['transaction' => $transaction->id]) }}" method="POST">
                     @csrf
 
                     @if (auth()->id() === $transaction->buyer_id)
@@ -57,144 +62,143 @@
                             <div class="complete__message">取引は完了しました</div>
                         @endif
                     @endif
-                    </form>
+                </form>
+            </div>
+        </div>
+
+        <div class="transaction__item">
+            <div class="item__image">
+                <img
+                    src="{{ $item->item_img_url ? Storage::url($item->item_img_url) : asset('img/placeholder.png') }}"
+                    alt="{{ $item->name }}"
+                    class="detail__image-img"
+                >
+            </div>
+            <div class="detail__header">
+                <h1 class="detail__name">{{ $item->name }}</h1>
+                <div class="detail__price">
+                    ¥{{ number_format($item->price) }} <span>（税込）</span>
                 </div>
             </div>
+        </div>
 
-            <div class="transaction__item">
-                <div class="item__image">
-                    <img
-                        src="{{ $item->item_img_url ? Storage::url($item->item_img_url) : asset('img/placeholder.png') }}" alt="{{ $item->name }}" class="detail__image-img">
-                </div>
-                <div class="detail__header">
-                    <h1 class="detail__name">{{ $item->name }}</h1>
-                    <div class="detail__price">
-                        ¥{{ number_format($item->price) }} <span>（税込）</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="chat">
+        <div class="chat">
 
             <div class="chat__list">
 
-                {{-- エラーが出ないように空配列 --}}
                 @foreach(($transaction->messages ?? []) as $messages)
 
-                {{-- 自分のメッセージ --}}
-                @if($messages->sender_id === auth()->id())
-                <div class="chat__row chat__row--me">
+                    {{-- 自分のメッセージ --}}
+                    @if($messages->sender_id === auth()->id())
+                        <div class="chat__row chat__row--me">
 
-                    <div class="chat__bubble">
-                        <div class="chat__sender--user">
-                            <div class="chat__avatar">
-                                <img src="{{ auth()->user()->user_img_url
-                            ? Storage::url(auth()->user()->user_img_url)
-                            : asset('img/avatar-default.png') }}">
-                            </div>
-                            <div class="chat__name">
-                                {{ auth()->user()->name }}
-                            </div>
-                        </div>
+                            <div class="chat__bubble">
+                                <div class="chat__sender--user">
+                                    <div class="chat__avatar">
+                                        <img src="{{ auth()->user()->user_img_url
+                                            ? Storage::url(auth()->user()->user_img_url)
+                                            : asset('img/avatar-default.png') }}">
+                                    </div>
+                                    <div class="chat__name">
+                                        {{ auth()->user()->name }}
+                                    </div>
+                                </div>
 
-                        {{-- メッセージ --}}
-                        <div class="chat__message">
-                            @if($editMessageId == $messages->id)
-                            <form action="{{ route('message.edit', ['transaction' => $transaction->id, 'message_id' => $messages->id]) }}" method="POST">
-                            @csrf
-                                <input type="text" name="message" value="{{ old('message', $messages->message) }}" required>
-                            </form>
-                            @else
-                                {{ $messages->message }}
-                            @endif
-                        </div>
+                                {{-- メッセージ --}}
+                                <div class="chat__message">
+                                    @if($editMessageId == $messages->id)
+                                        {{-- 更新ボタンが効くように id を付ける --}}
+                                        <form id="edit-form" action="{{ route('message.edit', ['transaction' => $transaction->id, 'message_id' => $messages->id]) }}" method="POST">
+                                            @csrf
+                                            <input type="text" name="message" value="{{ old('message', $messages->message) }}" required>
+                                        </form>
+                                    @else
+                                        {{ $messages->message }}
+                                    @endif
+                                </div>
 
-                        {{-- ボタンエリア --}}
-                        <div class="message__button">
+                                {{-- ボタンエリア --}}
+                                <div class="message__button">
+                                    @if($editMessageId == $messages->id)
+                                        <button form="edit-form" type="submit">更新</button>
+                                        <a href="{{ route('transaction.show', $transaction->id) }}">キャンセル</a>
+                                    @else
+                                        <a href="{{ route('transaction.show', $transaction->id) }}?edit={{ $messages->id }}">編集</a>
 
-                            @if($editMessageId == $messages->id)
-                            <button form="edit-form" type="submit">更新</button>
-                            <a href="{{ route('transaction.show', $transaction->id) }}">キャンセル</a>
-                            @else
-                            <a href="{{ route('transaction.show', $transaction->id) }}?edit={{ $messages->id }}">編集</a>
+                                        <form action="{{ route('message.delete', ['transaction' => $transaction->id, 'message_id' => $messages->id]) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" onclick="return confirm('削除しますか？')">削除</button>
+                                        </form>
+                                    @endif
+                                </div>
 
-                            <form action="{{ route('message.delete', ['transaction' => $transaction->id, 'message_id' => $messages->id]) }}" method="POST">
-                            @csrf
-                                <button type="submit" onclick="return confirm('削除しますか？')">
-                                    削除
-                                </button>
-                            </form>
-                            @endif
-
-                        </div>
-                        @if($messages->image_path)
-                        <div class="chat__photo">
-                            <img src="{{ Storage::url($messages->image_path) }}" alt="chat image">
-                        </div>
-                        @endif
-                    </div>
-
-                </div>
-
-                {{-- 相手のメッセージ --}}
-                @else
-                <div class="chat__row chat__row--other">
-
-
-                    <div class="chat__bubble">
-
-                        <div class="chat__sender--user">
-                            <div class="chat__avatar">
-                                <img src="{{ $messages->sender->user_img_url
-                                ? Storage::url($messages->sender->user_img_url)
-                                : asset('img/avatar-default.png') }}">
+                                @if($messages->image_path)
+                                    <div class="chat__photo">
+                                        <img src="{{ Storage::url($messages->image_path) }}" alt="chat image">
+                                    </div>
+                                @endif
                             </div>
 
-                            <div class="chat__name">
-                                {{ $messages->sender->name }}
+                        </div>
+
+                    {{-- 相手のメッセージ --}}
+                    @else
+                        <div class="chat__row chat__row--other">
+                            <div class="chat__bubble">
+
+                                <div class="chat__sender--user">
+                                    <div class="chat__avatar">
+                                        <img src="{{ $messages->sender->user_img_url
+                                            ? Storage::url($messages->sender->user_img_url)
+                                            : asset('img/avatar-default.png') }}">
+                                    </div>
+
+                                    <div class="chat__name">
+                                        {{ $messages->sender->name }}
+                                    </div>
+                                </div>
+
+                                <div class="chat__message">
+                                    {{ $messages->message }}
+                                </div>
+
+                                @if($messages->image_path)
+                                    <div class="chat__photo">
+                                        <img src="{{ Storage::url($messages->image_path) }}" alt="chat image">
+                                    </div>
+                                @endif
+
                             </div>
                         </div>
-                        <div class="chat__message">
-                            {{ $messages->message }}
-                        </div>
-                        @if($messages->image_path)
-                        <div class="chat__photo">
-                            <img src="{{ Storage::url($messages->image_path) }}" alt="chat image">
-                        </div>
-                        @endif
-                    </div>
+                    @endif
 
-                </div>
-                @endif
                 @endforeach
 
                 <div id="bottom"></div>
-
             </div>
 
-            <form class="chat__form" action="{{ route('transaction.message', $transaction) }}" method="POST" enctype="multipart/form-data">
-            @csrf
+            {{-- 入力フォーム --}}
+            <form class="chat__form" enctype="multipart/form-data">
 
                 <div class="chat__input-wrapper">
-
                     @error('message')
-                    <div class="message__error">{{ $message }}</div>
+                        <div class="message__error">{{ $message }}</div>
                     @enderror
 
-                    <input
-                        class="chat__input"
-                        type="text"
-                        name="message"
-                        placeholder="取引メッセージを記入してください"
-                        value="{{ old('message') }}"
-                        >
+                    <input class="chat__input" type="text" name="message" form="global-chat-form" placeholder="取引メッセージを記入してください" value="{{ old('message', session('draft_message_transaction_'.$transaction->id, '')) }}">
                 </div>
 
                 <label class="chat__image">
                     画像を追加
-                    <input type="file" name="image" hidden>
+                    <input type="file" name="image" hidden form="global-chat-form">
                 </label>
-                <button class="chat__send" type="submit" aria-label="送信">
+
+                <button class="chat__send"
+                        type="submit"
+                        form="global-chat-form"
+                        formaction="{{ route('transaction.message', $transaction) }}"
+                        formmethod="POST"
+                        aria-label="送信">
                     <img src="{{ asset('img/enter.jpg') }}" alt="送信">
                 </button>
             </form>
@@ -202,6 +206,5 @@
         </div>
 
     </div>
-
 </div>
 @endsection

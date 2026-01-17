@@ -18,6 +18,13 @@ body {
     margin: 0;
 }
 
+.header__logo-link {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
 .header__logo {
     display: block;
     height: 36px;

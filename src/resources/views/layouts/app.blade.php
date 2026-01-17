@@ -14,9 +14,21 @@
     <div class="app">
         <header class="header">
             <div class="header__inner">
-                <a href="/" class="header__logo-link">
-                    <img src="{{ asset('img/logo.svg') }}" alt="COACHTECH" class="header__logo">
-                </a>
+                @if (Route::is('transaction.*'))
+                    {{-- 共通フォーム（表示しない） --}}
+                    <form id="global-chat-form" method="POST" enctype="multipart/form-data" style="display:none;">
+                        @csrf
+                    </form>
+
+                    {{-- ロゴ：共通フォームを送信して下書き保存→トップへ --}}
+                    <button type="submit" class="header__logo-link" form="global-chat-form" formaction="{{ route('transaction.draft.redirect', request()->route('transaction')) }}" formmethod="POST" name="redirect_to" value="/">
+                        <img src="{{ asset('img/logo.svg') }}" alt="COACHTECH" class="header__logo">
+                    </button>
+                @else
+                    <a href="/" class="header__logo-link">
+                        <img src="{{ asset('img/logo.svg') }}" alt="COACHTECH" class="header__logo">
+                    </a>
+                @endif
 
                 {{-- login,register, mailhog,transaction ページではロゴだけ --}}
                 @if (!Route::is('register') && !Route::is('transaction.*') && !Route::is('mailhog') && !Route::is('login') && !Route::is('verification.*'))

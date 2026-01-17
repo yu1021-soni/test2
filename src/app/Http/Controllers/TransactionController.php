@@ -219,4 +219,23 @@ class TransactionController extends Controller
         return redirect()
             ->route('item.index');
     }
+
+    public function draftRedirect(Request $request, Transaction $transaction) {
+        $userId = auth()->id();
+
+        // 取引中のuserのみ許可（buyer or seller）
+        if ($userId !== $transaction->buyer_id && $userId !==  $transaction->seller_id) {
+            abort(403);
+        }
+
+        // 下書き保存
+        $draft = $request->input('message', '');
+        session(['draft_message_transaction_' . $transaction->id => $draft]);
+
+        // 遷移先
+        $redirectTo = $request->input('redirect_to');
+
+        return redirect($redirectTo);
+    }
+
 }

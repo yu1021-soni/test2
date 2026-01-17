@@ -26,6 +26,13 @@ body {
   margin-top: 20px;
 }
 
+.select__box-name button{
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+}
+
 .item__name {
   display: block;
   width: 197px;
