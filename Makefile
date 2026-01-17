@@ -5,6 +5,7 @@ init:
 	docker-compose exec php php artisan key:generate
 	docker-compose exec php php artisan migrate:fresh --seed
 	docker-compose exec php php artisan storage:link
+	docker-compose restart nginx
 
 stripe:
 	docker-compose exec php composer require stripe/stripe-php

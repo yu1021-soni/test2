@@ -14,6 +14,13 @@ class ItemSeeder extends Seeder
 {
     public function run(): void
     {
+        $fallbackPath = 'items/noimage.jpg';
+        $fallbackFile = database_path('seeders/assets/items/noimage.jpg');
+
+        if (file_exists($fallbackFile)) {
+            Storage::disk('public')->put($fallbackPath, file_get_contents($fallbackFile));
+        }
+
         $sellerAId = User::where('email', 'sellerA@example.com')->value('id');
         $sellerBId = User::where('email', 'sellerB@example.com')->value('id');
 
@@ -80,7 +87,7 @@ class ItemSeeder extends Seeder
                 'price'        => (int)str_replace(',', '', $price),
                 'brand'        => ($brand === '' || $brand === 'なし') ? null : $brand,
                 'description'  => $desc,
-                'item_img_url' => $stored ?: $url,
+                'item_img_url' => $stored ?: $fallbackPath,
                 'condition'    => $toCode($condLabel),
             ]);
 
