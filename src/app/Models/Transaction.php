@@ -42,6 +42,11 @@ class Transaction extends Model
     }
 
     public function messages() {
-    return $this->hasMany(Message::class);
+        return $this->hasMany(Message::class);
     }
+
+    public function evaluations() {
+        return $this->hasMany(Evaluation::class);
+    }
+
 }
