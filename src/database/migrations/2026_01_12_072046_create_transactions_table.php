@@ -34,6 +34,9 @@ class CreateTransactionsTable extends Migration
             $table->timestamp('seller_rated_at')->nullable();
 
             $table->timestamps();
+
+            $table->unique('item_id');
+            $table->unique('order_id');
         });
     }
 
