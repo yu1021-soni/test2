@@ -40,12 +40,12 @@ class TransactionController extends Controller
         ->where('is_read', 0)
         ->update(['is_read' => 1]);
 
-        // ✅ 自分がすでに評価したか？
+        // 自分がすでに評価したかどうか
         $alreadyRated = Evaluation::where('transaction_id', $transaction->id)
             ->where('evaluator_id', $authUser->id)
             ->exists();
 
-        // ✅ モーダルを開く条件
+        // モーダルを開く条件
         $openRatingModal =
             // 手動（?modal=rating）
             ($request->query('modal') === 'rating')
@@ -127,7 +127,7 @@ class TransactionController extends Controller
     }
 
     public function delete(Transaction $transaction, $message_id) {
-        
+
         // ① 削除したいメッセージを探す
         $message = Message::find($message_id);
 

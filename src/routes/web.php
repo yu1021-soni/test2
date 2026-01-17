@@ -75,7 +75,7 @@ Route::middleware(['auth','verified'])->group(function () {
 
     Route::post('/transaction/{transaction}/evaluation',[TransactionController::class,'evaluation'])->name('transaction.evaluation');
 
-    Route::post('/transactions/{transaction}/draft-redirect', [TransactionController::class, 'draftRedirect'])
+    Route::post('/transaction/{transaction}/draft-redirect', [TransactionController::class, 'draftRedirect'])
     ->name('transaction.draft.redirect');
 });
 
