@@ -151,11 +151,19 @@ body {
 }
 
 .chat__name {
+  margin: 0 15px;
   font-size: 20px;
   font-weight: 700;
 }
 
 .chat__sender--user {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 20px;
+}
+
+.chat__receiver--user {
   display: flex;
   align-items: center;
   padding: 20px;

@@ -94,13 +94,13 @@
 
                             <div class="chat__bubble">
                                 <div class="chat__sender--user">
+                                    <div class="chat__name">
+                                        {{ auth()->user()->name }}
+                                    </div>
                                     <div class="chat__avatar">
                                         <img src="{{ auth()->user()->user_img_url
                                             ? Storage::url(auth()->user()->user_img_url)
                                             : asset('img/avatar-default.png') }}">
-                                    </div>
-                                    <div class="chat__name">
-                                        {{ auth()->user()->name }}
                                     </div>
                                 </div>
 
@@ -146,7 +146,7 @@
                         <div class="chat__row chat__row--other">
                             <div class="chat__bubble">
 
-                                <div class="chat__sender--user">
+                                <div class="chat__receiver--user">
                                     <div class="chat__avatar">
                                         <img src="{{ $messages->sender->user_img_url
                                             ? Storage::url($messages->sender->user_img_url)
