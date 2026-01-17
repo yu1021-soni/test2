@@ -84,7 +84,7 @@ class TransactionController extends Controller
             'is_read'        => 0,
         ]);
 
-        // ⑤ 元の取引画面に戻る
+        // 元の取引画面に戻る
         return redirect()->route('transaction.show', $transaction);
     }
 
