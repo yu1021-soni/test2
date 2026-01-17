@@ -17,7 +17,7 @@ class CreateMessagesTable extends Migration
             $table->id();
             // どの取引のチャットか
             $table->foreignId('transaction_id')
-                    ->constrained()
+                    ->constrained('transactions')
                     ->cascadeOnDelete();
 
             $table->foreignId('receiver_id')

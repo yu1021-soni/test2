@@ -29,10 +29,10 @@ class CreateTransactionsTable extends Migration
             $table->timestamp('completed_at')->nullable();
             $table->timestamp('last_message_at')->nullable();
 
-            // 評価管理（あとで使う）
+            // 評価管理
             $table->timestamp('buyer_rated_at')->nullable();
             $table->timestamp('seller_rated_at')->nullable();
-            
+
             $table->timestamps();
         });
     }
