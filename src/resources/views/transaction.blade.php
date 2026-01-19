@@ -29,13 +29,11 @@
         </div>
 
         <div class="select__box-name">
-            @if($transaction->seller_id === auth()->id())
                 @foreach($transactions as $t)
                     <button type="submit" class="item__name" form="global-chat-form" formaction="{{ route('transaction.draft.redirect', $transaction->id) }}" formmethod="POST" name="redirect_to" value="{{ route('transaction.show', $t->id) }}#bottom">
                         {{ $t->item->name }}
                     </button>
                 @endforeach
-            @endif
         </div>
     </div>
 
