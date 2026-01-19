@@ -183,6 +183,10 @@
                         <div class="message__error">{{ $message }}</div>
                     @enderror
 
+                    @error('image')
+                        <div class="message__error">{{ $message }}</div>
+                    @enderror
+
                     <input class="chat__input" type="text" name="message" form="global-chat-form" placeholder="取引メッセージを記入してください" value="{{ old('message', session('draft_message_transaction_'.$transaction->id, '')) }}">
                 </div>
 

@@ -25,7 +25,7 @@ class MessageRequest extends FormRequest
     {
         return [
             'message' => ['required', 'string', 'max:400'],
-            'image_path' => ['nullable', 'file', 'mimes:jpeg,png'],
+            'image' => ['nullable', 'file', 'mimetypes:image/jpeg,image/png'],
         ];
     }
 
@@ -34,7 +34,7 @@ class MessageRequest extends FormRequest
         return [
             'message.required' => '本文を入力してください',
             'message.max' => '本文は400文字以内で入力してください',
-            'image_path.mimes' => '「.png」または「.jpeg」形式でアップロードしてください',
+            'image.mimetypes' => '「.png」または「.jpeg」形式でアップロードしてください',
         ];
     }
 }
